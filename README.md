@@ -9,4 +9,4 @@ Sitio de KI Advisory & Strategy Group: HTML estático (sin compilación), listo 
 - `en/`: versión en inglés de `index.html`, `infinity-workflow.html` y `contacto.html` (comparten `estilos.css`, `sitio.js` e `img/`); el selector ES | EN del menú lleva a la página equivalente y cada página declara su alterna con `hreflang`
 - `estilos.css`, `sitio.js`, `img/`
 
-El formulario de contacto abre el correo del visitante dirigido a salvador.delira@kiadvisorygroup.com.
+El formulario de contacto abre el correo del visitante dirigido a contact@kiadvisorygroup.com.
