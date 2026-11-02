@@ -204,3 +204,7 @@ section { padding: 110px 0; }
 
 /* Correos y enlaces largos: se parten en renglones en pantallas angostas */
 a[href^="mailto:"] { overflow-wrap: anywhere; }
+
+/* Selector de idioma (ES | EN) en el menú */
+.menu a.idioma { font-size: 0.78rem; font-weight: 600; letter-spacing: .12em; border: 1px solid var(--gris-claro); padding: 6px 10px; color: var(--gris); }
+.menu a.idioma:hover { border-color: var(--cian-osc); color: var(--cian-osc); }
