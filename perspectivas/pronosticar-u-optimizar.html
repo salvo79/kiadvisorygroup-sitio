@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Pronosticar u optimizar · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="Las series temporales miran el pasado para decir cuánto se va a vender. El modelo LP toma eso y decide cuánto conviene vender y comprar para ganar más sin romper las reglas del negocio. No compiten: una predice y el otro decide." />
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/pronosticar-u-optimizar.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/pronosticar-u-optimizar.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/pronosticar-u-optimizar.html" />
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --azul-suave: #e2f4fc;
+    --regla: #c2410c;
+    --regla-suave: #fdeee4;
+    --meta: #15803d;
+    --meta-suave: #e5f5ea;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-block: 48px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+.boceto-sitio h1, .boceto-sitio h2 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.18rem; color: var(--tinta); }
+.boceto-sitio .cabeza .tesis b { color: var(--azul); }
+.boceto-sitio .gps {
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+    background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 18px 22px; max-width: 760px;
+}
+.boceto-sitio .gps svg { width: 64px; height: 64px; }
+.boceto-sitio .boceto { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) ; align-items: stretch; gap: 14px; }
+.boceto-sitio .boceto .flecha { display: none; }
+@media (min-width: 1180px) {
+.boceto-sitio .boceto { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; }
+.boceto-sitio .boceto .flecha { display: flex; }
+}
+@media (max-width: 1179px) {
+.boceto-sitio .boceto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+}
+.boceto-sitio .etapa { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.boceto-sitio .etapa header { display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .etapa h3 { margin: 0; font: 800 1.15rem/1.15 var(--f-display); }
+.boceto-sitio .etapa header { min-height: 3.1rem; }
+.boceto-sitio .nota { text-wrap: balance; }
+.boceto-sitio .caja { flex: 1; border-radius: 14px; padding: 16px 18px; border: 2px solid; display: flex; flex-direction: column; gap: 10px; }
+.boceto-sitio .caja ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; line-height: 1.4; }
+.boceto-sitio .caja li { position: relative; padding-left: 18px; text-wrap: pretty; overflow-wrap: break-word; }
+.boceto-sitio .caja li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+.boceto-sitio .entradas .caja { border-color: var(--azul); background: var(--azul-suave); }
+.boceto-sitio .entradas li::before { color: var(--azul); }
+.boceto-sitio .reglas .caja { border-color: var(--regla); background: var(--regla-suave); }
+.boceto-sitio .reglas li::before { content: "✕"; left: 0; top: 0; width: auto; height: auto; background: none; color: var(--regla); font-weight: 700; opacity: 1; font-size: 0.78rem; line-height: 1.8; }
+.boceto-sitio .objetivo .caja { border-color: var(--meta); background: var(--meta-suave); justify-content: center; text-align: center; }
+.boceto-sitio .objetivo .formula { font: 800 1.05rem/1.35 var(--f-display); }
+.boceto-sitio .objetivo .formula span { display: block; font: 500 0.85rem/1.4 var(--f-texto); color: var(--tenue); }
+.boceto-sitio .plan .caja { border-color: var(--marino); background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .plan li::before { color: var(--sobre-marino); }
+.boceto-sitio .flecha { display: flex; align-items: center; justify-content: center; color: var(--tenue); }
+.boceto-sitio .flecha svg { width: 34px; height: 34px; }
+.boceto-sitio .nota { font-family: var(--f-mano); font-size: 1.15rem; line-height: 1.15; color: var(--tenue); }
+.boceto-sitio .motor {
+    display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: center;
+    background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 16px; padding: 26px;
+}
+.boceto-sitio .motor .texto { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.boceto-sitio .ejemplo { display: flex; flex-direction: column; gap: 18px; }
+.boceto-sitio .ejemplo .datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .dato { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .dato .k { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .dato .v { font: 800 1.35rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.boceto-sitio .comparacion { width: 100%; overflow-x: auto; }
+.boceto-sitio .comparacion table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; background: var(--tarjeta); border-radius: 12px; overflow: hidden; }
+.boceto-sitio .comparacion th, .boceto-sitio .comparacion td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--linea); }
+.boceto-sitio .comparacion th:first-child, .boceto-sitio .comparacion td:first-child { text-align: left; }
+.boceto-sitio .comparacion th { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td { background: var(--meta-suave); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td:first-child::after { content: "  ← el que elige el modelo"; font-family: var(--f-mano); font-size: 1.1rem; color: var(--meta); font-weight: 700; }
+.boceto-sitio .sombra { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; background: var(--azul-suave); border-radius: 14px; padding: 16px 20px; }
+.boceto-sitio .sombra .mano { font-size: 2rem; }
+.boceto-sitio .cierre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.boceto-sitio .cierre div { border-top: 3px solid var(--azul); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .cierre b { font-family: var(--f-display); font-size: 1.05rem; }
+.boceto-sitio .cierre p { color: var(--tenue); font-size: 0.93rem; }
+@media (max-width: 640px) {
+.boceto-sitio .boceto { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+.boceto-sitio .motor { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+.boceto-sitio .ejemplo .datos, .boceto-sitio .cierre { grid-template-columns: 1fr; }
+.boceto-sitio .gps { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+.boceto-sitio .motor .rayo { animation: brillo 2.6s ease-in-out infinite; }
+@keyframes brillo { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+}
+.boceto-sitio .duelo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.boceto-sitio .lado { background: var(--tarjeta); border: 2px solid; border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.boceto-sitio .lado.st { border-color: var(--azul); }
+.boceto-sitio .lado.lp { border-color: var(--meta); }
+.boceto-sitio .lado h2 { font-size: 1.35rem; }
+.boceto-sitio .lado .pregunta { font: 700 1.75rem/1.1 var(--f-mano); }
+.boceto-sitio .st .pregunta, .boceto-sitio .st .eyebrow { color: var(--azul); }
+.boceto-sitio .lp .pregunta, .boceto-sitio .lp .eyebrow { color: var(--meta); }
+.boceto-sitio .lado svg { width: 100%; height: auto; display: block; }
+.boceto-sitio .lado p { font-size: 0.95rem; }
+.boceto-sitio .tabla { width: 100%; overflow-x: auto; }
+.boceto-sitio .tabla table { width: 100%; min-width: 640px; border-collapse: collapse; background: var(--tarjeta); border-radius: 12px; overflow: hidden; font-size: 0.93rem; }
+.boceto-sitio .tabla th, .boceto-sitio .tabla td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.boceto-sitio .tabla thead th { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.boceto-sitio .tabla thead th.st { color: var(--azul); }
+.boceto-sitio .tabla thead th.lp { color: var(--meta); }
+.boceto-sitio .tabla tbody th { font-weight: 600; width: 22%; }
+.boceto-sitio .juntos { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.boceto-sitio .paso { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .paso b { font-family: var(--f-display); }
+.boceto-sitio .paso span { font-size: 0.88rem; color: var(--tenue); }
+.boceto-sitio .paso.st { border-color: var(--azul); }
+.boceto-sitio .paso.lp { border-color: var(--meta); }
+@media (max-width: 900px) {
+.boceto-sitio .duelo { grid-template-columns: 1fr; }
+.boceto-sitio .juntos { grid-template-columns: 1fr; }
+.boceto-sitio .juntos .flecha svg { transform: rotate(90deg); }
+}
+.boceto-sitio .nav-boceto { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--azul); color: var(--azul); background: var(--tarjeta); font: 600 0.9rem/1 var(--f-texto); text-decoration: none; }
+.boceto-sitio .nav-boceto:hover { background: var(--azul-suave); }
+.boceto-sitio .nav-boceto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .siguiente { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; background: var(--tarjeta); border: 2px dashed var(--azul); border-radius: 16px; padding: 20px 24px; color: inherit; text-decoration: none; }
+.boceto-sitio .siguiente:hover { background: var(--azul-suave); }
+.boceto-sitio .siguiente:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .siguiente b { font: 800 1.25rem/1.2 var(--f-display); }
+.boceto-sitio .siguiente .ir { font: 600 1rem/1 var(--f-texto); color: var(--azul); white-space: nowrap; }
+@media (max-width: 620px) {
+.boceto-sitio .siguiente { grid-template-columns: 1fr; }
+}
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); text-decoration: none; }
+.boceto-sitio .marca svg { width: 36px; height: 54px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.6rem/1 var(--f-texto); letter-spacing: -0.01em; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Servicios</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industrias</a>
+                <a href="../index.html#metodologia">Metodología</a>
+                <a href="../perspectivas/index.html" class="activo">Perspectivas</a>
+                <a class="idioma" href="../en/perspectivas/pronosticar-u-optimizar.html" hreflang="en" lang="en">EN</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Agendar consulta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Dos formas de planear</div>
+                <h1>Pronosticar u optimizar</h1>
+                <a class="volver-perspectivas" href="index.html">← Todas las perspectivas</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+    <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← Regresar a Cómo decide el plan de ventas</a>
+    <section class="cabeza">
+        <span class="eyebrow">Dos formas de planear</span>
+        <h1>Pronosticar u optimizar</h1>
+        <p class="tesis">Las <b>series temporales</b> miran el pasado para decir <b>cuánto se va a vender</b>. El <b>modelo LP</b> toma eso y decide <b>cuánto conviene vender y comprar</b> para ganar más sin romper las reglas del negocio. No compiten: una predice y el otro decide.</p>
+    </section>
+
+    <section class="gps" aria-label="Analogía">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="29" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2.5" />
+            <path d="M14 40 a10 10 0 0 1 4 -19 a13 13 0 0 1 25 2 a8 8 0 0 1 3 17 Z" fill="var(--tarjeta)" stroke="var(--tinta)" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M24 46 l-3 7 M33 46 l-3 7 M42 46 l-3 7" stroke="var(--azul)" stroke-width="3" stroke-linecap="round" />
+        </svg>
+        <div>
+            <p class="mano">El pronóstico es el reporte del clima. El LP es decidir qué hacer con ese clima.</p>
+            <p>El clima te dice que mañana probablemente llueve. No te dice si conviene cancelar la entrega, mover la ruta o llevar más paraguas a la tienda: eso depende de tus camiones, tus costos y tu inventario. Esa segunda parte es la que resuelve el modelo LP.</p>
+        </div>
+    </section>
+
+    <section class="duelo" aria-label="Las dos formas lado a lado">
+        <article class="lado st">
+            <span class="eyebrow">Series temporales (pronóstico)</span>
+            <p class="pregunta">"¿Cuánto vamos a vender?"</p>
+            <svg viewBox="0 0 360 224" role="img" aria-label="Ventas de los últimos 12 meses y pronóstico de los siguientes 6, con su banda de incertidumbre">
+<g font-family="Figtree, sans-serif" font-size="11" fill="var(--tenue)">
+<line x1="40" x2="350" y1="150.8" y2="150.8" stroke="var(--linea)" stroke-width="1"/><text x="34" y="154.8" text-anchor="end">40</text><line x1="40" x2="350" y1="112.2" y2="112.2" stroke="var(--linea)" stroke-width="1"/><text x="34" y="116.2" text-anchor="end">60</text><line x1="40" x2="350" y1="73.8" y2="73.8" stroke="var(--linea)" stroke-width="1"/><text x="34" y="77.8" text-anchor="end">80</text><line x1="40" x2="350" y1="35.2" y2="35.2" stroke="var(--linea)" stroke-width="1"/><text x="34" y="39.2" text-anchor="end">100</text>
+<polygon points="240.6,83.4 258.8,73.8 277.1,66.0 295.3,56.4 313.5,48.7 331.8,41.0 350.0,31.4 350.0,81.5 331.8,83.4 313.5,83.4 295.3,83.4 277.1,85.3 258.8,85.3 240.6,83.4" fill="var(--azul)" opacity="0.15"/>
+<polyline points="40.0,127.7 58.2,135.3 76.5,121.9 94.7,112.2 112.9,116.1 131.2,106.5 149.4,110.3 167.6,100.7 185.9,93.0 204.1,96.8 222.4,89.2 240.6,83.4" fill="none" stroke="var(--tinta)" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="240.6,83.4 258.8,79.5 277.1,75.7 295.3,69.9 313.5,66.0 331.8,62.2 350.0,56.4" fill="none" stroke="var(--azul)" stroke-width="2.5" stroke-dasharray="6 4"/>
+<line x1="249.7" x2="249.7" y1="16" y2="170" stroke="var(--tenue)" stroke-dasharray="2 3"/>
+<text x="131.2" y="188" text-anchor="middle">lo que pasó (12 meses)</text>
+<text x="304.4" y="188" text-anchor="middle" fill="var(--azul)">pronóstico (6)</text>
+<text x="350.0" y="27.6" text-anchor="end" fill="var(--azul)" font-weight="600">¿89 piezas?</text>
+</g></svg>
+            <p>Busca la <b>tendencia</b> y la <b>temporada</b> en lo que ya pasó y las alarga hacia adelante (media móvil, regresión, ARIMA). Entrega una cifra por mes y qué tan segura es: la banda se abre porque entre más lejos, menos certeza.</p>
+            <p class="nota">no sabe cuánto hay en el almacén ni cuánto deja cada pieza</p>
+        </article>
+        <article class="lado lp">
+            <span class="eyebrow">Modelo LP (optimización)</span>
+            <p class="pregunta">"¿Cuánto nos conviene vender?"</p>
+            <svg viewBox="0 0 360 200" role="img" aria-label="Con 100 piezas en almacén, el modelo da 70 a la Crema A, que deja 80 pesos por pieza, y 30 al Sérum B, que deja 50">
+<g font-family="Figtree, sans-serif" font-size="11" fill="var(--tenue)">
+<text x="0" y="16">Solo hay <tspan fill="var(--regla)" font-weight="700">100 piezas</tspan> en el almacén</text>
+<text x="0" y="51" fill="var(--tinta)" font-weight="600">Crema A · $80</text>
+<rect x="110" y="36" width="182.0" height="22" rx="4" fill="none" stroke="var(--tenue)" stroke-dasharray="4 3"/>
+<rect x="110" y="36" width="182.0" height="22" rx="4" fill="var(--meta)"/>
+<text x="286.0" y="51" text-anchor="end" fill="var(--sobre-marino)" font-weight="600">70 pz</text>
+<text x="298.0" y="51">mercado: 70</text>
+<text x="0" y="74" font-size="10">deja más por pieza</text>
+<text x="0" y="113" fill="var(--tinta)" font-weight="600">Sérum B · $50</text>
+<rect x="110" y="98" width="156.0" height="22" rx="4" fill="none" stroke="var(--tenue)" stroke-dasharray="4 3"/>
+<rect x="110" y="98" width="78.0" height="22" rx="4" fill="var(--meta)"/>
+<text x="182.0" y="113" text-anchor="end" fill="var(--sobre-marino)" font-weight="600">30 pz</text>
+<text x="272.0" y="113">mercado: 60</text>
+<text x="0" y="136" font-size="10">lo que sobra</text>
+<line x1="0" x2="360" y1="156" y2="156" stroke="var(--linea)"/>
+<text x="0" y="178" fill="var(--tinta)" font-weight="600">70 + 30 = 100 pz · margen $7,100</text>
+<text x="0" y="196" fill="var(--meta)" font-weight="600">el mejor reparto posible con esas reglas</text>
+</g></svg>
+            <p>Toma la demanda como un <b>techo</b> y combina todo a la vez: margen, inventario, compras, tiempos de entrega, presupuesto y metas. Entrega <b>decisiones</b>: qué vender, dónde, cuándo y cuánto comprar, y qué regla frena la utilidad.</p>
+            <p class="nota">necesita saber cuánto pide el mercado: ahí entra el pronóstico</p>
+        </article>
+    </section>
+
+    <section class="ejemplo">
+        <div class="cabeza">
+            <span class="eyebrow">El mismo mes, planeado de las dos formas</span>
+            <h2>El pronóstico pide 130 piezas, pero solo hay 100</h2>
+            <p>Crema A: el pronóstico dice 70 piezas y deja $80 cada una. Sérum B: el pronóstico dice 60 y deja $50. En el almacén hay 100 piezas.</p>
+        </div>
+        <div class="comparacion">
+            <table>
+                <thead><tr><th>Cómo se arma el plan</th><th>Crema A</th><th>Sérum B</th><th>¿Se puede?</th><th>Margen</th></tr></thead>
+                <tbody>
+                    <tr><td>Copiar el pronóstico tal cual</td><td>70</td><td>60</td><td>No: faltan 30 piezas</td><td>—</td></tr>
+                    <tr><td>Recortar el pronóstico parejo</td><td>54</td><td>46</td><td>Sí</td><td>$6,620</td></tr>
+                    <tr class="mejor"><td>Modelo LP</td><td>70</td><td>30</td><td>Sí</td><td>$7,100</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="nota">Con el pronóstico solo, el plan es imposible o deja dinero en la mesa. El LP usa el mismo pronóstico y elige el reparto que más deja.</p>
+    </section>
+
+    <section aria-label="Diferencias">
+        <div class="cabeza" style="margin-bottom:14px"><span class="eyebrow">Diferencias, punto por punto</span><h2>Qué hace cada uno</h2></div>
+        <div class="tabla">
+            <table>
+                <thead><tr><th></th><th class="st">Series temporales</th><th class="lp">Modelo LP</th></tr></thead>
+                <tbody>
+                    <tr><th>La pregunta</th><td>¿Cuánto se va a vender?</td><td>¿Cuánto conviene vender y comprar?</td></tr>
+                    <tr><th>Qué mira</th><td>Solo la historia de la variable (y su temporada)</td><td>Todo junto: demanda, margen, inventario, compras, entregas, presupuesto, metas</td></tr>
+                    <tr><th>Qué entrega</th><td>Una cifra por mes con su rango de confianza</td><td>Decisiones por producto, zona y mes, y el valor de cada restricción</td></tr>
+                    <tr><th>Reglas del negocio</th><td>No las conoce</td><td>Las respeta todas; un plan que rompe una regla no existe</td></tr>
+                    <tr><th>Dinero</th><td>No distingue lo que deja más margen</td><td>Prioriza lo que más margen deja</td></tr>
+                    <tr><th>Si algo cambia</th><td>Se vuelve a ajustar con datos nuevos</td><td>Se cambia el dato (precio, costo, almacén) y recalcula en segundos</td></tr>
+                    <tr><th>Su punto débil</th><td>Supone que el futuro se parece al pasado</td><td>Es tan bueno como la demanda que le damos</td></tr>
+                    <tr><th>En Infinity Workflow</th><td>Analítica de datos › Diseño de casos (tendencias, ARIMA y ARMA)</td><td>Planeación › Optimización de venta LP</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section aria-label="Cómo trabajan juntos">
+        <div class="cabeza" style="margin-bottom:14px"><span class="eyebrow">Lo mejor es usar los dos</span><h2>Uno alimenta al otro</h2></div>
+        <div class="juntos">
+            <div class="paso st"><b>1 · Pronosticar</b><span>Las series temporales estiman cuánto pide el mercado cada mes.</span></div>
+            <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+            <div class="paso lp"><b>2 · Optimizar</b><span>El LP usa ese pronóstico como techo y arma el plan de mayor margen.</span></div>
+            <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+            <div class="paso"><b>3 · Ejecutar</b><span>El plan se reparte en metas por vendedor y se vende.</span></div>
+            <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+            <div class="paso"><b>4 · Medir</b><span>Lo que se vendió de verdad se vuelve historia y mejora el siguiente pronóstico.</span></div>
+        </div>
+    </section>
+    <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← Regresar a Cómo decide el plan de ventas</a>
+</main>
+        </div>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Servicios</h4><a href="../index.html#servicios">Planeación estratégica</a><a href="../index.html#servicios">Programación operativa</a><a href="../index.html#servicios">Implementación</a><a href="../index.html#servicios">Evaluación y seguimiento</a></div>
+                <div><h4>Compañía</h4><a href="../index.html#metodologia">Metodología</a><a href="../index.html#industrias">Industrias</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Perspectivas</a></div>
+                <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Ciudad de México · España · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="../contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
+        </div>
+    </footer>
+    <script src="../sitio.js"></script>
+</body>
+</html>

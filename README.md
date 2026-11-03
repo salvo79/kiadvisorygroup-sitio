@@ -10,3 +10,15 @@ Sitio de KI Advisory & Strategy Group: HTML estático (sin compilación), listo 
 - `estilos.css`, `sitio.js`, `img/`
 
 El formulario de contacto abre el correo del visitante dirigido a contact@kiadvisorygroup.com.
+
+## Perspectivas (bocetos de Infinity Workflow)
+
+`perspectivas/` y `en/perspectivas/` se generan con `python3 _herramientas/bocetos.py` a partir de los bocetos de la aplicación
+(`WorkflowHD/FE/public/manuales`, y su traducción en `en/`). Cada boceto queda encerrado en `.boceto-sitio`, con la paleta,
+las tipografías, la cabecera y el pie del sitio. Al cambiar un boceto en la aplicación, se vuelve a correr el script.
+
+## Idioma
+
+Inglés por omisión. El script de `<head>` de cada página manda a la versión en español si el navegador del visitante
+está en español; si el visitante usa el selector ES | EN, su elección (guardada en el navegador) manda sobre lo automático.
+`x-default` de `hreflang` apunta a la versión en inglés.

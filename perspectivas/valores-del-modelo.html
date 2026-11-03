@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Valores del modelo · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="El modelo no solo dice qué hacer; también dice cuánto vale cambiar cada cosa. Con un solo ejemplo (una crema y un gel) vemos el valor óptimo, la actividad, la holgura, el valor sombra, el valor marginal, el break-even y la elasticidad." />
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/valores-del-modelo.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/valores-del-modelo.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/valores-del-modelo.html" />
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --azul-suave: #e2f4fc;
+    --naranja: #c2410c;
+    --naranja-suave: #fdeee4;
+    --verde: #15803d;
+    --verde-suave: #e5f5ea;
+    --morado: #7c3aed;
+    --morado-suave: #f1ebfe;
+    --rojo: #dc2626;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+    color-scheme: light;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio, .boceto-sitio { margin: 0; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio h3 { font-size: 1.12rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio b { font-weight: 600; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .tenue { color: var(--tenue); }
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); }
+.boceto-sitio .marca svg { width: 30px; height: 45px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.66rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.45rem/1 var(--f-texto); letter-spacing: -0.01em; }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 780px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.15rem; }
+.boceto-sitio .ejemplo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) {
+.boceto-sitio .ejemplo { grid-template-columns: 1fr; }
+}
+.boceto-sitio .producto { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .producto .fila { display: flex; justify-content: space-between; gap: 12px; font-size: 0.95rem; border-bottom: 1px dashed var(--linea); padding-bottom: 4px; }
+.boceto-sitio .producto .fila:last-child { border-bottom: 0; }
+.boceto-sitio .producto .num { font-variant-numeric: tabular-nums; font-weight: 600; }
+.boceto-sitio .concepto { background: var(--tarjeta); border-radius: 16px; border: 2px solid var(--c, var(--azul)); padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.boceto-sitio .concepto .titulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.boceto-sitio .concepto .titulo h2 { color: var(--c); }
+.boceto-sitio .alias { font-size: 0.82rem; color: var(--tenue); }
+.boceto-sitio .alias b { color: var(--tinta); }
+.boceto-sitio .pregunta { font-family: var(--f-mano); font-size: 1.45rem; line-height: 1.15; color: var(--c); }
+.boceto-sitio .dos { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) {
+.boceto-sitio .dos { grid-template-columns: 1fr; }
+}
+.boceto-sitio .cuenta { background: var(--fondo-c, var(--azul-suave)); border-radius: 12px; padding: 12px 14px; font-size: 0.95rem; display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .cuenta .grande { font: 800 1.6rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; color: var(--c); }
+.boceto-sitio .lectura { border-left: 4px solid var(--c); padding: 6px 12px; font-size: 0.95rem; }
+.boceto-sitio .control { display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .control label { font-size: 0.9rem; display: flex; justify-content: space-between; gap: 10px; }
+.boceto-sitio .control output { font-weight: 600; font-variant-numeric: tabular-nums; }
+.boceto-sitio input[type="range"] { width: 100%; accent-color: var(--c, var(--azul)); }
+.boceto-sitio svg.grafica { width: 100%; height: auto; display: block; }
+.boceto-sitio svg.grafica text { font-family: var(--f-texto); fill: var(--tenue); font-size: 11px; }
+.boceto-sitio .chip { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; background: var(--fondo-c); color: var(--c); }
+.boceto-sitio .mapa { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) {
+.boceto-sitio .mapa { grid-template-columns: 1fr; }
+}
+.boceto-sitio .mapa .lado { background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.boceto-sitio .mapa ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 0.95rem; }
+.boceto-sitio .tabla-wrap { overflow-x: auto; background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 14px; }
+.boceto-sitio table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.92rem; }
+.boceto-sitio th, .boceto-sitio td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.boceto-sitio th { font: 600 0.75rem/1.2 var(--f-texto); letter-spacing: 0.06em; text-transform: uppercase; color: var(--tenue); }
+.boceto-sitio td:first-child { font-weight: 600; white-space: nowrap; }
+.boceto-sitio tr:last-child td { border-bottom: 0; }
+.boceto-sitio .nav-boceto { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--azul); color: var(--azul); background: var(--tarjeta); font: 600 0.9rem/1 var(--f-texto); text-decoration: none; }
+.boceto-sitio .nav-boceto:hover { background: var(--azul-suave); }
+.boceto-sitio .nav-boceto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .cierre { background: var(--marino); color: var(--sobre-marino); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .cierre h2 { color: var(--sobre-marino); }
+.boceto-sitio .cierre p { font-size: 1.02rem; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Servicios</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industrias</a>
+                <a href="../index.html#metodologia">Metodología</a>
+                <a href="../perspectivas/index.html" class="activo">Perspectivas</a>
+                <a class="idioma" href="../en/perspectivas/valores-del-modelo.html" hreflang="en" lang="en">EN</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Agendar consulta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Planeación · cómo leer los resultados</div>
+                <h1>Qué significan los números que da el modelo</h1>
+                <a class="volver-perspectivas" href="index.html">← Todas las perspectivas</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+
+    <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← Regresar a Cómo decide el plan de ventas</a>
+    <section class="cabeza">
+        <span class="eyebrow">Planeación · cómo leer los resultados</span>
+        <h1>Qué significan los números que da el modelo</h1>
+        <p class="tesis">El modelo no solo dice <b>qué hacer</b>; también dice <b>cuánto vale cambiar</b> cada cosa. Con un solo ejemplo (una crema y un gel) vemos el valor óptimo, la actividad, la holgura, el valor sombra, el valor marginal, el break-even y la elasticidad.</p>
+        <p class="mano">Mueve los controles: los números cambian como en el modelo.</p>
+    </section>
+
+    <!-- El ejemplo -->
+    <section class="ejemplo" aria-label="Ejemplo">
+        <div class="producto">
+            <h3>Crema hidratante</h3>
+            <div class="fila"><span>Precio</span><span class="num">$100</span></div>
+            <div class="fila"><span>Costo</span><span class="num">$40</span></div>
+            <div class="fila"><span>Margen por pieza</span><span class="num">$60</span></div>
+            <div class="fila"><span>El mercado compra hasta</span><span class="num">600 pz</span></div>
+            <div class="fila"><span>Hay en inventario</span><span class="num" id="invTexto">500 pz</span></div>
+        </div>
+        <div class="producto">
+            <h3>Gel exfoliante</h3>
+            <div class="fila"><span>Precio</span><span class="num" id="gelPrecioTexto">$40</span></div>
+            <div class="fila"><span>Costo</span><span class="num">$45</span></div>
+            <div class="fila"><span>Margen por pieza</span><span class="num" id="gelMargenTexto">−$5</span></div>
+            <div class="fila"><span>El mercado compra hasta</span><span class="num">200 pz</span></div>
+            <div class="fila"><span>Hay en inventario</span><span class="num">300 pz</span></div>
+        </div>
+    </section>
+
+    <!-- 1. Valor óptimo y actividad -->
+    <section class="concepto" style="--c: var(--verde); --fondo-c: var(--verde-suave)">
+        <div class="titulo">
+            <h2>1 · Valor óptimo y actividad</h2>
+            <span class="alias">también: <b>función objetivo (Z)</b> · <b>solución primal</b> · <b>valor de la variable</b></span>
+        </div>
+        <p class="pregunta">¿Qué es lo mejor que se puede lograr, y haciendo qué?</p>
+        <div class="dos">
+            <div class="cuenta">
+                <span>El modelo prueba todas las combinaciones y elige la de mayor margen:</span>
+                <span>Crema: vende <b id="cremaVende">500</b> pz × $60 = <b id="cremaMargen">$30,000</b></span>
+                <span>Gel: vende <b id="gelVende">0</b> pz <span class="tenue" id="gelPorque">(cada pieza pierde $5)</span></span>
+                <span class="grande" id="z">Z = $30,000</span>
+            </div>
+            <div class="lectura">
+                <p>El <b>valor óptimo</b> es la mejor utilidad posible con las reglas del negocio. La <b>actividad</b> es cuánto hace el plan de cada cosa: 500 piezas de crema y 0 de gel. Ninguna otra combinación deja más.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Holgura y restricción activa -->
+    <section class="concepto" style="--c: var(--azul); --fondo-c: var(--azul-suave)">
+        <div class="titulo">
+            <h2>2 · Restricción activa y holgura</h2>
+            <span class="alias">también: <b>límite</b> · <b>actividad de la restricción</b> · <b>slack</b></span>
+        </div>
+        <p class="pregunta">¿Qué regla está frenando el plan?</p>
+        <div class="dos">
+            <div class="cuenta">
+                <span>Inventario de crema: usa <b id="usaInv">500</b> de <b id="limInv">500</b> → holgura <b id="holInv">0</b> <span class="chip" id="chipInv">activa: frena</span></span>
+                <span>Demanda de crema: usa <b id="usaDem">500</b> de 600 → holgura <b id="holDem">100</b> <span class="chip" id="chipDem" style="--c: var(--tenue)">no frena</span></span>
+            </div>
+            <div class="lectura">
+                <p>Una restricción está <b>activa</b> cuando se usa completa (holgura 0): es la que impide ganar más. La que tiene holgura no estorba. Aquí manda el inventario, no el mercado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Valor sombra / dual -->
+    <section class="concepto" style="--c: var(--naranja); --fondo-c: var(--naranja-suave)">
+        <div class="titulo">
+            <h2>3 · Valor sombra</h2>
+            <span class="alias">también: <b>precio sombra</b> · <b>valor dual</b> · <b>valor marginal de una restricción</b></span>
+        </div>
+        <p class="pregunta">Si tuviera una pieza más de inventario, ¿cuánto ganaría?</p>
+        <div class="dos">
+            <div class="control">
+                <label for="inv">Inventario de crema <output id="invSalida">500 pz</output></label>
+                <input id="inv" type="range" min="300" max="800" step="10" value="500">
+                <svg class="grafica" id="grafInv" viewBox="0 0 420 200" role="img" aria-label="Utilidad según el inventario de crema"></svg>
+            </div>
+            <div class="flex">
+                <div class="cuenta">
+                    <span>Valor sombra del inventario</span>
+                    <span class="grande" id="sombra">$60 por pieza</span>
+                    <span id="sombraTexto">Cada pieza más se vende y deja $60. Vale la pena comprar hasta que el mercado se llene (600 pz).</span>
+                </div>
+            </div>
+        </div>
+        <div class="lectura">
+            <p>El <b>valor sombra</b> (o <b>dual</b>) es la pendiente de la utilidad: cuánto sube Z si una restricción se afloja una unidad. Solo las restricciones activas lo tienen. Ojo: <b>vale dentro de un rango</b>. Pasando 600 piezas el que manda es el mercado y una pieza más de inventario ya vale $0; ahora el valor sombra lo tiene la demanda.</p>
+        </div>
+    </section>
+
+    <!-- 4. Valor marginal / costo reducido y break-even -->
+    <section class="concepto" style="--c: var(--morado); --fondo-c: var(--morado-suave)">
+        <div class="titulo">
+            <h2>4 · Valor marginal y break-even</h2>
+            <span class="alias">también: <b>costo reducido</b> (de una variable) · <b>valor de equilibrio</b> · <b>precio de equilibrio</b></span>
+        </div>
+        <p class="pregunta">¿Por qué no vende gel, y a qué precio sí convendría?</p>
+        <div class="dos">
+            <div class="control">
+                <label for="gel">Precio del gel <output id="gelSalida">$40</output></label>
+                <input id="gel" type="range" min="34" max="56" step="1" value="40">
+                <svg class="grafica" id="grafGel" viewBox="0 0 420 120" role="img" aria-label="Margen por pieza del gel según su precio"></svg>
+            </div>
+            <div class="cuenta">
+                <span>Valor marginal (costo reducido) de vender gel</span>
+                <span class="grande" id="marginal">−$5 por pieza</span>
+                <span>Break-even (precio de equilibrio): <b>$45</b></span>
+                <span id="gelLectura">Si se obligara a vender una pieza, la utilidad bajaría $5. Por eso el modelo lo deja en cero.</span>
+            </div>
+        </div>
+        <div class="lectura">
+            <p>El <b>valor marginal</b> de una variable que el plan deja en cero dice cuánto costaría forzarla. El <b>break-even</b> es el precio (o costo) a partir del cual empieza a convenir: aquí $45. Una variable que ya conviene (como la crema) tiene valor marginal 0 y no tiene break-even.</p>
+        </div>
+    </section>
+
+    <!-- 5. Elasticidad -->
+    <section class="concepto" style="--c: var(--rojo); --fondo-c: var(--naranja-suave)">
+        <div class="titulo">
+            <h2>5 · Elasticidad precio</h2>
+            <span class="alias">también: <b>elasticidad de la demanda</b> · <b>sensibilidad al precio</b></span>
+        </div>
+        <p class="pregunta">Si subo el precio de la crema, ¿cuánto dejo de vender?</p>
+        <div class="dos">
+            <div class="flex">
+                <div class="control">
+                    <label for="elas">Elasticidad de la crema <output id="elasSalida">−2.0</output></label>
+                    <input id="elas" type="range" min="-3" max="-0.3" step="0.1" value="-2">
+                </div>
+                <div class="control" style="margin-top: 10px">
+                    <label for="cambio">Cambio de precio <output id="cambioSalida">+10 %</output></label>
+                    <input id="cambio" type="range" min="-20" max="20" step="1" value="10">
+                </div>
+            </div>
+            <div class="cuenta">
+                <span>Demanda <span class="chip" id="tipo">elástica</span></span>
+                <span>Piezas: <b id="efPiezas">−17 %</b> · Ingreso: <b id="efIngreso">−9 %</b> · Margen: <b id="efMargen">−10 %</b></span>
+                <span>Precio que maximiza el margen: <b id="precioOpt">$80</b></span>
+            </div>
+        </div>
+        <div class="lectura">
+            <p>La <b>elasticidad</b> es cuánto cambian las piezas por cada 1 % que sube el precio (−2: subir 1 % baja 2 %). Si es <b>elástica</b> (más de 1 en valor absoluto), bajar el precio sube el ingreso; si es <b>inelástica</b>, subirlo lo sube. El modelo la mide con la historia de cada producto y, si la activas, la demanda de un escenario responde a su precio.</p>
+        </div>
+    </section>
+
+    <!-- Mapa: variables vs restricciones -->
+    <section class="mapa">
+        <div class="lado">
+            <span class="eyebrow">Sobre las decisiones (variables)</span>
+            <h3>¿Cuánto hacer de cada cosa?</h3>
+            <ul>
+                <li><b>Actividad</b>: cuánto hace el plan (piezas a vender, comprar, tener).</li>
+                <li><b>Mín. / Máx.</b>: entre qué valores puede moverse.</li>
+                <li><b>Valor marginal</b> (costo reducido): cuánto costaría forzar una unidad más de algo que no conviene.</li>
+                <li><b>Break-even</b>: el precio o costo con el que empezaría a convenir.</li>
+            </ul>
+        </div>
+        <div class="lado">
+            <span class="eyebrow">Sobre las reglas (restricciones)</span>
+            <h3>¿Qué frena el plan y cuánto vale aflojarlo?</h3>
+            <ul>
+                <li><b>Actividad</b>: cuánto se usa del límite.</li>
+                <li><b>Holgura</b>: cuánto sobra; 0 = está activa y frena.</li>
+                <li><b>Valor sombra / dual</b>: cuánto ganaría el plan si el límite creciera una unidad.</li>
+                <li><b>Rango</b>: hasta dónde vale ese valor antes de que mande otra regla.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Tabla resumen -->
+    <section style="display:flex;flex-direction:column;gap:12px">
+        <h2>En una tabla</h2>
+        <div class="tabla-wrap">
+            <table>
+                <thead><tr><th>Concepto</th><th>Otros nombres</th><th>Responde</th><th>En el ejemplo</th><th>Dónde se ve</th></tr></thead>
+                <tbody>
+                    <tr><td>Valor óptimo</td><td>Función objetivo, Z</td><td>¿Qué es lo mejor posible?</td><td>$30,000</td><td>Resultados › encabezado</td></tr>
+                    <tr><td>Actividad</td><td>Primal, valor de la variable</td><td>¿Cuánto hacer?</td><td>500 pz de crema, 0 de gel</td><td>Reporte de actividad › Variables</td></tr>
+                    <tr><td>Holgura</td><td>Slack</td><td>¿Cuánto sobra del límite?</td><td>Inventario 0 · demanda 100</td><td>Reporte de actividad › Restricciones</td></tr>
+                    <tr><td>Valor sombra</td><td>Precio sombra, valor dual</td><td>¿Cuánto vale aflojar una regla?</td><td>$60 por pieza de inventario</td><td>Restricciones · Inventarios</td></tr>
+                    <tr><td>Valor marginal</td><td>Costo reducido</td><td>¿Cuánto cuesta forzar algo?</td><td>−$5 por pieza de gel</td><td>Reporte de actividad › Variables</td></tr>
+                    <tr><td>Break-even</td><td>Valor o precio de equilibrio</td><td>¿Desde qué precio conviene?</td><td>Gel a $45</td><td>Variables · Productos</td></tr>
+                    <tr><td>Elasticidad</td><td>Sensibilidad al precio</td><td>¿Cuánto cae la venta si sube el precio?</td><td>−2 → +10 % precio = −17 % piezas</td><td>Productos · Gantt · Excel</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="cierre">
+        <h2>La idea en una frase</h2>
+        <p>El <b>valor óptimo</b> dice cuánto se puede ganar; la <b>actividad</b>, qué hacer; el <b>valor sombra</b>, qué límite conviene ampliar; el <b>valor marginal</b> y el <b>break-even</b>, qué no conviene y a qué precio convendría; y la <b>elasticidad</b>, cómo reacciona el mercado al precio.</p>
+    </section>
+    <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← Regresar a Cómo decide el plan de ventas</a>
+</main>
+        </div>
+<script>
+// Ejemplo: crema margen $60, demanda 600; gel costo $45, demanda 200. Los números se recalculan con los controles.
+const $ = (id) => document.getElementById(id);
+const pesos = (x) => `${x < 0 ? '−' : ''}$${Math.abs(Math.round(x)).toLocaleString('es-MX')}`;
+const pct = (x) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(Math.round(x))} %`;
+const color = (v) => getComputedStyle(document.querySelector('.boceto-sitio')).getPropertyValue(v).trim();
+const MARGEN = 60, DEMANDA = 600, GEL_COSTO = 45, GEL_DEMANDA = 200;
+
+function recalcular() {
+    const inv = +$('inv').value;
+    const gel = +$('gel').value;
+    const vende = Math.min(inv, DEMANDA);
+    const gelMargen = gel - GEL_COSTO;
+    const gelVende = gelMargen > 0 ? GEL_DEMANDA : 0;
+    const z = vende * MARGEN + gelVende * gelMargen;
+
+    $('invTexto').textContent = `${inv} pz`;
+    $('invSalida').textContent = `${inv} pz`;
+    $('cremaVende').textContent = vende;
+    $('cremaMargen').textContent = pesos(vende * MARGEN);
+    $('gelVende').textContent = gelVende;
+    $('gelPorque').textContent = gelMargen > 0 ? `(deja ${pesos(gelMargen)} por pieza)` : gelMargen === 0 ? '(no gana ni pierde)' : `(cada pieza pierde ${pesos(-gelMargen)})`;
+    $('z').textContent = `Z = ${pesos(z)}`;
+
+    // Holgura y restricciones activas
+    $('usaInv').textContent = vende; $('limInv').textContent = inv; $('holInv').textContent = inv - vende;
+    $('usaDem').textContent = vende; $('holDem').textContent = DEMANDA - vende;
+    const invActiva = inv < DEMANDA;
+    $('chipInv').textContent = invActiva ? 'activa: frena' : 'no frena';
+    $('chipInv').style.setProperty('--c', invActiva ? 'var(--azul)' : 'var(--tenue)');
+    $('chipDem').textContent = invActiva ? 'no frena' : 'activa: frena';
+    $('chipDem').style.setProperty('--c', invActiva ? 'var(--tenue)' : 'var(--azul)');
+
+    // Valor sombra
+    $('sombra').textContent = invActiva ? '$60 por pieza' : '$0 por pieza';
+    $('sombraTexto').textContent = invActiva ? `Cada pieza más se vende y deja $60. Conviene comprar hasta que el mercado se llene (faltan ${DEMANDA - inv} pz).` : 'Ya sobra inventario: una pieza más no se vende. Ahora el valor sombra lo tiene la demanda ($60 por cada cliente más).';
+    dibujarInventario(inv);
+
+    // Valor marginal y break-even
+    $('gelSalida').textContent = `$${gel}`;
+    $('gelPrecioTexto').textContent = `$${gel}`;
+    $('gelMargenTexto').textContent = pesos(gelMargen);
+    $('marginal').textContent = gelMargen < 0 ? `${pesos(gelMargen)} por pieza` : '$0 (ya conviene)';
+    $('gelLectura').textContent = gelMargen < 0 ? `Si se obligara a vender una pieza, la utilidad bajaría ${pesos(-gelMargen)}. Por eso el modelo lo deja en cero.` : gelMargen === 0 ? 'Justo en el break-even: venderlo ni suma ni resta.' : `Pasó el break-even: el modelo ya lo vende (${GEL_DEMANDA} pz) y suma ${pesos(gelMargen * GEL_DEMANDA)}.`;
+    dibujarGel(gel);
+
+    // Elasticidad (crema, precio $100, costo $40)
+    const e = +$('elas').value;
+    const c = +$('cambio').value / 100;
+    const q = Math.pow(1 + c, e);
+    const ingreso = (1 + c) * q;
+    const margen = (100 * (1 + c) - 40) * q / 60;
+    $('elasSalida').textContent = e.toFixed(1).replace('-', '−');
+    $('cambioSalida').textContent = pct(c * 100);
+    $('efPiezas').textContent = pct((q - 1) * 100);
+    $('efIngreso').textContent = pct((ingreso - 1) * 100);
+    $('efMargen').textContent = pct((margen - 1) * 100);
+    const tipo = Math.abs(e) > 1.05 ? 'elástica' : Math.abs(e) < 0.95 ? 'inelástica' : 'unitaria';
+    $('tipo').textContent = tipo;
+    $('precioOpt').textContent = e < -1 ? `$${Math.round((40 * e) / (1 + e))}` : 'no hay tope: con demanda inelástica, subir el precio sigue sumando (hasta que cambie el mercado)';
+}
+
+function dibujarInventario(inv) {
+    const s = $('grafInv');
+    const X = (v) => 40 + ((v - 300) / 500) * 360;
+    const Y = (z) => 170 - (z / 40000) * 150;
+    const linea = [300, 600, 800].map((v) => `${X(v)},${Y(Math.min(v, DEMANDA) * MARGEN)}`).join(' ');
+    const z = Math.min(inv, DEMANDA) * MARGEN;
+    s.innerHTML = `
+        <line x1="40" y1="170" x2="400" y2="170" stroke="${color('--linea')}" />
+        <line x1="40" y1="20" x2="40" y2="170" stroke="${color('--linea')}" />
+        <line x1="${X(600)}" y1="20" x2="${X(600)}" y2="170" stroke="${color('--linea')}" stroke-dasharray="4 4" />
+        <text x="${X(600) + 4}" y="164">mercado lleno (600)</text>
+        <polyline points="${linea}" fill="none" stroke="${color('--naranja')}" stroke-width="3" />
+        <text x="${X(430)}" y="${Y(430 * 60) + 26}" style="fill:${color('--naranja')};font-weight:600">pendiente $60 = valor sombra</text>
+        <text x="${X(660)}" y="${Y(36000) - 10}">pendiente $0</text>
+        <circle cx="${X(inv)}" cy="${Y(z)}" r="6" fill="${color('--naranja')}" />
+        <text x="44" y="186">300 pz</text><text x="372" y="186">800 pz</text>
+        <text x="4" y="${Y(z) + 4}">${(z / 1000).toFixed(0)}k</text>`;
+}
+
+function dibujarGel(precio) {
+    const s = $('grafGel');
+    const X = (p) => 30 + ((p - 34) / 22) * 370;
+    const margen = precio - GEL_COSTO;
+    s.innerHTML = `
+        <line x1="30" y1="60" x2="400" y2="60" stroke="${color('--linea')}" />
+        <rect x="${X(34)}" y="40" width="${X(45) - X(34)}" height="40" rx="6" fill="${color('--naranja-suave')}" />
+        <rect x="${X(45)}" y="40" width="${X(56) - X(45)}" height="40" rx="6" fill="${color('--verde-suave')}" />
+        <text x="${X(35)}" y="76">no conviene</text>
+        <text x="${X(47)}" y="76">conviene: se vende</text>
+        <line x1="${X(45)}" y1="28" x2="${X(45)}" y2="92" stroke="${color('--morado')}" stroke-width="2" stroke-dasharray="4 3" />
+        <text x="${X(45) - 40}" y="20" style="fill:${color('--morado')};font-weight:600">break-even $45</text>
+        <circle cx="${X(precio)}" cy="60" r="7" fill="${margen < 0 ? color('--naranja') : color('--verde')}" />
+        <text x="${X(precio) - 12}" y="110">$${precio}</text>`;
+}
+
+['inv', 'gel', 'elas', 'cambio'].forEach((id) => $(id).addEventListener('input', recalcular));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recalcular);
+recalcular();
+</script>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Servicios</h4><a href="../index.html#servicios">Planeación estratégica</a><a href="../index.html#servicios">Programación operativa</a><a href="../index.html#servicios">Implementación</a><a href="../index.html#servicios">Evaluación y seguimiento</a></div>
+                <div><h4>Compañía</h4><a href="../index.html#metodologia">Metodología</a><a href="../index.html#industrias">Industrias</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Perspectivas</a></div>
+                <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Ciudad de México · España · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="../contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
+        </div>
+    </footer>
+    <script src="../sitio.js"></script>
+</body>
+</html>

@@ -3,6 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
     <title>Infinity Workflow · KI Advisory & Strategy Group</title>
     <meta name="description" content="Infinity Workflow: a platform for optimization-based planning, sales scheduling, daily operations and evaluation against the plan." />
     <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
@@ -11,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
     <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/infinity-workflow.html" />
     <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
-    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/infinity-workflow.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
     <link rel="stylesheet" href="../estilos.css" />
 </head>
 <body>
@@ -24,6 +38,7 @@
                 <a href="infinity-workflow.html" class="activo">Infinity Workflow</a>
                 <a href="index.html#industrias">Industries</a>
                 <a href="index.html#metodologia">Methodology</a>
+                <a href="perspectivas/index.html">Insights</a>
                 <a class="idioma" href="../infinity-workflow.html" hreflang="es" lang="es">ES</a>
                 <a class="boton boton-oscuro" href="contacto.html">Book a consultation</a>
             </nav>
@@ -37,7 +52,7 @@
                     <div class="marca-iw"><img src="../img/infinity-icon-white.png" alt="" /><div><small>INFINITY</small><strong>Workflow</strong></div></div>
                     <h1>From the optimal plan <em>to today’s visit.</em></h1>
                     <p class="entrada">The platform we built so strategy gets executed and measured: optimization-based planning, scheduling by owner, daily operations and evaluation against the plan, in a single cloud tool.</p>
-                    <div class="acciones" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px"><a class="boton boton-primario" href="contacto.html?interes=Infinity%20Workflow"><span class="flecha">Request a demo</span></a><a class="boton boton-borde" href="#modulos">See modules</a></div>
+                    <div class="acciones" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px"><a class="boton boton-primario" href="contacto.html?interes=Infinity%20Workflow"><span class="con-flecha">Request a demo</span></a><a class="boton boton-borde" href="#modulos">See modules</a></div>
                 </div>
                 <div class="pantalla" aria-hidden="true">
                     <div class="barra"><i></i><i></i><i></i></div>
@@ -64,7 +79,7 @@
             </div>
         </section>
         <section class="gris">
-            <div class="contenedor dos">
+            <div class="contenedor dos-col">
                 <div class="aparece">
                     <div class="antetitulo">Who it is for</div>
                     <h2>Companies with <em>teams in the field.</em></h2>
@@ -89,13 +104,13 @@
                     <li>Trial accounts for the pilot</li>
                     <li>English and Spanish, including reports and the assistant</li>
                 </ul>
-                <a class="boton boton-primario aparece" href="contacto.html?interes=Infinity%20Workflow"><span class="flecha">Request a demo</span></a>
+                <a class="boton boton-primario aparece" href="contacto.html?interes=Infinity%20Workflow"><span class="con-flecha">Request a demo</span></a>
             </div>
         </section>
     </main>
 
 
-    <footer class="pie">
+    <footer class="pie-sitio">
         <div class="contenedor">
             <div class="columnas">
                 <div>
@@ -103,7 +118,7 @@
                     <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
                 </div>
                 <div><h4>Services</h4><a href="index.html#servicios">Strategic planning</a><a href="index.html#servicios">Operational scheduling</a><a href="index.html#servicios">Implementation</a><a href="index.html#servicios">Evaluation and follow-up</a></div>
-                <div><h4>Company</h4><a href="index.html#metodologia">Methodology</a><a href="index.html#industrias">Industries</a><a href="infinity-workflow.html">Infinity Workflow</a></div>
+                <div><h4>Company</h4><a href="index.html#metodologia">Methodology</a><a href="index.html#industrias">Industries</a><a href="infinity-workflow.html">Infinity Workflow</a><a href="perspectivas/index.html">Insights</a></div>
                 <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="contacto.html">Mexico City · Spain · LATAM</a></div>
             </div>
             <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>

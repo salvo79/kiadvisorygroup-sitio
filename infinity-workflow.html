@@ -3,6 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
     <title>Infinity Workflow · KI Advisory & Strategy Group</title>
     <meta name="description" content="Infinity Workflow: plataforma de planeación con optimización, programación comercial, operación diaria y evaluación contra el plan." />
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
@@ -11,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
     <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/infinity-workflow.html" />
     <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
-    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/infinity-workflow.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
     <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
@@ -24,6 +38,7 @@
                 <a href="infinity-workflow.html" class="activo">Infinity Workflow</a>
                 <a href="index.html#industrias">Industrias</a>
                 <a href="index.html#metodologia">Metodología</a>
+                <a href="perspectivas/index.html">Perspectivas</a>
                 <a class="idioma" href="en/infinity-workflow.html" hreflang="en" lang="en">EN</a>
                 <a class="boton boton-oscuro" href="contacto.html">Agendar consulta</a>
             </nav>
@@ -37,7 +52,7 @@
                     <div class="marca-iw"><img src="img/infinity-icon-white.png" alt="" /><div><small>INFINITY</small><strong>Workflow</strong></div></div>
                     <h1>Del plan óptimo <em>a la visita del día.</em></h1>
                     <p class="entrada">La plataforma que desarrollamos para que la estrategia se ejecute y se mida: planeación con optimización, programación por responsable, operación diaria y evaluación contra el plan, en una sola herramienta en la nube.</p>
-                    <div class="acciones" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px"><a class="boton boton-primario" href="contacto.html?interes=Infinity%20Workflow"><span class="flecha">Solicitar una demostración</span></a><a class="boton boton-borde" href="#modulos">Ver módulos</a></div>
+                    <div class="acciones" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px"><a class="boton boton-primario" href="contacto.html?interes=Infinity%20Workflow"><span class="con-flecha">Solicitar una demostración</span></a><a class="boton boton-borde" href="#modulos">Ver módulos</a></div>
                 </div>
                 <div class="pantalla" aria-hidden="true">
                     <div class="barra"><i></i><i></i><i></i></div>
@@ -64,7 +79,7 @@
             </div>
         </section>
         <section class="gris">
-            <div class="contenedor dos">
+            <div class="contenedor dos-col">
                 <div class="aparece">
                     <div class="antetitulo">Para quién</div>
                     <h2>Empresas con <em>equipos en campo.</em></h2>
@@ -89,13 +104,13 @@
                     <li>Cuentas de prueba para el piloto</li>
                     <li>Español e inglés, incluidos reportes y asistente</li>
                 </ul>
-                <a class="boton boton-primario aparece" href="contacto.html?interes=Infinity%20Workflow"><span class="flecha">Solicitar una demostración</span></a>
+                <a class="boton boton-primario aparece" href="contacto.html?interes=Infinity%20Workflow"><span class="con-flecha">Solicitar una demostración</span></a>
             </div>
         </section>
     </main>
 
 
-    <footer class="pie">
+    <footer class="pie-sitio">
         <div class="contenedor">
             <div class="columnas">
                 <div>
@@ -103,7 +118,7 @@
                     <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
                 </div>
                 <div><h4>Servicios</h4><a href="index.html#servicios">Planeación estratégica</a><a href="index.html#servicios">Programación operativa</a><a href="index.html#servicios">Implementación</a><a href="index.html#servicios">Evaluación y seguimiento</a></div>
-                <div><h4>Compañía</h4><a href="index.html#metodologia">Metodología</a><a href="index.html#industrias">Industrias</a><a href="infinity-workflow.html">Infinity Workflow</a></div>
+                <div><h4>Compañía</h4><a href="index.html#metodologia">Metodología</a><a href="index.html#industrias">Industrias</a><a href="infinity-workflow.html">Infinity Workflow</a><a href="perspectivas/index.html">Perspectivas</a></div>
                 <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="contacto.html">Ciudad de México · España · LATAM</a></div>
             </div>
             <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>

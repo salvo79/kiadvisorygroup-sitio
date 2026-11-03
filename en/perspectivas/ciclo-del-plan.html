@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Plan cycle · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="The plan is calculated, distributed among the salespeople, converted into visits, executed in the field, and compared daily against actual results. What is learned adjusts the next plan. Everything lives in the same app, and every step leaves a trail." />
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/ciclo-del-plan.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/ciclo-del-plan.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/ciclo-del-plan.html" />
+    <link rel="stylesheet" href="../../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --e1: #0090d0;
+    --e2: #7c3aed;
+    --e3: #0d9488;
+    --e4: #15803d;
+    --e5: #c2410c;
+    --e6: #b45309;
+    --suave: color-mix(in srgb, var(--c) 10%, var(--tarjeta));
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+    color-scheme: light;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio, .boceto-sitio { margin: 0; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio h3 { font-size: 1.1rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio b { font-weight: 600; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--e1); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--e1); }
+.boceto-sitio .tenue { color: var(--tenue); }
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); }
+.boceto-sitio .marca svg { width: 30px; height: 45px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.66rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.45rem/1 var(--f-texto); letter-spacing: -0.01em; }
+.boceto-sitio .navs { display: flex; flex-wrap: wrap; gap: 10px; }
+.boceto-sitio .nav-boceto { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--e1); color: var(--e1); background: var(--tarjeta); font: 600 0.9rem/1 var(--f-texto); text-decoration: none; }
+.boceto-sitio .nav-boceto:hover { background: color-mix(in srgb, var(--e1) 10%, var(--tarjeta)); }
+.boceto-sitio .nav-boceto:focus-visible { outline: 3px solid var(--e1); outline-offset: 2px; }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 800px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.15rem; }
+.boceto-sitio .rueda { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+@media (max-width: 900px) {
+.boceto-sitio .rueda { grid-template-columns: 1fr; }
+}
+.boceto-sitio .rueda svg { width: 100%; max-width: 520px; height: auto; margin: 0 auto; display: block; }
+.boceto-sitio .rueda svg text { font-family: var(--f-texto); }
+.boceto-sitio .ritmo { display: flex; flex-direction: column; gap: 12px; }
+.boceto-sitio .ritmo .paso { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 10px 14px; background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 12px; }
+.boceto-sitio .ritmo .cuando { font: 800 0.95rem/1.2 var(--f-display); color: var(--c); }
+.boceto-sitio .etapas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) {
+.boceto-sitio .etapas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+.boceto-sitio .etapas { grid-template-columns: 1fr; }
+}
+.boceto-sitio .etapa { background: var(--tarjeta); border: 2px solid var(--c); border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.boceto-sitio .etapa .num { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: var(--tarjeta); font: 800 0.95rem/1 var(--f-display); }
+.boceto-sitio .etapa header { display: flex; align-items: center; gap: 10px; }
+.boceto-sitio .etapa h3 { color: var(--c); }
+.boceto-sitio .etapa .donde { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .etapa .donde b { color: var(--tinta); }
+.boceto-sitio .etapa ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; font-size: 0.9rem; line-height: 1.4; }
+.boceto-sitio .etapa .sale { margin-top: auto; background: color-mix(in srgb, var(--c) 12%, var(--tarjeta)); border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; }
+.boceto-sitio .etapa .quien { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .hilo { display: flex; flex-direction: column; gap: 12px; }
+.boceto-sitio .linea-tiempo { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 1000px) {
+.boceto-sitio .linea-tiempo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+.boceto-sitio .linea-tiempo { grid-template-columns: 1fr; }
+}
+.boceto-sitio .dato { background: var(--tarjeta); border-top: 5px solid var(--c); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 1px 0 var(--linea); min-width: 0; }
+.boceto-sitio .dato .cifra { font: 800 1.35rem/1.1 var(--f-display); color: var(--c); font-variant-numeric: tabular-nums; }
+.boceto-sitio .dato p { font-size: 0.88rem; line-height: 1.4; }
+.boceto-sitio .red { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; align-items: start; background: var(--tarjeta); border: 2px dashed var(--e3); border-radius: 16px; padding: 18px 20px; }
+@media (max-width: 860px) {
+.boceto-sitio .red { grid-template-columns: 1fr; }
+}
+.boceto-sitio .red-texto { display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .red .tag { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.1em; text-transform: uppercase; color: var(--e3); }
+.boceto-sitio .red h3 { color: var(--e3); }
+.boceto-sitio .red-texto p { font-size: 0.93rem; }
+.boceto-sitio .red-pasos { margin: 0; padding: 0; list-style: none; counter-reset: paso; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 560px) {
+.boceto-sitio .red-pasos { grid-template-columns: 1fr; }
+}
+.boceto-sitio .red-pasos li { counter-increment: paso; position: relative; padding: 10px 12px 10px 44px; border-radius: 12px; background: color-mix(in srgb, var(--e3) 10%, var(--tarjeta)); display: flex; flex-direction: column; gap: 2px; font-size: 0.88rem; line-height: 1.35; }
+.boceto-sitio .red-pasos li::before { content: counter(paso); position: absolute; left: 12px; top: 10px; width: 22px; height: 22px; border-radius: 50%; background: var(--e3); color: var(--tarjeta); font: 800 0.8rem/22px var(--f-display); text-align: center; }
+.boceto-sitio .red-pasos li:last-child { background: color-mix(in srgb, var(--e4) 14%, var(--tarjeta)); }
+.boceto-sitio .red-pasos li:last-child::before { background: var(--e4); }
+.boceto-sitio .dato .tag { font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+.boceto-sitio .traza { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) {
+.boceto-sitio .traza { grid-template-columns: 1fr; }
+}
+.boceto-sitio .traza .lado { background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .traza ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 0.93rem; }
+.boceto-sitio .cierre { background: var(--marino); color: var(--sobre-marino); border-radius: 16px; padding: 22px 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 760px) {
+.boceto-sitio .cierre { grid-template-columns: 1fr; }
+}
+.boceto-sitio .cierre b { font: 800 1.1rem/1.2 var(--f-display); display: block; margin-bottom: 4px; }
+.boceto-sitio .cierre p { font-size: 0.95rem; opacity: 0.92; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Open menu" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Services</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industries</a>
+                <a href="../index.html#metodologia">Methodology</a>
+                <a href="../perspectivas/index.html" class="activo">Insights</a>
+                <a class="idioma" href="../../perspectivas/ciclo-del-plan.html" hreflang="es" lang="es">ES</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Book a consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Planning · The Complete Cycle</div>
+                <h1>From the Company Plan to the Daily Visit, and Back</h1>
+                <a class="volver-perspectivas" href="index.html">← All insights</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+    <div class="navs">
+        <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← How the sales program decides</a>
+        <a class="nav-boceto" href="quien-vende-que.html">Who sells what →</a>
+    </div>
+
+    <section class="cabeza">
+        <span class="eyebrow">Planning · The Complete Cycle</span>
+        <h1>From the Company Plan to the Daily Visit, and Back</h1>
+        <p class="tesis">The plan is <b>calculated</b>, <b>distributed</b> among the salespeople, converted into <b>visits</b>, <b>executed</b> in the field, and <b>compared</b> daily against actual results. What is learned <b>adjusts</b> the next plan. Everything lives in the same app, and every step leaves a trail.</p>
+        <p class="mano">A single target, six hands moving it.</p>
+    </section>
+
+    <!-- Rueda y ritmo -->
+    <section class="rueda" aria-label="The cycle">
+        <svg viewBox="0 0 520 520" role="img" aria-label="Cycle: plan, schedule, assign, execute, evaluate, and adjust">
+            <defs>
+                <marker id="pt" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--tenue)" /></marker>
+            </defs>
+            <circle cx="260" cy="260" r="180" fill="none" stroke="var(--linea)" stroke-width="2" stroke-dasharray="6 6" />
+            <g id="ruedaPasos"></g>
+            <circle cx="260" cy="260" r="78" fill="var(--tarjeta)" stroke="var(--linea)" stroke-width="2" />
+            <text x="260" y="248" text-anchor="middle" style="font: 800 17px var(--f-display); fill: var(--tinta)">One target</text>
+            <text x="260" y="270" text-anchor="middle" style="font: 500 13px var(--f-texto); fill: var(--tenue)">product · zone · month</text>
+            <text x="260" y="290" text-anchor="middle" style="font: 500 13px var(--f-texto); fill: var(--tenue)">in pesos and pieces</text>
+        </svg>
+        <div class="ritmo">
+            <div class="paso" style="--c: var(--e1)"><span class="cuando">Yearly</span><span>The model is built, scenarios are compared, and the plan is chosen.</span></div>
+            <div class="paso" style="--c: var(--e2)"><span class="cuando">Upon publishing</span><span>The plan is distributed among salespeople, and each one confirms their target.</span></div>
+            <div class="paso" style="--c: var(--e3)"><span class="cuando">Weekly</span><span>The salesperson (or their supervisor) builds the visit plan and publishes the routes.</span></div>
+            <div class="paso" style="--c: var(--e4)"><span class="cuando">Daily</span><span>Check-in, result, order, and check-out on the route; the supervisor receives the report.</span></div>
+            <div class="paso" style="--c: var(--e5)"><span class="cuando">Always</span><span>Plan vs. actual by zone, supervisor, and salesperson; forecast accuracy at month-end.</span></div>
+            <div class="paso" style="--c: var(--e6)"><span class="cuando">When needed</span><span>Replanning takes place: closed months are not touched, and each salesperson sees what changed.</span></div>
+        </div>
+    </section>
+
+    <!-- Etapas -->
+    <section class="etapas" aria-label="Stages">
+        <article class="etapa" style="--c: var(--e1)">
+            <header><span class="num">1</span><h3>Plan</h3></header>
+            <span class="donde">In the app: <b>Strategic planning › Model · Cases · Results</b></span>
+            <ul>
+                <li>The model calculates how much to sell of each product, in each zone and month, how much to buy, and how much inventory to keep to <b>earn the highest margin</b>.</li>
+                <li>Scenarios are tested (price, demand, lead time), including hot-swapping changes on a case.</li>
+                <li>The comparator helps choose the case to be executed.</li>
+            </ul>
+            <span class="quien">Who: planner and management</span>
+            <div class="sale"><b>Output:</b> the optimal plan by product, zone, and month, and when to order from suppliers.</div>
+        </article>
+        <article class="etapa" style="--c: var(--e2)">
+            <header><span class="num">2</span><h3>Schedule</h3></header>
+            <span class="donde">In the app: <b>Sales scheduling</b></span>
+            <ul>
+                <li>A second optimization distributes the plan among salespeople based on their <b>affinity</b>, <b>trend</b>, and <b>capacity</b>.</li>
+                <li>It is reviewed by zone, salesperson, product, and month, in pesos or pieces.</li>
+                <li><b>Publishing and sending targets</b> turns it into the Sales program.</li>
+            </ul>
+            <span class="quien">Who: planner and sales management</span>
+            <div class="sale"><b>Output:</b> each salesperson's target by month, customer, and product.</div>
+        </article>
+        <article class="etapa" style="--c: var(--e3)">
+            <header><span class="num">3</span><h3>Deliver to Salesperson</h3></header>
+            <span class="donde">In the app: <b>My target · Visit plan</b></span>
+            <ul>
+                <li>The salesperson receives a notification, views their target, and <b>confirms receipt</b>.</li>
+                <li>The visit plan starts from what is missing: it suggests which doctors and prospects to visit, when, and what to offer.</li>
+                <li><b>One route per day</b> is published; if the supervisor builds it, the salesperson accepts or edits it.</li>
+                <li>If their customers are not enough, <b>Expand my network</b> suggests prospects and doctors without a nearby salesperson.</li>
+            </ul>
+            <span class="quien">Who: salesperson and supervisor</span>
+            <div class="sale"><b>Output:</b> the week's routes with their expected value.</div>
+        </article>
+        <article class="etapa" style="--c: var(--e4)">
+            <header><span class="num">4</span><h3>Execute the Day</h3></header>
+            <span class="donde">In the app: <b>My route of the day</b> (direct access)</span>
+            <ul>
+                <li><b>Check-in</b> upon arrival (it auto-locates near the stop), visit result, and instant <b>order</b>.</li>
+                <li>If they move away, an hour passes, or the day ends without closing, the visit closes automatically, leaving a task to complete it.</li>
+                <li><b>Check-out</b> at the end: the report goes to the supervisor.</li>
+            </ul>
+            <span class="quien">Who: salesperson</span>
+            <div class="sale"><b>Output:</b> verified visits, orders, and the impact on their target.</div>
+        </article>
+        <article class="etapa" style="--c: var(--e5)">
+            <header><span class="num">5</span><h3>Evaluate Day by Day</h3></header>
+            <span class="donde">In the app: <b>Salesperson tracking · My performance · Plan evaluation</b></span>
+            <ul>
+                <li>Map showing each salesperson, their status color-code, and the day's check-ins.</li>
+                <li>Plan vs. actual KPIs <b>by zone, supervisor, and salesperson</b>, in pesos and pieces, with projections based on orders.</li>
+                <li>At month-end: capture, accuracy, and forecast bias.</li>
+            </ul>
+            <span class="quien">Who: supervisor, management, and the salesperson themselves</span>
+            <div class="sale"><b>Output:</b> who is doing well, who is falling behind, and why.</div>
+        </article>
+        <article class="etapa" style="--c: var(--e6)">
+            <header><span class="num">6</span><h3>Adjust</h3></header>
+            <span class="donde">In the app: <b>Replan and publish</b> · new case</span>
+            <ul>
+                <li>Replanning is done with what was learned; <b>closed months are preserved</b>.</li>
+                <li>Before publishing, it is compared against the current plan by salesperson, product, and month, with a mandatory reason.</li>
+                <li>Each salesperson sees what went up or down and confirms again.</li>
+            </ul>
+            <span class="quien">Who: planner and management</span>
+            <div class="sale"><b>Output:</b> a new version of the plan, with history.</div>
+        </article>
+    </section>
+
+    <!-- Un dato de punta a punta -->
+    <section class="hilo">
+        <span class="eyebrow">A Single Data Point from End to End</span>
+        <h2>The cream in the North zone, in March</h2>
+        <p class="tenue">Illustrative figures.</p>
+        <div class="linea-tiempo">
+            <div class="dato" style="--c: var(--e1)"><span class="tag">1 · Plan</span><span class="cifra">1,200 pcs</span><p>The model decides to sell 1,200 pieces in the North in March ($120,000) and order from the supplier on January 14.</p></div>
+            <div class="dato" style="--c: var(--e2)"><span class="tag">2 · Program</span><span class="cifra">300 pcs</span><p>Ana is assigned 300 pieces: she already sells cream in that zone, and her trend is rising.</p></div>
+            <div class="dato" style="--c: var(--e3)"><span class="tag">3 · Visits</span><span class="cifra">6 stops</span><p>Her visit plan suggests Dr. Ruiz on Tuesday: he is due for a restock and can buy 20 pieces.</p></div>
+            <div class="dato" style="--c: var(--e4)"><span class="tag">4 · The Day</span><span class="cifra">Bought 20</span><p>Check-in at the office, result "Bought", order of 20 pieces, and check-out with a report to the supervisor.</p></div>
+            <div class="dato" style="--c: var(--e5)"><span class="tag">5 · Evaluation</span><span class="cifra">62 %</span><p>Mid-month, Ana is at 62% of her target; the North zone is at 58%: amber on the status indicator.</p></div>
+            <div class="dato" style="--c: var(--e6)"><span class="tag">6 · Adjustment</span><span class="cifra">April −5 %</span><p>If the North falls short, April is replanned and visits are reinforced; March, already closed, does not change.</p></div>
+        </div>
+        <div class="red">
+            <div class="red-texto">
+                <span class="tag">What if Ana doesn't reach her target with her customers?</span>
+                <h3>She expands her portfolio with new visits</h3>
+                <p>Mid-month, she is short by <b>114 pieces</b> and her doctors have already bought their share. In the <b>Visit plan</b>, she activates <b>Expand portfolio with prospects</b>: the assistant suggests new prospects and doctors without an assigned salesperson in her zone and neighboring ZIP codes, showing what they can buy and what to offer them.</p>
+            </div>
+            <ol class="red-pasos">
+                <li><b>What is missing</b><span>Her target minus sales and orders in transit: 114 pcs.</span></li>
+                <li><b>Expand my network</b><span>12 prospects and 4 doctors without an assigned salesperson within 5 km, sorted by potential.</span></li>
+                <li><b>New visits</b><span>She adds them to her weekly route; the new ones are assigned to her name and appear as pending.</span></li>
+                <li><b>Exceeds her target</b><span>With 6 new purchases, she closes at 108% and adds customers for the following months.</span></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Trazabilidad -->
+    <section class="traza">
+        <div class="lado">
+            <span class="eyebrow">Downward</span>
+            <h3>Every visit knows which target it comes from</h3>
+            <ul>
+                <li>The route carries the salesperson's target and the expected value of each stop.</li>
+                <li>The salesperson's target comes from the published sales scheduling.</li>
+                <li>The scheduling comes from the chosen case of the model (version, model, and case).</li>
+            </ul>
+        </div>
+        <div class="lado">
+            <span class="eyebrow">Upward</span>
+            <h3>Every result goes back to the plan</h3>
+            <ul>
+                <li>The result of each visit recalculates the doctor's next contact.</li>
+                <li>Orders count toward the target upon invoicing; progress is visible in My target and Tracking.</li>
+                <li>Actual results feed the forecast evaluation and the history for the next model.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="cierre" aria-label="What the business gains">
+        <div><b>A single number</b><p>The board's target, the salesperson's target, and the target of each visit are the same, at different scales.</p></div>
+        <div><b>Seen in time</b><p>Deviations appear the same day, not at the end of the quarter.</p></div>
+        <div><b>It learns</b><p>Each cycle improves the next: actual history goes back into the model.</p></div>
+    </section>
+
+    <div class="navs">
+        <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">← How the sales program decides</a>
+        <a class="nav-boceto" href="valores-del-modelo.html">What the model numbers mean →</a>
+    </div>
+</main>
+        </div>
+<script>
+// Rueda: seis etapas alrededor del círculo, con flechas de una a la siguiente
+const ETAPAS = [
+    ['Plan', 'Model and cases', '--e1'],
+    ['Schedule', 'By salesperson', '--e2'],
+    ['Assign', 'Target and visits', '--e3'],
+    ['Execute', 'Route of the day', '--e4'],
+    ['Evaluate', 'Plan vs. actual', '--e5'],
+    ['Adjust', 'Replan', '--e6']
+];
+const g = document.getElementById('ruedaPasos');
+const R = 180, CX = 260, CY = 260;
+const pos = (i, r = R) => {
+    const a = -Math.PI / 2 + (i * 2 * Math.PI) / ETAPAS.length;
+    return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+};
+let html = '';
+ETAPAS.forEach((_, i) => {
+    const a0 = -Math.PI / 2 + (i * 2 * Math.PI) / ETAPAS.length + 0.32;
+    const a1 = -Math.PI / 2 + ((i + 1) * 2 * Math.PI) / ETAPAS.length - 0.32;
+    const [x0, y0] = [CX + R * Math.cos(a0), CY + R * Math.sin(a0)];
+    const [x1, y1] = [CX + R * Math.cos(a1), CY + R * Math.sin(a1)];
+    html += `<path d="M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1}" fill="none" stroke="var(--tenue)" stroke-width="2.5" marker-end="url(#pt)" />`;
+});
+ETAPAS.forEach(([t, s, c], i) => {
+    const [x, y] = pos(i);
+    html += `<circle cx="${x}" cy="${y}" r="58" fill="var(${c})" />
+        <text x="${x}" y="${y - 4}" text-anchor="middle" style="font: 800 14px var(--f-display); fill: var(--tarjeta)">${i + 1} · ${t}</text>
+        <text x="${x}" y="${y + 15}" text-anchor="middle" style="font: 500 11px var(--f-texto); fill: var(--tarjeta)">${s}</text>`;
+});
+g.innerHTML = html;
+</script>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Services</h4><a href="../index.html#servicios">Strategic planning</a><a href="../index.html#servicios">Operational scheduling</a><a href="../index.html#servicios">Implementation</a><a href="../index.html#servicios">Evaluation and follow-up</a></div>
+                <div><h4>Company</h4><a href="../index.html#metodologia">Methodology</a><a href="../index.html#industrias">Industries</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Insights</a></div>
+                <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Mexico City · Spain · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="../contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>
+        </div>
+    </footer>
+    <script src="../../sitio.js"></script>
+</body>
+</html>

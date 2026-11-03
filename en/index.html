@@ -3,6 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
     <title>KI Advisory & Strategy Group · Strategy and operations</title>
     <meta name="description" content="Strategic planning, operational scheduling, operations implementation and evaluation consulting, with optimization models, partners in the field and the Infinity Workflow platform." />
     <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
@@ -11,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
     <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/index.html" />
     <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/index.html" />
-    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/index.html" />
     <link rel="stylesheet" href="../estilos.css" />
 </head>
 <body>
@@ -24,6 +38,7 @@
                 <a href="infinity-workflow.html">Infinity Workflow</a>
                 <a href="#industrias">Industries</a>
                 <a href="#metodologia">Methodology</a>
+                <a href="perspectivas/index.html">Insights</a>
                 <a class="idioma" href="../index.html" hreflang="es" lang="es">ES</a>
                 <a class="boton boton-oscuro" href="contacto.html">Book a consultation</a>
             </nav>
@@ -50,7 +65,7 @@
                 <h1>From strategy to <em>measurable operations.</em></h1>
                 <p class="entrada">We plan, schedule, implement and evaluate your operations with optimization models, partners who work in the field and our own platform: Infinity Workflow.</p>
                 <div class="acciones">
-                    <a class="boton boton-primario" href="contacto.html"><span class="flecha">Book an initial consultation</span></a>
+                    <a class="boton boton-primario" href="contacto.html"><span class="con-flecha">Book an initial consultation</span></a>
                     <a class="boton boton-borde" href="#servicios">Our approach</a>
                 </div>
             </div>
@@ -111,7 +126,7 @@
 
         <!-- Enfoque -->
         <section class="gris">
-            <div class="contenedor dos">
+            <div class="contenedor dos-col">
                 <blockquote class="cita aparece">“We don’t deliver reports that get filed away. We deliver results that get measured.”<small>Working principle of KI Advisory &amp; Strategy Group</small></blockquote>
                 <div class="dos-texto aparece">
                     <div class="antetitulo">Our approach</div>
@@ -135,7 +150,7 @@
                         <li>Daily routes and visits, operations, staff and fleet</li>
                         <li>KPIs, analytics and an AI assistant in English and Spanish</li>
                     </ul>
-                    <a class="boton boton-primario" href="infinity-workflow.html"><span class="flecha">Discover Infinity Workflow</span></a>
+                    <a class="boton boton-primario" href="infinity-workflow.html"><span class="con-flecha">Discover Infinity Workflow</span></a>
                 </div>
                 <div class="pantalla aparece" aria-hidden="true">
                     <div class="barra"><i></i><i></i><i></i></div>
@@ -173,7 +188,7 @@
 
         <!-- Metodología -->
         <section id="metodologia">
-            <div class="contenedor dos" style="align-items: start">
+            <div class="contenedor dos-col" style="align-items: start">
                 <div class="aparece">
                     <div class="antetitulo">Methodology</div>
                     <h2>A proven method, <em>from start to finish.</em></h2>
@@ -188,6 +203,20 @@
                 </div>
             </div>
         </section>
+        <!-- Perspectivas -->
+        <section id="perspectivas">
+            <div class="contenedor">
+                <div class="antetitulo">Insights</div>
+                <h2 class="aparece">Ideas you can <em>put into operation.</em></h2>
+                <div class="perspectivas aparece">
+                    <a class="perspectiva" href="perspectivas/mapa-de-infinity-workflow.html"><small>Draft · Application Map</small><h3>Infinity Workflow Map</h3><p></p></a>
+                    <a class="perspectiva" href="perspectivas/como-decide-el-plan-de-ventas.html"><small>Sales planning</small><h3>How the Sales Program is Decided</h3><p>The model is a calculator that reviews all possible combinations of what to sell, where, when, and how much to buy, and keeps the one that yields the highest margin without breakin…</p></a>
+                    <a class="perspectiva" href="perspectivas/pronosticar-u-optimizar.html"><small>Two ways to plan</small><h3>Forecast or optimize</h3><p>Time series look at the past to tell you how much will be sold. The LP model takes that and decides how much is best to sell and buy to earn more without breaking business rules. T…</p></a>
+                </div>
+                <a class="enlace" href="perspectivas/index.html" style="margin-top: 40px">See all insights</a>
+            </div>
+        </section>
+        <!-- /Perspectivas -->
 
         <!-- Llamado -->
         <section class="llamado">
@@ -198,13 +227,13 @@
                 </div>
                 <div>
                     <p>The first consultation is free and with no commitment. We reply within one business day.</p>
-                    <a class="boton boton-primario" href="contacto.html"><span class="flecha">Book an initial consultation</span></a>
+                    <a class="boton boton-primario" href="contacto.html"><span class="con-flecha">Book an initial consultation</span></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="pie">
+    <footer class="pie-sitio">
         <div class="contenedor">
             <div class="columnas">
                 <div>
@@ -212,7 +241,7 @@
                     <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
                 </div>
                 <div><h4>Services</h4><a href="#servicios">Strategic planning</a><a href="#servicios">Operational scheduling</a><a href="#servicios">Implementation</a><a href="#servicios">Evaluation and follow-up</a></div>
-                <div><h4>Company</h4><a href="#metodologia">Methodology</a><a href="#industrias">Industries</a><a href="infinity-workflow.html">Infinity Workflow</a></div>
+                <div><h4>Company</h4><a href="#metodologia">Methodology</a><a href="#industrias">Industries</a><a href="infinity-workflow.html">Infinity Workflow</a><a href="perspectivas/index.html">Insights</a></div>
                 <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="contacto.html">Mexico City · Spain · LATAM</a></div>
             </div>
             <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>

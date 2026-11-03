@@ -64,3 +64,12 @@
     var interes = new URLSearchParams(location.search).get('interes');
     if (area && interes) area.value = interes;
 })();
+
+// Selector ES | EN: la elección del visitante manda sobre el idioma de su navegador (ver el script de <head>)
+document.querySelectorAll('a.idioma').forEach(function (a) {
+    a.addEventListener('click', function () {
+        try {
+            localStorage.setItem('ki_idioma', a.getAttribute('hreflang'));
+        } catch (e) {}
+    });
+});

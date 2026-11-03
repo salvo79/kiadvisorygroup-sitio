@@ -3,6 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
     <title>KI Advisory & Strategy Group · Estrategia y operaciones</title>
     <meta name="description" content="Consultoría de planeación estratégica, programación operativa, implementación de operaciones y evaluación, con modelos matemáticos, socios en campo y la plataforma Infinity Workflow." />
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
@@ -11,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
     <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/index.html" />
     <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/index.html" />
-    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/index.html" />
     <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
@@ -24,6 +38,7 @@
                 <a href="infinity-workflow.html">Infinity Workflow</a>
                 <a href="#industrias">Industrias</a>
                 <a href="#metodologia">Metodología</a>
+                <a href="perspectivas/index.html">Perspectivas</a>
                 <a class="idioma" href="en/index.html" hreflang="en" lang="en">EN</a>
                 <a class="boton boton-oscuro" href="contacto.html">Agendar consulta</a>
             </nav>
@@ -50,7 +65,7 @@
                 <h1>De la estrategia a la <em>operación medible.</em></h1>
                 <p class="entrada">Planeamos, programamos, implementamos y evaluamos su operación con modelos de optimización, socios que trabajan en campo y una plataforma propia: Infinity Workflow.</p>
                 <div class="acciones">
-                    <a class="boton boton-primario" href="contacto.html"><span class="flecha">Agendar consulta inicial</span></a>
+                    <a class="boton boton-primario" href="contacto.html"><span class="con-flecha">Agendar consulta inicial</span></a>
                     <a class="boton boton-borde" href="#servicios">Conocer nuestro enfoque</a>
                 </div>
             </div>
@@ -111,7 +126,7 @@
 
         <!-- Enfoque -->
         <section class="gris">
-            <div class="contenedor dos">
+            <div class="contenedor dos-col">
                 <blockquote class="cita aparece">«No entregamos reportes que se archivan. Entregamos resultados que se miden.»<small>Principio de trabajo de KI Advisory &amp; Strategy Group</small></blockquote>
                 <div class="dos-texto aparece">
                     <div class="antetitulo">Nuestro enfoque</div>
@@ -135,7 +150,7 @@
                         <li>Rutas y visitas del día, operaciones, personal y flotilla</li>
                         <li>KPI, analítica y asistente de IA en español e inglés</li>
                     </ul>
-                    <a class="boton boton-primario" href="infinity-workflow.html"><span class="flecha">Conocer Infinity Workflow</span></a>
+                    <a class="boton boton-primario" href="infinity-workflow.html"><span class="con-flecha">Conocer Infinity Workflow</span></a>
                 </div>
                 <div class="pantalla aparece" aria-hidden="true">
                     <div class="barra"><i></i><i></i><i></i></div>
@@ -173,7 +188,7 @@
 
         <!-- Metodología -->
         <section id="metodologia">
-            <div class="contenedor dos" style="align-items: start">
+            <div class="contenedor dos-col" style="align-items: start">
                 <div class="aparece">
                     <div class="antetitulo">Metodología</div>
                     <h2>Un método probado, <em>de principio a fin.</em></h2>
@@ -188,6 +203,20 @@
                 </div>
             </div>
         </section>
+        <!-- Perspectivas -->
+        <section id="perspectivas">
+            <div class="contenedor">
+                <div class="antetitulo">Perspectivas</div>
+                <h2 class="aparece">Ideas que <em>se pueden operar.</em></h2>
+                <div class="perspectivas aparece">
+                    <a class="perspectiva" href="perspectivas/mapa-de-infinity-workflow.html"><small>Boceto · mapa de la aplicación</small><h3>Mapa de Infinity Workflow</h3><p></p></a>
+                    <a class="perspectiva" href="perspectivas/como-decide-el-plan-de-ventas.html"><small>Planeación de ventas</small><h3>Cómo decide el plan de ventas</h3><p>El modelo es una calculadora que revisa todas las combinaciones posibles de qué vender, dónde, cuándo y cuánto comprar, y se queda con la que deja más margen sin romper ninguna reg…</p></a>
+                    <a class="perspectiva" href="perspectivas/pronosticar-u-optimizar.html"><small>Dos formas de planear</small><h3>Pronosticar u optimizar</h3><p>Las series temporales miran el pasado para decir cuánto se va a vender. El modelo LP toma eso y decide cuánto conviene vender y comprar para ganar más sin romper las reglas del neg…</p></a>
+                </div>
+                <a class="enlace" href="perspectivas/index.html" style="margin-top: 40px">Ver todas las perspectivas</a>
+            </div>
+        </section>
+        <!-- /Perspectivas -->
 
         <!-- Llamado -->
         <section class="llamado">
@@ -198,13 +227,13 @@
                 </div>
                 <div>
                     <p>La primera consulta es sin costo y sin compromiso. Respondemos en menos de 24 horas hábiles.</p>
-                    <a class="boton boton-primario" href="contacto.html"><span class="flecha">Agendar consulta inicial</span></a>
+                    <a class="boton boton-primario" href="contacto.html"><span class="con-flecha">Agendar consulta inicial</span></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="pie">
+    <footer class="pie-sitio">
         <div class="contenedor">
             <div class="columnas">
                 <div>
@@ -212,7 +241,7 @@
                     <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
                 </div>
                 <div><h4>Servicios</h4><a href="#servicios">Planeación estratégica</a><a href="#servicios">Programación operativa</a><a href="#servicios">Implementación</a><a href="#servicios">Evaluación y seguimiento</a></div>
-                <div><h4>Compañía</h4><a href="#metodologia">Metodología</a><a href="#industrias">Industrias</a><a href="infinity-workflow.html">Infinity Workflow</a></div>
+                <div><h4>Compañía</h4><a href="#metodologia">Metodología</a><a href="#industrias">Industrias</a><a href="infinity-workflow.html">Infinity Workflow</a><a href="perspectivas/index.html">Perspectivas</a></div>
                 <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="contacto.html">Ciudad de México · España · LATAM</a></div>
             </div>
             <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Insights · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="How we think about planning and operations: sketches that explain, with a concrete example, the ideas behind our work and Infinity Workflow." />
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/index.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/index.html" />
+    <link rel="stylesheet" href="../../estilos.css" />
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Open menu" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Services</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industries</a>
+                <a href="../index.html#metodologia">Methodology</a>
+                <a href="../perspectivas/index.html" class="activo">Insights</a>
+                <a class="idioma" href="../../perspectivas/index.html" hreflang="es" lang="es">ES</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Book a consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Insights</div>
+                <h1>Ideas you can <em>put into operation.</em></h1>
+                <p class="entrada">How we think about planning and operations: sketches that explain, with a concrete example, the ideas behind our work and Infinity Workflow.</p>
+            </div>
+        </section>
+        <section>
+            <div class="contenedor">
+                <div class="perspectivas">
+                    <a class="perspectiva" href="mapa-de-infinity-workflow.html"><small>Draft · Application Map</small><h3>Infinity Workflow Map</h3><p></p></a>
+                    <a class="perspectiva" href="como-decide-el-plan-de-ventas.html"><small>Sales planning</small><h3>How the Sales Program is Decided</h3><p>The model is a calculator that reviews all possible combinations of what to sell, where, when, and how much to buy, and keeps the one that yields the highest margin without breaking any business rules.</p></a>
+                    <a class="perspectiva" href="pronosticar-u-optimizar.html"><small>Two ways to plan</small><h3>Forecast or optimize</h3><p>Time series look at the past to tell you how much will be sold. The LP model takes that and decides how much is best to sell and buy to earn more without breaking business rules. They do not compete: one predicts and the…</p></a>
+                    <a class="perspectiva" href="quien-vende-que.html"><small>Zone and salesperson scheduling</small><h3>Who sells what</h3><p>The plan says what to sell, in which zone, and in which month. Scheduling decides who on the team sells it, so that each salesperson receives a target they can actually meet and, added up, all targets align with the plan…</p></a>
+                    <a class="perspectiva" href="ciclo-del-plan.html"><small>Planning · The Complete Cycle</small><h3>Plan cycle</h3><p>The plan is calculated, distributed among the salespeople, converted into visits, executed in the field, and compared daily against actual results. What is learned adjusts the next plan. Everything lives in the same app,…</p></a>
+                    <a class="perspectiva" href="valores-del-modelo.html"><small>Planning · how to read the results</small><h3>Model values</h3><p>The model doesn&#x27;t just say what to do; it also says how much it is worth to change each thing. With a single example (a cream and a gel) we see the optimal value, activity, slack, shadow price, reduced cost, break-even, …</p></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Services</h4><a href="../index.html#servicios">Strategic planning</a><a href="../index.html#servicios">Operational scheduling</a><a href="../index.html#servicios">Implementation</a><a href="../index.html#servicios">Evaluation and follow-up</a></div>
+                <div><h4>Company</h4><a href="../index.html#metodologia">Methodology</a><a href="../index.html#industrias">Industries</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Insights</a></div>
+                <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Mexico City · Spain · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="../contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>
+        </div>
+    </footer>
+    <script src="../../sitio.js"></script>
+</body>
+</html>

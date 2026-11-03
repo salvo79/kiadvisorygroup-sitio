@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Quién vende qué · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="El plan dice qué vender, en qué zona y en qué mes. La programación decide quién del equipo lo vende, para que cada vendedor reciba una meta que sí puede cumplir y, sumadas, todas las metas cuadren con el plan." />
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/quien-vende-que.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/quien-vende-que.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/quien-vende-que.html" />
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --azul-suave: #e2f4fc;
+    --regla: #c2410c;
+    --regla-suave: #fdeee4;
+    --meta: #15803d;
+    --meta-suave: #e5f5ea;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-block: 48px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+.boceto-sitio h1, .boceto-sitio h2 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.18rem; color: var(--tinta); }
+.boceto-sitio .cabeza .tesis b { color: var(--azul); }
+.boceto-sitio .gps {
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+    background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 18px 22px; max-width: 760px;
+}
+.boceto-sitio .gps svg { width: 64px; height: 64px; }
+.boceto-sitio .boceto { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) ; align-items: stretch; gap: 14px; }
+.boceto-sitio .boceto .flecha { display: none; }
+@media (min-width: 1180px) {
+.boceto-sitio .boceto { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; }
+.boceto-sitio .boceto .flecha { display: flex; }
+}
+@media (max-width: 1179px) {
+.boceto-sitio .boceto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+}
+.boceto-sitio .etapa { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.boceto-sitio .etapa header { display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .etapa h3 { margin: 0; font: 800 1.15rem/1.15 var(--f-display); }
+.boceto-sitio .etapa header { min-height: 3.1rem; }
+.boceto-sitio .nota { text-wrap: balance; }
+.boceto-sitio .caja { flex: 1; border-radius: 14px; padding: 16px 18px; border: 2px solid; display: flex; flex-direction: column; gap: 10px; }
+.boceto-sitio .caja ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; line-height: 1.4; }
+.boceto-sitio .caja li { position: relative; padding-left: 18px; text-wrap: pretty; overflow-wrap: break-word; }
+.boceto-sitio .caja li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+.boceto-sitio .entradas .caja { border-color: var(--azul); background: var(--azul-suave); }
+.boceto-sitio .entradas li::before { color: var(--azul); }
+.boceto-sitio .reglas .caja { border-color: var(--regla); background: var(--regla-suave); }
+.boceto-sitio .reglas li::before { content: "✕"; left: 0; top: 0; width: auto; height: auto; background: none; color: var(--regla); font-weight: 700; opacity: 1; font-size: 0.78rem; line-height: 1.8; }
+.boceto-sitio .objetivo .caja { border-color: var(--meta); background: var(--meta-suave); justify-content: center; text-align: center; }
+.boceto-sitio .objetivo .formula { font: 800 1.05rem/1.35 var(--f-display); }
+.boceto-sitio .objetivo .formula span { display: block; font: 500 0.85rem/1.4 var(--f-texto); color: var(--tenue); }
+.boceto-sitio .plan .caja { border-color: var(--marino); background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .plan li::before { color: var(--sobre-marino); }
+.boceto-sitio .flecha { display: flex; align-items: center; justify-content: center; color: var(--tenue); }
+.boceto-sitio .flecha svg { width: 34px; height: 34px; }
+.boceto-sitio .nota { font-family: var(--f-mano); font-size: 1.15rem; line-height: 1.15; color: var(--tenue); }
+.boceto-sitio .motor {
+    display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: center;
+    background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 16px; padding: 26px;
+}
+.boceto-sitio .motor .texto { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.boceto-sitio .ejemplo { display: flex; flex-direction: column; gap: 18px; }
+.boceto-sitio .ejemplo .datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .dato { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .dato .k { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .dato .v { font: 800 1.35rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.boceto-sitio .comparacion { width: 100%; overflow-x: auto; }
+.boceto-sitio .comparacion table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; background: var(--tarjeta); border-radius: 12px; overflow: hidden; }
+.boceto-sitio .comparacion th, .boceto-sitio .comparacion td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--linea); }
+.boceto-sitio .comparacion th:first-child, .boceto-sitio .comparacion td:first-child { text-align: left; }
+.boceto-sitio .comparacion th { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td { background: var(--meta-suave); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td:first-child::after { content: "  ← el que elige el modelo"; font-family: var(--f-mano); font-size: 1.1rem; color: var(--meta); font-weight: 700; }
+.boceto-sitio .sombra { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; background: var(--azul-suave); border-radius: 14px; padding: 16px 20px; }
+.boceto-sitio .sombra .mano { font-size: 2rem; }
+.boceto-sitio .cierre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.boceto-sitio .cierre div { border-top: 3px solid var(--azul); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .cierre b { font-family: var(--f-display); font-size: 1.05rem; }
+.boceto-sitio .cierre p { color: var(--tenue); font-size: 0.93rem; }
+@media (max-width: 640px) {
+.boceto-sitio .boceto { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+.boceto-sitio .motor { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+.boceto-sitio .ejemplo .datos, .boceto-sitio .cierre { grid-template-columns: 1fr; }
+.boceto-sitio .gps { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+.boceto-sitio .motor .rayo { animation: brillo 2.6s ease-in-out infinite; }
+@keyframes brillo { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+}
+.boceto-sitio .vendedores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .vendedor { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .vendedor .nombre { font: 800 1.15rem/1.1 var(--f-display); }
+.boceto-sitio .vendedor .fila { display: flex; justify-content: space-between; gap: 10px; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.boceto-sitio .vendedor .fila span:first-child { color: var(--tenue); }
+.boceto-sitio .barra { display: flex; height: 34px; border-radius: 8px; overflow: hidden; font: 600 0.85rem/34px var(--f-texto); font-variant-numeric: tabular-nums; }
+.boceto-sitio .barra div { text-align: center; white-space: nowrap; overflow: hidden; }
+.boceto-sitio .barra .ana { background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .barra .beto { background: var(--azul-suave); color: var(--tinta); border: 1.5px solid var(--azul); border-left: 0; border-radius: 0 8px 8px 0; }
+.boceto-sitio .saturado { display: inline-block; font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: var(--regla-suave); color: var(--regla); border: 1px solid var(--regla); width: fit-content; }
+@media (max-width: 620px) {
+.boceto-sitio .vendedores { grid-template-columns: 1fr; }
+}
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); text-decoration: none; }
+.boceto-sitio .marca svg { width: 36px; height: 54px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.6rem/1 var(--f-texto); letter-spacing: -0.01em; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Servicios</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industrias</a>
+                <a href="../index.html#metodologia">Metodología</a>
+                <a href="../perspectivas/index.html" class="activo">Perspectivas</a>
+                <a class="idioma" href="../en/perspectivas/quien-vende-que.html" hreflang="en" lang="en">EN</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Agendar consulta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Programación de zonas y vendedores</div>
+                <h1>Quién vende qué</h1>
+                <a class="volver-perspectivas" href="index.html">← Todas las perspectivas</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+    <section class="cabeza">
+        <span class="eyebrow">Programación de zonas y vendedores</span>
+        <h1>Quién vende qué</h1>
+        <p class="tesis">El plan dice <b>qué vender, en qué zona y en qué mes</b>. La programación decide <b>quién del equipo lo vende</b>, para que cada vendedor reciba una meta que sí puede cumplir y, sumadas, todas las metas cuadren con el plan.</p>
+    </section>
+
+    <section class="gps" aria-label="Analogía">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="29" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2.5" />
+            <circle cx="23" cy="23" r="6.5" fill="var(--tinta)" /><path d="M12 47 a11 11 0 0 1 22 0 Z" fill="var(--tinta)" />
+            <circle cx="41" cy="23" r="6.5" fill="var(--azul)" /><path d="M30 47 a11 11 0 0 1 22 0 Z" fill="var(--azul)" />
+        </svg>
+        <div>
+            <p class="mano">Piénsalo como el jefe de cocina repartiendo la comanda.</p>
+            <p>Le da cada platillo al cocinero que mejor lo prepara, sin pasarse de lo que cada uno aguanta en el turno, y se asegura de que salga toda la comanda. Eso mismo hace el modelo con las piezas del plan y el equipo de ventas.</p>
+        </div>
+    </section>
+
+    <section class="boceto" aria-label="Boceto de la programación">
+        <div class="etapa entradas">
+            <header><span class="eyebrow">1 · Lo que llega</span><h3>El plan y la historia</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>El plan aprobado: piezas por producto, zona y mes</li>
+                    <li>Lo que cada vendedor ha vendido: qué productos, en qué zonas y cuánto al mes</li>
+                    <li>Los meses fuertes y flojos de cada quien (estacionalidad)</li>
+                    <li>Las promociones y a qué vendedores aplican</li>
+                </ul>
+            </div>
+            <p class="nota">sale del plan publicado y de las ventas reales</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa objetivo">
+            <header><span class="eyebrow">2 · Quién es bueno en qué</span><h3>La efectividad</h3></header>
+            <div class="caja" style="text-align: left; justify-content: flex-start">
+                <ul>
+                    <li><b>100 %</b> si ya vendió ese producto en esa zona</li>
+                    <li><b>85 %</b> si lo vende, pero en otra de sus zonas</li>
+                    <li><b>70 %</b> si la zona es suya, pero nunca lo ha vendido</li>
+                    <li>Se ajusta hasta ±10 % según si sus ventas suben o bajan</li>
+                </ul>
+            </div>
+            <p class="nota">una pieza en manos de quien la conoce "vale más"</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa reglas">
+            <header><span class="eyebrow">3 · Lo que no se vale</span><h3>Las reglas</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Dejar piezas del plan sin dueño (si no caben, se reportan)</li>
+                    <li>Darle a alguien más de su capacidad: su venta normal del mes + un % de esfuerzo</li>
+                    <li>Dejar a alguien por debajo de su mínimo del mes</li>
+                    <li>Cargarle a una sola persona todo un producto en una zona</li>
+                </ul>
+            </div>
+            <p class="nota">para que las metas sean alcanzables</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa plan">
+            <header><span class="eyebrow">4 · Lo que recibe</span><h3>Su meta</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Meta mensual en pesos y en piezas</li>
+                    <li>Los productos a impulsar y los clientes prioritarios</li>
+                    <li>Un aviso y su pantalla Mi meta para confirmar de recibido</li>
+                    <li>Su avance real contra la meta, todo el mes</li>
+                </ul>
+            </div>
+            <p class="nota">la suma de todas = el plan</p>
+        </div>
+    </section>
+
+    <section class="motor">
+        <div class="texto">
+            <span class="eyebrow">¿Cómo elige?</span>
+            <h2>Cada pieza va a donde más margen se espera</h2>
+            <p>El modelo calcula, para cada vendedor, cuánto margen se espera de cada pieza que le asigna: el margen del producto por su efectividad. Luego reparte todo el plan buscando que la suma sea la mayor posible, siempre dentro de las reglas.</p>
+            <p>Si alguien llega a su tope en un mes, el sistema lo marca como <b>saturado</b> (por ejemplo "Saturado 2 m" = dos meses al tope) y dice cuánto margen se ganaría si tuviera un poco más de capacidad. Así se ve dónde hace falta apoyo o un vendedor más.</p>
+        </div>
+        <svg viewBox="0 0 420 230" role="img" aria-label="Las piezas del plan pasan por el motor y se reparten entre vendedores según su efectividad y su capacidad">
+            <g font-family="Figtree, sans-serif" font-size="12" fill="var(--tenue)">
+                <rect x="8" y="70" width="86" height="90" rx="12" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2" />
+                <text x="51" y="106" text-anchor="middle" fill="var(--tinta)" font-weight="600">Plan</text>
+                <text x="51" y="128" text-anchor="middle" font-size="11">por producto,</text><text x="51" y="142" text-anchor="middle" font-size="11">zona y mes</text>
+                <path d="M100 115 H140" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <path d="M134 108 L142 115 L134 122" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <rect x="148" y="62" width="120" height="106" rx="16" fill="var(--marino)" />
+                <path class="rayo" d="M212 78 L194 116 H210 L200 152 L226 106 H210 L222 78 Z" fill="var(--sobre-marino)" />
+                <text x="208" y="190" text-anchor="middle" fill="var(--tinta)" font-weight="600">reparto óptimo</text>
+                <path d="M272 100 L318 52 M272 115 H318 M272 130 L318 178" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <g>
+                    <circle cx="340" cy="46" r="15" fill="var(--tinta)" /><text x="362" y="50" fill="var(--tinta)" font-weight="600">Ana</text>
+                    <circle cx="340" cy="115" r="15" fill="var(--azul)" /><text x="362" y="119" fill="var(--tinta)" font-weight="600">Beto</text>
+                    <circle cx="340" cy="184" r="15" fill="var(--meta)" /><text x="362" y="188" fill="var(--tinta)" font-weight="600">Carla</text>
+                </g>
+                <text x="300" y="222" fill="var(--tenue)">cada uno con su meta</text>
+            </g>
+        </svg>
+    </section>
+
+    <section class="ejemplo">
+        <div class="cabeza">
+            <span class="eyebrow">Ejemplo en una servilleta</span>
+            <h2>100 piezas de Crema A en la Zona Norte, en marzo</h2>
+            <p>Cada pieza deja $80 de margen. Hay dos vendedores en la zona:</p>
+        </div>
+        <div class="vendedores">
+            <div class="vendedor">
+                <span class="nombre">Ana</span>
+                <div class="fila"><span>Ya vende Crema A en Norte</span><span>efectividad 100 %</span></div>
+                <div class="fila"><span>Margen esperado por pieza</span><span><b>$80</b></span></div>
+                <div class="fila"><span>Capacidad en marzo</span><span>60 piezas</span></div>
+            </div>
+            <div class="vendedor">
+                <span class="nombre">Beto</span>
+                <div class="fila"><span>Norte es su zona, nunca la ha vendido</span><span>efectividad 70 %</span></div>
+                <div class="fila"><span>Margen esperado por pieza</span><span><b>$56</b></span></div>
+                <div class="fila"><span>Capacidad en marzo</span><span>80 piezas</span></div>
+            </div>
+        </div>
+        <div class="comparacion">
+            <table>
+                <thead><tr><th>Cómo repartir las 100 piezas</th><th>Ana</th><th>Beto</th><th>Margen esperado</th></tr></thead>
+                <tbody>
+                    <tr><td>Mitad y mitad</td><td>50</td><td>50</td><td>$6,800</td></tr>
+                    <tr><td>Más al que tiene más capacidad</td><td>40</td><td>60</td><td>$6,560</td></tr>
+                    <tr class="mejor"><td>Ana hasta su tope, el resto a Beto</td><td>60</td><td>40</td><td>$7,040</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barra" role="img" aria-label="Reparto final: Ana 60 piezas, Beto 40 piezas">
+            <div class="ana" style="width:60%">Ana · 60 pz</div>
+            <div class="beto" style="width:40%">Beto · 40 pz</div>
+        </div>
+        <div class="sombra">
+            <span class="mano">+$24</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+                <span class="saturado">Ana · saturada en marzo</span>
+                <p>Ana quedó al tope. Si pudiera vender una pieza más, se le quitaría a Beto y el margen subiría $24 ($80 − $56). Ese número le dice a la dirección cuánto vale apoyar a Ana (más visitas, un ayudante) o capacitar a Beto en la Crema A.</p>
+            </div>
+        </div>
+        <p class="nota">En la vida real son todos los productos, zonas, vendedores y meses a la vez. La idea es exactamente la misma.</p>
+    </section>
+
+    <section class="cierre" aria-label="Qué gana el negocio">
+        <div><b>Metas justas</b><p>Cada quien recibe lo que su historia dice que puede vender, no una cifra igual para todos.</p></div>
+        <div><b>El plan se cumple</b><p>Toda pieza del plan tiene dueño; lo que no cabe se ve antes de publicar.</p></div>
+        <div><b>Dónde apoyar</b><p>Los vendedores saturados y su valor muestran dónde reforzar al equipo.</p></div>
+    </section>
+</main>
+        </div>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Servicios</h4><a href="../index.html#servicios">Planeación estratégica</a><a href="../index.html#servicios">Programación operativa</a><a href="../index.html#servicios">Implementación</a><a href="../index.html#servicios">Evaluación y seguimiento</a></div>
+                <div><h4>Compañía</h4><a href="../index.html#metodologia">Metodología</a><a href="../index.html#industrias">Industrias</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Perspectivas</a></div>
+                <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Ciudad de México · España · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="../contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
+        </div>
+    </footer>
+    <script src="../sitio.js"></script>
+</body>
+</html>

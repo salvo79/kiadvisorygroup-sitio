@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Infinity Workflow Map · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="" />
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="stylesheet" href="../../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --a-dia: #0090d0;
+    --a-gente: #7c3aed;
+    --a-negocio: #0d9488;
+    --a-inteligencia: #c2410c;
+    --a-control: #475569;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+    color-scheme: light;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio, .boceto-sitio { margin: 0; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.5rem; line-height: 1.15; }
+.boceto-sitio h3 { font-size: 1.05rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio b { font-weight: 600; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .tenue { color: var(--tenue); }
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); }
+.boceto-sitio .marca svg { width: 30px; height: 45px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.66rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.45rem/1 var(--f-texto); letter-spacing: -0.01em; }
+.boceto-sitio .arriba { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.boceto-sitio .navs { display: flex; flex-wrap: wrap; gap: 8px; }
+.boceto-sitio .nav-boceto { font: 500 0.85rem/1 var(--f-texto); color: var(--tenue); text-decoration: none; border: 1px solid var(--linea); border-radius: 999px; padding: 8px 12px; background: var(--tarjeta); }
+.boceto-sitio .nav-boceto:hover { color: var(--tinta); border-color: var(--tenue); }
+.boceto-sitio .cabeza { display: grid; gap: 14px; max-width: 820px; }
+.boceto-sitio .cabeza .lead { font-size: 1.12rem; color: var(--tenue); }
+.boceto-sitio .mapa-y-ficha { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 940px) {
+.boceto-sitio .mapa-y-ficha { grid-template-columns: 1fr; }
+}
+.boceto-sitio .mapa { display: flex; flex-direction: column; gap: 14px; }
+.boceto-sitio .capa { display: grid; grid-template-columns: 118px minmax(0, 1fr); gap: 12px; align-items: stretch; }
+@media (max-width: 560px) {
+.boceto-sitio .capa { grid-template-columns: minmax(0, 1fr); }
+.boceto-sitio .areas { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.boceto-sitio .area { padding: 10px 11px; }
+.boceto-sitio .area h3 { font-size: 0.9rem; }
+}
+.boceto-sitio .capa-nombre { display: flex; flex-direction: column; justify-content: center; gap: 2px; border-left: 4px solid var(--c); padding-left: 10px; }
+.boceto-sitio .capa-nombre b { font-family: var(--f-display); font-size: 1rem; color: var(--c); }
+.boceto-sitio .capa-nombre span { font-size: 0.78rem; color: var(--tenue); line-height: 1.3; }
+.boceto-sitio .areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(176px, 100%), 1fr)); gap: 10px; }
+.boceto-sitio .area {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 14px 12px;
+    border-radius: 14px;
+    background: var(--tarjeta);
+    border: 1px solid var(--linea);
+    border-top: 4px solid var(--c);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    min-height: 104px;
+}
+.boceto-sitio .area:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(5, 28, 44, 0.08); }
+.boceto-sitio .area:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .area[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 11%, var(--tarjeta)); border-color: var(--c); box-shadow: 0 0 0 1px var(--c); }
+.boceto-sitio .area .fila { display: flex; align-items: center; gap: 8px; }
+.boceto-sitio .icono { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 15%, transparent); color: var(--c); flex-shrink: 0; }
+.boceto-sitio .icono svg { width: 18px; height: 18px; }
+.boceto-sitio .area h3 { font-size: 0.98rem; line-height: 1.15; }
+.boceto-sitio .area p { font-size: 0.82rem; color: var(--tenue); line-height: 1.35; }
+.boceto-sitio .area .cuenta { margin-top: auto; font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c); }
+.boceto-sitio .ficha {
+    position: sticky;
+    top: 16px;
+    background: var(--tarjeta);
+    border: 1px solid var(--linea);
+    border-top: 6px solid var(--c);
+    border-radius: 18px;
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+}
+@media (max-width: 940px) {
+.boceto-sitio .ficha { position: static; max-height: none; }
+}
+.boceto-sitio .ficha .titulo { display: flex; gap: 12px; align-items: center; }
+.boceto-sitio .ficha .titulo .icono { width: 44px; height: 44px; border-radius: 12px; }
+.boceto-sitio .ficha .titulo .icono svg { width: 24px; height: 24px; }
+.boceto-sitio .ficha .eyebrow { color: var(--c); }
+.boceto-sitio .ficha .para { font-size: 1.02rem; }
+.boceto-sitio .bloque { display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .bloque > b { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.12em; text-transform: uppercase; color: var(--tenue); }
+.boceto-sitio .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.boceto-sitio .chip { font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 12%, transparent); color: var(--tinta); }
+.boceto-sitio .chip.ir { all: unset; cursor: pointer; font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--c2, var(--linea)); color: var(--tinta); background: var(--tarjeta); }
+.boceto-sitio .chip.ir:hover, .boceto-sitio .chip.ir:focus-visible { background: color-mix(in srgb, var(--c2) 14%, var(--tarjeta)); outline: none; }
+.boceto-sitio .chip.ir::after { content: ' →'; color: var(--c2); }
+.boceto-sitio .pantallas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.boceto-sitio .pantallas li { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--linea); }
+.boceto-sitio .pantallas li:last-child { border-bottom: 0; }
+.boceto-sitio .pantallas li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--c); margin-top: 7px; }
+.boceto-sitio .pantallas li b { display: block; font-size: 0.93rem; }
+.boceto-sitio .pantallas li span { font-size: 0.85rem; color: var(--tenue); }
+.boceto-sitio .ejemplo { border: 1.5px dashed var(--c); border-radius: 14px; padding: 12px 14px; background: color-mix(in srgb, var(--c) 6%, var(--tarjeta)); }
+.boceto-sitio .ejemplo .mano { color: var(--c); display: block; margin-bottom: 4px; }
+.boceto-sitio .ejemplo p { font-size: 0.92rem; }
+.boceto-sitio .donde { font-size: 0.82rem; color: var(--tenue); }
+.boceto-sitio .donde code { font: 500 0.8rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: color-mix(in srgb, var(--c) 10%, transparent); padding: 2px 6px; border-radius: 6px; color: var(--tinta); }
+.boceto-sitio .seccion { display: flex; flex-direction: column; gap: 14px; }
+.boceto-sitio .recorrido { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; counter-reset: paso; }
+@media (max-width: 1000px) {
+.boceto-sitio .recorrido { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.boceto-sitio .paso {
+    all: unset; box-sizing: border-box; cursor: pointer; position: relative;
+    background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px;
+}
+.boceto-sitio .paso:hover, .boceto-sitio .paso:focus-visible { border-color: var(--c); outline: none; box-shadow: 0 0 0 1px var(--c); }
+.boceto-sitio .paso::before { counter-increment: paso; content: counter(paso); font: 800 1.4rem/1 var(--f-display); color: var(--c); }
+.boceto-sitio .paso b { font-size: 0.9rem; }
+.boceto-sitio .paso span { font-size: 0.8rem; color: var(--tenue); line-height: 1.35; }
+.boceto-sitio .transversal { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.boceto-sitio .trans { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .trans h3 { font-size: 0.98rem; }
+.boceto-sitio .trans p { font-size: 0.86rem; color: var(--tenue); }
+.boceto-sitio .pie { font-size: 0.82rem; color: var(--tenue); border-top: 1px solid var(--linea); padding-top: 16px; }
+@media (prefers-reduced-motion: reduce) {
+.boceto-sitio .area { transition: none; }
+.boceto-sitio .area:hover { transform: none; }
+}
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Open menu" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Services</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industries</a>
+                <a href="../index.html#metodologia">Methodology</a>
+                <a href="../perspectivas/index.html" class="activo">Insights</a>
+                <a class="idioma" href="../../perspectivas/mapa-de-infinity-workflow.html" hreflang="es" lang="es">ES</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Book a consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Draft · Application Map</div>
+                <h1>Infinity Workflow, Area by Area</h1>
+                <a class="volver-perspectivas" href="index.html">← All insights</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="arriba">
+        <div class="marca" role="img" aria-label="Infinity Workflow">
+            <svg viewBox="0 0 100 150" aria-hidden="true">
+                <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+                <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+            </svg>
+            <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+        </div>
+        <nav class="navs" aria-label="Other drafts">
+            <a class="nav-boceto" href="ciclo-del-plan.html">Plan cycle →</a>
+            <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">How the sales plan decides →</a>
+        </nav>
+    </div>
+
+    <section class="cabeza">
+        <span class="eyebrow">Draft · Application Map</span>
+        <h1>Infinity Workflow, Area by Area</h1>
+        <p class="lead">A single application for people, operations, sales, field, inventory, money, planning, and control. Areas share the same data: what is captured in one feeds the others.</p>
+        <p class="mano">Click on an area to see what it does, who uses it, and its screens ↓</p>
+    </section>
+
+    <section class="mapa-y-ficha">
+        <div class="mapa" id="mapa" aria-label="Application areas"></div>
+        <article class="ficha" id="ficha" aria-live="polite"></article>
+    </section>
+
+    <section class="seccion">
+        <div>
+            <span class="eyebrow">How they connect</span>
+            <h2>The journey of a data point through the application</h2>
+            <p class="tenue">From registering a person to measuring if the plan was met. Click on each step to open its area.</p>
+        </div>
+        <div class="recorrido" id="recorrido"></div>
+    </section>
+
+    <section class="seccion">
+        <div>
+            <span class="eyebrow">Across all screens</span>
+            <h2>What spans across all areas</h2>
+        </div>
+        <div class="transversal" id="transversal"></div>
+    </section>
+
+    <p class="pie">Illustrative draft of Infinity Workflow (November 2026). Each screen has its help with the <b>F1</b> key; what each person sees depends on their role and their access by section.</p>
+</main>
+        </div>
+<script>
+// Íconos de trazo simple (24×24)
+const ICONOS = {
+    inicio: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+    operaciones: '<rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/>',
+    rrhh: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M16 14.2c2.9.2 5 2.6 5 5.8"/>',
+    activos: '<path d="M4 15l1.8-5.2A2 2 0 0 1 7.7 8.5h8.6a2 2 0 0 1 1.9 1.3L20 15"/><rect x="3" y="15" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="19.5" r="1.4"/><circle cx="16.5" cy="19.5" r="1.4"/>',
+    ventas: '<path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M3 19h18"/><path d="M14 7l3-3 3 3"/>',
+    campo: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+    inventario: '<path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/>',
+    cobranza: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/>',
+    planeacion: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/><path d="M12 3.5V1.5M20.5 12h2"/>',
+    analitica: '<path d="M3 20h18"/><circle cx="7" cy="14" r="1.6"/><circle cx="11" cy="9" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="19" cy="5" r="1.6"/><path d="M5 17l14-12" stroke-dasharray="2 2.5"/>',
+    usuarios: '<rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.4"/>',
+    datos: '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5"/><path d="M4.5 12v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/>'
+};
+const icono = (k) => `<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS[k]}</svg></span>`;
+
+const CAPAS = [
+    { id: 'dia', nombre: 'Day-to-day', nota: 'what you see when entering and work in progress', color: 'var(--a-dia)' },
+    { id: 'gente', nombre: 'People and resources', nota: 'human resources and what the company provides', color: 'var(--a-gente)' },
+    { id: 'negocio', nombre: 'The business', nota: 'selling, visiting, supplying, and collecting', color: 'var(--a-negocio)' },
+    { id: 'inteligencia', nombre: 'Intelligence', nota: 'deciding with models and data', color: 'var(--a-inteligencia)' },
+    { id: 'control', nombre: 'Control', nota: 'who enters, what they do, and data health', color: 'var(--a-control)' }
+];
+
+const AREAS = [
+    {
+        id: 'inicio', capa: 'dia', titulo: 'Home and pending tasks', corto: 'Your dashboard, KPI boards, and everything that requires your attention.',
+        para: 'It is the gateway: each person builds their own dashboard, checks the general status of the operation, and sees in one place what is expiring or awaiting approval.',
+        quien: ['All users', 'Directors and supervisors (KPI dashboards)'],
+        pantallas: [
+            ['My dashboard', 'Widget board that everyone arranges; it is saved in their account and follows them on any device.'],
+            ['General dashboard', 'Indicators and graphs of the operation by status and priority, with the most recent or upcoming expirations.'],
+            ['KPI dashboards', 'Indicators in tabs, each with its date range that recalculates KPIs.'],
+            ['Pending tasks and actions', 'Expirations (policies, maintenance, verifications), requests to approve, incident actions, and assigned tasks.']
+        ],
+        conecta: ['operaciones', 'rrhh', 'activos', 'ventas'],
+        ejemplo: 'On Monday, the manager opens Pending tasks: two vacations to approve, a truck policy expiring on Friday, and an incident with an overdue action plan.',
+        menu: 'Home'
+    },
+    {
+        id: 'operaciones', capa: 'dia', titulo: 'Operations', corto: 'Internal jobs and requests with approval workflow.',
+        para: 'Registers each job, order, or internal request and guides it through its workflow — Draft → Pending → In progress → Under review → Approved → Closed — with tasks, assignees, and log.',
+        quien: ['Operators', 'Supervisors who approve', 'Task owners'],
+        pantallas: [
+            ['List', 'All operations with their status, priority, dates, and assignees.'],
+            ['Kanban board', 'Operations as cards by status; dragging a card executes the workflow action.'],
+            ['RACI matrix', 'Operations and tasks against people, with their role (responsible, approver, consulted, informed), alerts, and workload.'],
+            ['Operation detail', 'Data, tasks, progress, history, and allowed actions based on status and your role.']
+        ],
+        conecta: ['inicio', 'rrhh'],
+        ejemplo: 'Purchasing requests a quote for a new packaging: the operation starts in Draft, the supervisor approves it, tasks are assigned, and when closed, its complete history is saved.',
+        menu: 'Operations'
+    },
+    {
+        id: 'rrhh', capa: 'gente', titulo: 'Human Resources and Organization', corto: 'Companies, organizational chart by position, employees, vacations, and absences.',
+        para: 'The structure of the company and its people: the organizational chart is built by position (each position depends on another and has slots) and people occupy slots. From here, we determine who is whose boss for approvals, notices, and target agreements.',
+        quien: ['Human resources', 'Managers (their team)', 'Each employee (their vacations)'],
+        pantallas: [
+            ['Companies and departments', 'General and tax data for each group company; areas with code, cost center, and head.'],
+            ['Positions and organizational chart', 'Structure by position with slots; if someone leaves, the structure does not change.'],
+            ['Employees', 'File: contact, position, shift, rest days, seniority, and vacation policy.'],
+            ['My vacations and absences', 'Request vacations, personal days, home office, leaves, and disability, with day balance.'],
+            ['My team (Gantt)', 'For managers: team absences on a Gantt chart; approve or reject requests and changes.'],
+            ['Holidays, birthdays, and policies', 'Official and company calendar, team birthdays, and employee insurance policies.']
+        ],
+        conecta: ['inicio', 'activos', 'usuarios', 'ventas'],
+        ejemplo: 'Ana requests 5 vacation days; her manager sees it on the team Gantt, approves it, and Ana\'s balance is automatically deducted, excluding the holiday.',
+        menu: 'Organization · Vacations and absences'
+    },
+    {
+        id: 'activos', capa: 'gente', titulo: 'Assets', corto: 'Assigned vehicles and equipment, with maintenance and policies.',
+        para: 'What the company lends to its people: the fleet and equipment (cell phones, laptops, tablets...), who they are assigned to, and what is expiring.',
+        quien: ['Asset management', 'Anyone with an assigned vehicle or equipment'],
+        pantallas: [
+            ['Vehicles', 'Permanent or temporary assignment, license plates and permits, policy, mileage, maintenance, accidents, and aesthetic condition.'],
+            ['Equipment', 'Description, serial number, IMEI, SIM and line, purchase, warranty, condition, and who it is assigned to.']
+        ],
+        conecta: ['rrhh', 'inicio'],
+        ejemplo: 'A truck\'s inspection expires in 10 days: it appears in the Pending tasks of the responsible person and the administrator until registered.',
+        menu: 'Assets'
+    },
+    {
+        id: 'ventas', capa: 'negocio', titulo: 'Sales and Customers', corto: 'Customers, zones, products, prices, sales program, and analysis.',
+        para: 'The commercial heart: who the customers are and where they are, what is sold and at what price, what each salesperson\'s target is, and how actual sales compare to what was scheduled.',
+        quien: ['Salespeople', 'Commercial managers', 'Price administration'],
+        pantallas: [
+            ['Customers and points of sale', 'Tax data, credit, account executive, branches, and contacts; the zone is derived from the state where each point is located.'],
+            ['Zones and salespeople', 'Regions formed by states; salespeople with their zones and customers.'],
+            ['Products and suppliers', 'Catalog with SKU, purchase and sale prices, margin, minimum stock, and sanitary registration; suppliers with conditions.'],
+            ['Prices and promotions', 'Price lists, promotions (discounts, NxM, free gifts) with scope and validity, their effect on sales, and a quote generator.'],
+            ['Sales program and My target', 'Monthly targets per salesperson, customer, and product; each salesperson sees their target, their progress, and reviews their scheduling with their supervisor.'],
+            ['Sales analysis', 'Program versus actual by salesperson, customer, and product, and 5-year history.'],
+            ['Incidents and important dates', 'Product claims with action plan; birthdays and anniversaries of customers and doctors.']
+        ],
+        conecta: ['campo', 'inventario', 'cobranza', 'planeacion'],
+        ejemplo: 'The scheduling publishes Ana\'s target; she reviews it in My target, adjusts two products within her range, and accepts it; from that moment on, her progress is measured against what was agreed.',
+        menu: 'Commercial'
+    },
+    {
+        id: 'campo', capa: 'negocio', titulo: 'Medical Visits and Field', corto: 'Medical market, daily route, orders, and salesperson tracking.',
+        para: 'Work outside the office: finding doctors and clinics, visiting them with a route, taking orders during the visit, and counting the product they have (sell-out). It also works as an app on Android and iOS.',
+        quien: ['Salespeople and medical representatives', 'Field supervisors', 'Warehouse and shipping (orders)'],
+        pantallas: [
+            ['Medical market', 'Doctors and clinics by postal code (Google Places) against your customers; prospects and published routes.'],
+            ['My daily route', 'Log of each visit (arrival, result, notes, order), impact on the target, and check-out reporting to the supervisor.'],
+            ['Doctor orders', 'The order is placed while viewing stock and promotions; warehouse supplies it, shipping sends it, and the sale is recorded with its batch.'],
+            ['Shadow inventory (sell-out)', 'What each customer has of our product: actual sales = previous count + delivered − counted today.'],
+            ['Salesperson tracking', 'Where each salesperson was last registered and the performance of their routes.']
+        ],
+        conecta: ['ventas', 'inventario', 'planeacion'],
+        ejemplo: 'Ana is short 114 pieces: the Visit plan suggests doctors with no salesperson nearby; during the visit she places an order and upon check-out her supervisor receives the report.',
+        menu: 'Commercial · Medical market, My daily route, Doctor orders'
+    },
+    {
+        id: 'inventario', capa: 'negocio', titulo: 'Inventory, Purchasing, and Traceability', corto: 'Stock, purchase orders, backorders, and the history of each batch.',
+        para: 'Ensuring product availability and knowing where it came from: stock by warehouse, purchases from suppliers with batch and expiration, and traceability of each item to who purchased it.',
+        quien: ['Warehouse', 'Purchasing', 'Quality (traceability and incidents)'],
+        pantallas: [
+            ['Inventories', 'Stock by product and warehouse, annual outlook with the plan, Sankey balance, backorders, and kardex.'],
+            ['Purchase orders', 'Purchases from suppliers and their receipt with batch, expiration, and invoice: the first link in traceability.'],
+            ['Traceability', 'History of each batch: supplier, receipt, transfers, orders, who it was sold to, incidents, and returns.']
+        ],
+        conecta: ['ventas', 'campo', 'planeacion'],
+        ejemplo: 'A doctor reports a defective tube: using the batch, the purchase order, supplier, and other customers who received that same batch can be seen.',
+        menu: 'Commercial · Inventories, Purchase orders, Traceability'
+    },
+    {
+        id: 'cobranza', capa: 'negocio', titulo: 'Accounts Receivable', corto: 'Portfolio by customer and point of sale, aging, and payments.',
+        para: 'The money pending collection: each sale to a customer automatically generates its charge; here you can see the portfolio, balance aging, and register manual payments and charges.',
+        quien: ['Administration and credit (administrators only)'],
+        pantallas: [
+            ['Portfolio by customer', 'Balance of each customer with its aging.'],
+            ['By point of sale', 'Open portfolio by branch or customer facility.'],
+            ['Documents and payments', 'Charges, payments, and manual adjustments with their history.']
+        ],
+        conecta: ['ventas', 'inicio'],
+        ejemplo: 'A pharmacy has a balance older than 60 days: credit sees it in the portfolio and the salesperson knows it before their next visit.',
+        menu: 'Accounts Receivable'
+    },
+    {
+        id: 'planeacion', capa: 'inteligencia', titulo: 'Strategic planning', corto: 'Optimization model, salesperson scheduling, visit plan, and evaluation.',
+        para: 'Decides what to sell, where, and when to maximize margin while respecting inventory, delivery times, demand, and the company\'s target; distributes the plan among salespeople, negotiates it with them, and evaluates it against actual results.',
+        quien: ['Planners', 'Commercial direction', 'Supervisors (agreements with their team)'],
+        pantallas: [
+            ['Sales optimization (LP)', 'Model, cases, and scenarios with editable Gantt, elasticity, sensitivity, backcasting, activity report, and results.'],
+            ['Zone and salesperson scheduling', 'Distributes the plan by history, affinity, and capacity; publishes targets, salesperson-supervisor agreements, and agreed targets with their gaps.'],
+            ['Visit plan', 'From the salesperson\'s target to their routes: which doctors to visit and how to expand their network.'],
+            ['Plan evaluation', 'Plan versus actual by month, salesperson, product, and zone, with forecast accuracy, findings, and AI interpretation.']
+        ],
+        conecta: ['ventas', 'campo', 'inventario', 'analitica'],
+        ejemplo: 'The model says the cream is best suited for the North in March; scheduling assigns it to Ana, she agrees on her target, and in April the evaluation measures how much was captured.',
+        menu: 'Strategic planning'
+    },
+    {
+        id: 'analitica', capa: 'inteligencia', titulo: 'Data Analytics', corto: 'Case design and multivariable analysis on business series.',
+        para: 'To understand why things happen: business variables are chosen in a process tree and studied to see how they relate and how they are forecasted.',
+        quien: ['Analysts', 'Planners', 'Management'],
+        pantallas: [
+            ['Case design', 'Drag variables to a case, view them in a graph and grid with trends and statistics, and create calculated variables.'],
+            ['Multivariable analysis', 'Correlation, scatter, PCA, multiple regression, PLS, ARIMA/ARMAX forecasting, and neural network.']
+        ],
+        conecta: ['planeacion', 'ventas'],
+        ejemplo: 'Do summer promotions drive gel sales or just bring them forward? A case is built with promotions, sales, and price, and the regression answers it.',
+        menu: 'Data Analytics'
+    },
+    {
+        id: 'usuarios', capa: 'control', titulo: 'Users, Access, and Security', corto: 'User registration, roles, section access, monitoring, and 2FA.',
+        para: 'Who enters and what they can do: each user has a role and, if needed, section exceptions; activity is monitored and everyone protects their account with two-factor authentication or passkeys.',
+        quien: ['Administrators', 'Each user (their security)'],
+        pantallas: [
+            ['Users', 'Registration, roles (admin, supervisor, operator, salesperson, planner), special permissions, link to employee, and access requests.'],
+            ['Access by section', 'Who enters each section and subsection and what they can do within; exceptions for each user.'],
+            ['User monitoring', 'Who is online, logins and failed attempts, what everyone is working on, security alerts, and session termination.'],
+            ['My account security', 'Change password, two-factor authentication (2FA), and passkeys.']
+        ],
+        conecta: ['rrhh', 'datos'],
+        ejemplo: 'A new planner arrives: they are registered, linked to their employee file, and given access to Planning; monitoring shows their first login.',
+        menu: 'Administration · Users, Access, Monitoring'
+    },
+    {
+        id: 'datos', capa: 'control', titulo: 'Database and Integrity', corto: 'Atlas audit, change log, and volume per collection.',
+        para: 'Data health: ensuring each record points to others that exist, inventory balances, invoice numbers do not repeat, and a record is kept of every administrative operation on the database.',
+        quien: ['Administrators (read-only in the log)'],
+        pantallas: [
+            ['Data integrity', 'Broken references, inventory balance, business consistency, and repeated invoice numbers, with manual or automatic correction and the volume of each collection.'],
+            ['Database log', 'What changed in which collections, how many documents, when, and by whom.']
+        ],
+        conecta: ['usuarios', 'inventario'],
+        ejemplo: 'The nightly check finds 3 sales pointing to a deleted customer; the administrator corrects them and the log records who did it.',
+        menu: 'Administration · Data integrity, Database log'
+    }
+];
+
+const RECORRIDO = [
+    ['rrhh', 'People and structure', 'Employees, positions, and who is whose boss.'],
+    ['ventas', 'Commercial catalog', 'Customers, zones, products, and prices.'],
+    ['planeacion', 'Plan and targets', 'The model decides; scheduling distributes and is agreed upon.'],
+    ['campo', 'Field execution', 'Routes, visits, and doctor orders.'],
+    ['inventario', 'Supply and track', 'Warehouse, purchases, and the batch of each item.'],
+    ['cobranza', 'Collect', 'Each sale generates its charge in the portfolio.'],
+    ['analitica', 'Measure and learn', 'Plan evaluation and data analysis.']
+];
+
+const TRANSVERSAL = [
+    ['AI Assistant', 'Ask in natural language ("what policies expire this month?") and query your data in read-only mode; it also builds planning models.'],
+    ['Notifications and pending tasks', 'The bell notifies about requests, approvals, targets, and agreements; the pending counter gathers what is expiring.'],
+    ['Help and manuals', 'Each screen has its guide (F1), with PDF manuals and drafts like this one.'],
+    ['Roles and access', 'What you see depends on your role and the section access assigned to you.'],
+    ['Change log', 'Most records save who changed what and when.'],
+    ['Mobile app and SOS', 'The same application on Android and iOS for the field, and the SOS button with emergency contacts and procedures.']
+];
+
+const capa = (id) => CAPAS.find((c) => c.id === id);
+const area = (id) => AREAS.find((a) => a.id === id);
+const color = (a) => capa(a.capa).color;
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+// Mapa por capas
+const mapa = document.getElementById('mapa');
+mapa.innerHTML = CAPAS.map((c) => `
+    <div class="capa" style="--c:${c.color}">
+        <div class="capa-nombre"><b>${c.nombre}</b><span>${c.nota}</span></div>
+        <div class="areas">${AREAS.filter((a) => a.capa === c.id).map((a) => `
+            <button class="area" type="button" data-area="${a.id}" aria-pressed="false" aria-controls="ficha" style="--c:${c.color}">
+                <span class="fila">${icono(a.id)}<h3>${a.titulo}</h3></span>
+                <p>${a.corto}</p>
+                <span class="cuenta">${a.pantallas.length} screens</span>
+            </button>`).join('')}
+        </div>
+    </div>`).join('');
+
+const ficha = document.getElementById('ficha');
+function mostrar(id, { desplazar = false } = {}) {
+    const a = area(id) ?? AREAS[0];
+    const c = capa(a.capa);
+    ficha.style.setProperty('--c', c.color);
+    ficha.innerHTML = `
+        <div class="titulo">${icono(a.id)}<div><span class="eyebrow">${c.nombre}</span><h2>${a.titulo}</h2></div></div>
+        <p class="para">${a.para}</p>
+        <div class="bloque"><b>Who uses it</b><div class="chips">${a.quien.map((q) => `<span class="chip">${q}</span>`).join('')}</div></div>
+        <div class="bloque"><b>Its screens</b><ul class="pantallas">${a.pantallas.map(([n, d]) => `<li><div><b>${n}</b><span>${d}</span></div></li>`).join('')}</ul></div>
+        <div class="bloque"><b>Connects with</b><div class="chips">${a.conecta.map((k) => `<button class="chip ir" type="button" data-area="${k}" style="--c2:${color(area(k))}">${area(k).titulo}</button>`).join('')}</div></div>
+        <div class="ejemplo"><span class="mano">For example…</span><p>${a.ejemplo}</p></div>
+        <p class="donde">In the menu: <code>${esc(a.menu)}</code></p>`;
+    document.querySelectorAll('.area').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.area === a.id)));
+    if (location.hash.slice(1) !== a.id) history.replaceState(null, '', `#${a.id}`);
+    if (desplazar && window.matchMedia('(max-width: 940px)').matches) ficha.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-area]');
+    if (!b) return;
+    mostrar(b.dataset.area, { desplazar: true });
+    if (b.classList.contains('paso')) document.querySelector('.mapa-y-ficha').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+window.addEventListener('hashchange', () => mostrar(location.hash.slice(1)));
+
+document.getElementById('recorrido').innerHTML = RECORRIDO.map(([k, t, d]) => `<button class="paso" type="button" data-area="${k}" style="--c:${color(area(k))}"><b>${t}</b><span>${d}</span></button>`).join('');
+document.getElementById('transversal').innerHTML = TRANSVERSAL.map(([t, d]) => `<div class="trans"><h3>${t}</h3><p>${d}</p></div>`).join('');
+
+mostrar(location.hash.slice(1) || 'ventas');
+</script>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Services</h4><a href="../index.html#servicios">Strategic planning</a><a href="../index.html#servicios">Operational scheduling</a><a href="../index.html#servicios">Implementation</a><a href="../index.html#servicios">Evaluation and follow-up</a></div>
+                <div><h4>Company</h4><a href="../index.html#metodologia">Methodology</a><a href="../index.html#industrias">Industries</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Insights</a></div>
+                <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Mexico City · Spain · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="../contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>
+        </div>
+    </footer>
+    <script src="../../sitio.js"></script>
+</body>
+</html>

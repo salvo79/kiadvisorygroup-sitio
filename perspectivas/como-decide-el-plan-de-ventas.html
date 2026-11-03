@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Cómo decide el plan de ventas · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="El modelo es una calculadora que revisa todas las combinaciones posibles de qué vender, dónde, cuándo y cuánto comprar, y se queda con la que deja más margen sin romper ninguna regla del negocio." />
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/como-decide-el-plan-de-ventas.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/como-decide-el-plan-de-ventas.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/como-decide-el-plan-de-ventas.html" />
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --azul-suave: #e2f4fc;
+    --regla: #c2410c;
+    --regla-suave: #fdeee4;
+    --meta: #15803d;
+    --meta-suave: #e5f5ea;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-block: 48px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+.boceto-sitio h1, .boceto-sitio h2 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.18rem; color: var(--tinta); }
+.boceto-sitio .cabeza .tesis b { color: var(--azul); }
+.boceto-sitio .gps {
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+    background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 18px 22px; max-width: 760px;
+}
+.boceto-sitio .gps svg { width: 64px; height: 64px; }
+.boceto-sitio .boceto { display: grid; grid-template-columns: 1fr auto 1fr auto 0.9fr auto 1fr; align-items: stretch; gap: 10px; }
+.boceto-sitio .etapa { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.boceto-sitio .etapa header { display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .etapa h3 { margin: 0; font: 800 1.15rem/1.15 var(--f-display); }
+.boceto-sitio .caja { flex: 1; border-radius: 14px; padding: 14px 16px; border: 2px solid; display: flex; flex-direction: column; gap: 9px; }
+.boceto-sitio .caja ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.93rem; }
+.boceto-sitio .caja li { display: grid; grid-template-columns: 18px 1fr; gap: 6px; }
+.boceto-sitio .caja li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-top: 8px; opacity: 0.7; }
+.boceto-sitio .entradas .caja { border-color: var(--azul); background: var(--azul-suave); }
+.boceto-sitio .entradas li::before { color: var(--azul); }
+.boceto-sitio .reglas .caja { border-color: var(--regla); background: var(--regla-suave); }
+.boceto-sitio .reglas li::before { content: "✕"; width: auto; height: auto; background: none; color: var(--regla); margin-top: 0; font-weight: 700; opacity: 1; font-size: 0.8rem; line-height: 1.9; }
+.boceto-sitio .objetivo .caja { border-color: var(--meta); background: var(--meta-suave); justify-content: center; text-align: center; }
+.boceto-sitio .objetivo .formula { font: 800 1.05rem/1.35 var(--f-display); }
+.boceto-sitio .objetivo .formula span { display: block; font: 500 0.85rem/1.4 var(--f-texto); color: var(--tenue); }
+.boceto-sitio .plan .caja { border-color: var(--marino); background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .plan li::before { color: var(--sobre-marino); }
+.boceto-sitio .flecha { display: flex; align-items: center; justify-content: center; color: var(--tenue); }
+.boceto-sitio .flecha svg { width: 34px; height: 34px; }
+.boceto-sitio .nota { font-family: var(--f-mano); font-size: 1.15rem; line-height: 1.15; color: var(--tenue); }
+.boceto-sitio .motor {
+    display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: center;
+    background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 16px; padding: 26px;
+}
+.boceto-sitio .motor .texto { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.boceto-sitio .ejemplo { display: flex; flex-direction: column; gap: 18px; }
+.boceto-sitio .ejemplo .datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .dato { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .dato .k { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .dato .v { font: 800 1.35rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.boceto-sitio .comparacion { width: 100%; overflow-x: auto; }
+.boceto-sitio .comparacion table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; background: var(--tarjeta); border-radius: 12px; overflow: hidden; }
+.boceto-sitio .comparacion th, .boceto-sitio .comparacion td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--linea); }
+.boceto-sitio .comparacion th:first-child, .boceto-sitio .comparacion td:first-child { text-align: left; }
+.boceto-sitio .comparacion th { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td { background: var(--meta-suave); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td:first-child::after { content: "  ← el que elige el modelo"; font-family: var(--f-mano); font-size: 1.1rem; color: var(--meta); font-weight: 700; }
+.boceto-sitio .sombra { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; background: var(--azul-suave); border-radius: 14px; padding: 16px 20px; }
+.boceto-sitio .sombra .mano { font-size: 2rem; }
+.boceto-sitio .cierre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.boceto-sitio .cierre div { border-top: 3px solid var(--azul); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .cierre b { font-family: var(--f-display); font-size: 1.05rem; }
+.boceto-sitio .cierre p { color: var(--tenue); font-size: 0.93rem; }
+@media (max-width: 900px) {
+.boceto-sitio .boceto { grid-template-columns: 1fr; }
+.boceto-sitio .flecha svg { transform: rotate(90deg); }
+.boceto-sitio .motor { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+.boceto-sitio .ejemplo .datos, .boceto-sitio .cierre { grid-template-columns: 1fr; }
+.boceto-sitio .gps { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+.boceto-sitio .motor .rayo { animation: brillo 2.6s ease-in-out infinite; }
+@keyframes brillo { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+}
+.boceto-sitio .nav-boceto { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--azul); color: var(--azul); background: var(--tarjeta); font: 600 0.9rem/1 var(--f-texto); text-decoration: none; }
+.boceto-sitio .nav-boceto:hover { background: var(--azul-suave); }
+.boceto-sitio .nav-boceto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .siguiente { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; background: var(--tarjeta); border: 2px dashed var(--azul); border-radius: 16px; padding: 20px 24px; color: inherit; text-decoration: none; }
+.boceto-sitio .siguiente:hover { background: var(--azul-suave); }
+.boceto-sitio .siguiente:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .siguiente b { font: 800 1.25rem/1.2 var(--f-display); }
+.boceto-sitio .siguiente .ir { font: 600 1rem/1 var(--f-texto); color: var(--azul); white-space: nowrap; }
+@media (max-width: 620px) {
+.boceto-sitio .siguiente { grid-template-columns: 1fr; }
+}
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); text-decoration: none; }
+.boceto-sitio .marca svg { width: 36px; height: 54px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.6rem/1 var(--f-texto); letter-spacing: -0.01em; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Servicios</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industrias</a>
+                <a href="../index.html#metodologia">Metodología</a>
+                <a href="../perspectivas/index.html" class="activo">Perspectivas</a>
+                <a class="idioma" href="../en/perspectivas/como-decide-el-plan-de-ventas.html" hreflang="en" lang="en">EN</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Agendar consulta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Planeación de ventas</div>
+                <h1>Cómo decide el plan de ventas</h1>
+                <a class="volver-perspectivas" href="index.html">← Todas las perspectivas</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+    <section class="cabeza">
+        <span class="eyebrow">Planeación de ventas</span>
+        <h1>Cómo decide el plan de ventas</h1>
+        <a class="nav-boceto" href="pronosticar-u-optimizar.html">Pronosticar u optimizar: ¿en qué se diferencia? →</a>
+        <a class="nav-boceto" href="valores-del-modelo.html">Qué significan los números: valor sombra, elasticidad, break-even… →</a>
+        <a class="nav-boceto" href="ciclo-del-plan.html">El ciclo completo: del plan a la visita de cada día →</a>
+        <p class="tesis">El modelo es una calculadora que revisa <b>todas las combinaciones posibles</b> de qué vender, dónde, cuándo y cuánto comprar, y se queda con la que <b>deja más margen</b> sin romper ninguna regla del negocio.</p>
+    </section>
+
+    <section class="gps" aria-label="Analogía">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="29" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2.5" />
+            <path d="M14 46 C 22 30, 30 40, 36 26 S 46 18, 50 16" fill="none" stroke="var(--azul)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6" />
+            <circle cx="14" cy="46" r="4" fill="var(--tinta)" />
+            <path d="M50 8 a7 7 0 0 1 7 7 c0 5 -7 12 -7 12 s-7 -7 -7 -12 a7 7 0 0 1 7 -7z" fill="var(--regla)" />
+        </svg>
+        <div>
+            <p class="mano">Piénsalo como el GPS del negocio.</p>
+            <p>Tú le dices a dónde quieres llegar (el mayor margen) y qué calles están cerradas (las reglas). Él no adivina: calcula todas las rutas y te da la mejor. Si cambias un dato, recalcula en segundos.</p>
+        </div>
+    </section>
+
+    <section class="boceto" aria-label="Boceto del modelo">
+        <div class="etapa entradas">
+            <header><span class="eyebrow">1 · Lo que sabemos</span><h3>Los datos</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Lo que se ha vendido de cada producto, en cada zona y mes</li>
+                    <li>Precio, costo y costo de llevarlo a cada zona</li>
+                    <li>Inventario hoy y compras que vienen en camino</li>
+                    <li>Cuánto tarda en llegar un pedido al proveedor</li>
+                    <li>Pedidos pendientes de surtir y la meta de la empresa</li>
+                </ul>
+            </div>
+            <p class="nota">todo sale de la plataforma, nadie lo teclea</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa reglas">
+            <header><span class="eyebrow">2 · Lo que no se vale</span><h3>Las reglas</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Vender más de lo que el mercado compra (lo histórico + un margen de esfuerzo)</li>
+                    <li>Vender lo que no hay en el almacén</li>
+                    <li>Pasarse del presupuesto de compras o del espacio del almacén</li>
+                    <li>Dejar sin surtir los pedidos que ya están vendidos</li>
+                    <li>Quedarse por debajo de la meta (o, si se permite, pagar un castigo por no llegar)</li>
+                </ul>
+            </div>
+            <p class="nota">las "calles cerradas"</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa objetivo">
+            <header><span class="eyebrow">3 · Lo que buscamos</span><h3>El objetivo</h3></header>
+            <div class="caja">
+                <p class="formula">Ganar el mayor margen<span>precio − costo − logística − almacenaje, sumado en todos los productos, zonas y meses</span></p>
+            </div>
+            <p class="nota">el "destino" del GPS</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa plan">
+            <header><span class="eyebrow">4 · Lo que entrega</span><h3>El plan</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Cuánto vender de cada producto, en cada zona y mes</li>
+                    <li>Cuánto comprar y cuándo pedirlo</li>
+                    <li>Con cuánto inventario cerrar cada mes</li>
+                    <li>Qué regla está frenando la utilidad y cuánto vale aflojarla</li>
+                </ul>
+            </div>
+            <p class="nota">y se reparte en metas por vendedor</p>
+        </div>
+    </section>
+
+    <section class="motor">
+        <div class="texto">
+            <span class="eyebrow">¿Y en medio qué pasa?</span>
+            <h2>El motor prueba, descarta y se queda con el mejor</h2>
+            <p>Por ejemplo, con 40 productos, 8 zonas y 12 meses hay casi 4,000 decisiones de venta, más las de compra e inventario. Una persona no puede revisar todas sus combinaciones. El motor matemático (programación lineal) sí: descarta de inmediato las que rompen una regla y, entre las que quedan, encuentra la de mayor margen.</p>
+            <p>No es una predicción ni una opinión: es la mejor respuesta posible <b>con los datos y las reglas que le dimos</b>. Si los datos cambian, el plan cambia.</p>
+        </div>
+        <svg viewBox="0 0 420 230" role="img" aria-label="Muchas combinaciones entran al motor; las que rompen una regla se descartan y sale un solo plan, el de mayor margen">
+            <g font-family="Figtree, sans-serif" font-size="12" fill="var(--tenue)">
+                <g fill="var(--azul)">
+                    <circle cx="22" cy="40" r="6" /><circle cx="44" cy="70" r="6" /><circle cx="18" cy="100" r="6" /><circle cx="48" cy="128" r="6" />
+                    <circle cx="20" cy="160" r="6" /><circle cx="46" cy="188" r="6" /><circle cx="70" cy="52" r="6" /><circle cx="74" cy="112" r="6" /><circle cx="72" cy="170" r="6" />
+                </g>
+                <text x="10" y="222">miles de combinaciones</text>
+                <path d="M95 115 H140" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <path d="M134 108 L142 115 L134 122" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <rect x="148" y="62" width="120" height="106" rx="16" fill="var(--marino)" />
+                <path class="rayo" d="M212 78 L194 116 H210 L200 152 L226 106 H210 L222 78 Z" fill="var(--sobre-marino)" />
+                <text x="208" y="190" text-anchor="middle" fill="var(--tinta)" font-weight="600">motor de optimización</text>
+                <g stroke="var(--regla)" stroke-width="2.5" stroke-linecap="round">
+                    <path d="M290 44 l12 12 M302 44 l-12 12" /><path d="M318 66 l12 12 M330 66 l-12 12" />
+                    <path d="M290 170 l12 12 M302 170 l-12 12" /><path d="M322 150 l12 12 M334 150 l-12 12" />
+                </g>
+                <text x="290" y="30" fill="var(--regla)">rompen una regla</text>
+                <path d="M272 115 H330" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <path d="M324 108 L332 115 L324 122" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <circle cx="362" cy="115" r="22" fill="var(--meta-suave)" stroke="var(--meta)" stroke-width="3" />
+                <path d="M351 115 l8 8 l15 -16" stroke="var(--meta)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                <text x="362" y="158" text-anchor="middle" fill="var(--meta)" font-weight="600">el plan de</text>
+                <text x="362" y="174" text-anchor="middle" fill="var(--meta)" font-weight="600">mayor margen</text>
+            </g>
+        </svg>
+    </section>
+
+    <section class="ejemplo">
+        <div class="cabeza">
+            <span class="eyebrow">Ejemplo en una servilleta</span>
+            <h2>Dos productos y solo 100 piezas en el almacén</h2>
+        </div>
+        <div class="datos">
+            <div class="dato"><span class="k">Crema A · margen por pieza</span><span class="v">$80</span><span class="k">el mercado compra hasta 70 piezas</span></div>
+            <div class="dato"><span class="k">Sérum B · margen por pieza</span><span class="v">$50</span><span class="k">el mercado compra hasta 60 piezas</span></div>
+            <div class="dato"><span class="k">Regla</span><span class="v">100 pz</span><span class="k">no se puede vender más de lo que hay</span></div>
+        </div>
+        <div class="comparacion">
+            <table>
+                <thead><tr><th>Cómo repartir las 100 piezas</th><th>Crema A</th><th>Sérum B</th><th>Margen</th></tr></thead>
+                <tbody>
+                    <tr><td>Mitad y mitad</td><td>50</td><td>50</td><td>$6,500</td></tr>
+                    <tr><td>Lo que más se vendió el año pasado</td><td>40</td><td>60</td><td>$6,200</td></tr>
+                    <tr class="mejor"><td>Primero lo que más deja</td><td>70</td><td>30</td><td>$7,100</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sombra">
+            <span class="mano">+$50</span>
+            <p><b>Precio sombra.</b> El modelo también dice cuánto ganaríamos con una pieza más en el almacén: $50, porque se vendería otro Sérum B. Así sabemos si conviene comprar más inventario, pagar más espacio o subir el presupuesto, antes de gastar.</p>
+        </div>
+        <p class="nota">En la vida real son miles de piezas, productos, zonas y meses a la vez. La idea es exactamente la misma.</p>
+    </section>
+
+    <a class="siguiente" href="pronosticar-u-optimizar.html">
+        <span><span class="eyebrow">Siguiente lectura</span><br /><b>Pronosticar u optimizar</b><br /><span class="nota">¿En qué se diferencia de planear con series temporales (pronóstico)?</span></span>
+        <span class="ir">Ver la comparación →</span>
+    </a>
+
+    <a class="siguiente" href="ciclo-del-plan.html">
+        <span><span class="eyebrow">Siguiente lectura</span><br /><b>El ciclo completo del plan</b><br /><span class="nota">Planear, programar entre vendedores, llevarlo a sus visitas, ejecutar el día, evaluar contra el plan y ajustar.</span></span>
+        <span class="ir">Ver el ciclo →</span>
+    </a>
+
+    <a class="siguiente" href="valores-del-modelo.html">
+        <span><span class="eyebrow">Siguiente lectura</span><br /><b>Qué significan los números del modelo</b><br /><span class="nota">Valor óptimo, actividad, holgura, valor sombra (dual), valor marginal, break-even y elasticidad, con un ejemplo que puedes mover.</span></span>
+        <span class="ir">Ver los valores →</span>
+    </a>
+
+    <section class="cierre" aria-label="Qué gana el negocio">
+        <div><b>Decisiones con sustento</b><p>Cada cifra del plan se puede explicar con un dato y una regla.</p></div>
+        <div><b>Escenarios en segundos</b><p>¿Y si sube el costo o cae la demanda? Se cambia el dato y se compara.</p></div>
+        <div><b>Metas alcanzables</b><p>El plan se reparte entre vendedores y, sumadas, sus metas cumplen el plan.</p></div>
+    </section>
+</main>
+        </div>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Servicios</h4><a href="../index.html#servicios">Planeación estratégica</a><a href="../index.html#servicios">Programación operativa</a><a href="../index.html#servicios">Implementación</a><a href="../index.html#servicios">Evaluación y seguimiento</a></div>
+                <div><h4>Compañía</h4><a href="../index.html#metodologia">Metodología</a><a href="../index.html#industrias">Industrias</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Perspectivas</a></div>
+                <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Ciudad de México · España · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="../contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
+        </div>
+    </footer>
+    <script src="../sitio.js"></script>
+</body>
+</html>

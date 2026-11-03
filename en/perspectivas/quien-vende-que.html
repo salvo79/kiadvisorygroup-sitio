@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Who sells what · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="The plan says what to sell, in which zone, and in which month. Scheduling decides who on the team sells it, so that each salesperson receives a target they can actually meet and, added up, all targets align with the plan." />
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/quien-vende-que.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/quien-vende-que.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/quien-vende-que.html" />
+    <link rel="stylesheet" href="../../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --azul-suave: #e2f4fc;
+    --regla: #c2410c;
+    --regla-suave: #fdeee4;
+    --meta: #15803d;
+    --meta-suave: #e5f5ea;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-block: 48px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+.boceto-sitio h1, .boceto-sitio h2 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.45rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .cabeza { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.boceto-sitio .cabeza .tesis { font-size: 1.18rem; color: var(--tinta); }
+.boceto-sitio .cabeza .tesis b { color: var(--azul); }
+.boceto-sitio .gps {
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+    background: var(--tarjeta); border: 1.5px dashed var(--linea); border-radius: 14px; padding: 18px 22px; max-width: 760px;
+}
+.boceto-sitio .gps svg { width: 64px; height: 64px; }
+.boceto-sitio .boceto { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) ; align-items: stretch; gap: 14px; }
+.boceto-sitio .boceto .flecha { display: none; }
+@media (min-width: 1180px) {
+.boceto-sitio .boceto { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; }
+.boceto-sitio .boceto .flecha { display: flex; }
+}
+@media (max-width: 1179px) {
+.boceto-sitio .boceto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+}
+.boceto-sitio .etapa { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.boceto-sitio .etapa header { display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .etapa h3 { margin: 0; font: 800 1.15rem/1.15 var(--f-display); }
+.boceto-sitio .etapa header { min-height: 3.1rem; }
+.boceto-sitio .nota { text-wrap: balance; }
+.boceto-sitio .caja { flex: 1; border-radius: 14px; padding: 16px 18px; border: 2px solid; display: flex; flex-direction: column; gap: 10px; }
+.boceto-sitio .caja ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; line-height: 1.4; }
+.boceto-sitio .caja li { position: relative; padding-left: 18px; text-wrap: pretty; overflow-wrap: break-word; }
+.boceto-sitio .caja li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+.boceto-sitio .entradas .caja { border-color: var(--azul); background: var(--azul-suave); }
+.boceto-sitio .entradas li::before { color: var(--azul); }
+.boceto-sitio .reglas .caja { border-color: var(--regla); background: var(--regla-suave); }
+.boceto-sitio .reglas li::before { content: "✕"; left: 0; top: 0; width: auto; height: auto; background: none; color: var(--regla); font-weight: 700; opacity: 1; font-size: 0.78rem; line-height: 1.8; }
+.boceto-sitio .objetivo .caja { border-color: var(--meta); background: var(--meta-suave); justify-content: center; text-align: center; }
+.boceto-sitio .objetivo .formula { font: 800 1.05rem/1.35 var(--f-display); }
+.boceto-sitio .objetivo .formula span { display: block; font: 500 0.85rem/1.4 var(--f-texto); color: var(--tenue); }
+.boceto-sitio .plan .caja { border-color: var(--marino); background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .plan li::before { color: var(--sobre-marino); }
+.boceto-sitio .flecha { display: flex; align-items: center; justify-content: center; color: var(--tenue); }
+.boceto-sitio .flecha svg { width: 34px; height: 34px; }
+.boceto-sitio .nota { font-family: var(--f-mano); font-size: 1.15rem; line-height: 1.15; color: var(--tenue); }
+.boceto-sitio .motor {
+    display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: center;
+    background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 16px; padding: 26px;
+}
+.boceto-sitio .motor .texto { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.boceto-sitio .ejemplo { display: flex; flex-direction: column; gap: 18px; }
+.boceto-sitio .ejemplo .datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .dato { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .dato .k { font-size: 0.8rem; color: var(--tenue); }
+.boceto-sitio .dato .v { font: 800 1.35rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.boceto-sitio .comparacion { width: 100%; overflow-x: auto; }
+.boceto-sitio .comparacion table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; background: var(--tarjeta); border-radius: 12px; overflow: hidden; }
+.boceto-sitio .comparacion th, .boceto-sitio .comparacion td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--linea); }
+.boceto-sitio .comparacion th:first-child, .boceto-sitio .comparacion td:first-child { text-align: left; }
+.boceto-sitio .comparacion th { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td { background: var(--meta-suave); font-weight: 600; }
+.boceto-sitio .comparacion tr.mejor td:first-child::after { content: "  ← the one the model chooses"; font-family: var(--f-mano); font-size: 1.1rem; color: var(--meta); font-weight: 700; }
+.boceto-sitio .sombra { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; background: var(--azul-suave); border-radius: 14px; padding: 16px 20px; }
+.boceto-sitio .sombra .mano { font-size: 2rem; }
+.boceto-sitio .cierre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.boceto-sitio .cierre div { border-top: 3px solid var(--azul); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.boceto-sitio .cierre b { font-family: var(--f-display); font-size: 1.05rem; }
+.boceto-sitio .cierre p { color: var(--tenue); font-size: 0.93rem; }
+@media (max-width: 640px) {
+.boceto-sitio .boceto { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+.boceto-sitio .motor { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+.boceto-sitio .ejemplo .datos, .boceto-sitio .cierre { grid-template-columns: 1fr; }
+.boceto-sitio .gps { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+.boceto-sitio .motor .rayo { animation: brillo 2.6s ease-in-out infinite; }
+@keyframes brillo { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+}
+.boceto-sitio .vendedores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.boceto-sitio .vendedor { background: var(--tarjeta); border: 1.5px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .vendedor .nombre { font: 800 1.15rem/1.1 var(--f-display); }
+.boceto-sitio .vendedor .fila { display: flex; justify-content: space-between; gap: 10px; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.boceto-sitio .vendedor .fila span:first-child { color: var(--tenue); }
+.boceto-sitio .barra { display: flex; height: 34px; border-radius: 8px; overflow: hidden; font: 600 0.85rem/34px var(--f-texto); font-variant-numeric: tabular-nums; }
+.boceto-sitio .barra div { text-align: center; white-space: nowrap; overflow: hidden; }
+.boceto-sitio .barra .ana { background: var(--marino); color: var(--sobre-marino); }
+.boceto-sitio .barra .beto { background: var(--azul-suave); color: var(--tinta); border: 1.5px solid var(--azul); border-left: 0; border-radius: 0 8px 8px 0; }
+.boceto-sitio .saturado { display: inline-block; font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: var(--regla-suave); color: var(--regla); border: 1px solid var(--regla); width: fit-content; }
+@media (max-width: 620px) {
+.boceto-sitio .vendedores { grid-template-columns: 1fr; }
+}
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); text-decoration: none; }
+.boceto-sitio .marca svg { width: 36px; height: 54px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.6rem/1 var(--f-texto); letter-spacing: -0.01em; }
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Open menu" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Services</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industries</a>
+                <a href="../index.html#metodologia">Methodology</a>
+                <a href="../perspectivas/index.html" class="activo">Insights</a>
+                <a class="idioma" href="../../perspectivas/quien-vende-que.html" hreflang="es" lang="es">ES</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Book a consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Zone and salesperson scheduling</div>
+                <h1>Who sells what</h1>
+                <a class="volver-perspectivas" href="index.html">← All insights</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="marca" role="img" aria-label="Infinity Workflow">
+        <svg viewBox="0 0 100 150" aria-hidden="true">
+            <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+            <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+        </svg>
+        <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+    </div>
+    <section class="cabeza">
+        <span class="eyebrow">Zone and salesperson scheduling</span>
+        <h1>Who sells what</h1>
+        <p class="tesis">The plan says <b>what to sell, in which zone, and in which month</b>. Scheduling decides <b>who on the team sells it</b>, so that each salesperson receives a target they can actually meet and, added up, all targets align with the plan.</p>
+    </section>
+
+    <section class="gps" aria-label="Analogy">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="29" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2.5" />
+            <circle cx="23" cy="23" r="6.5" fill="var(--tinta)" /><path d="M12 47 a11 11 0 0 1 22 0 Z" fill="var(--tinta)" />
+            <circle cx="41" cy="23" r="6.5" fill="var(--azul)" /><path d="M30 47 a11 11 0 0 1 22 0 Z" fill="var(--azul)" />
+        </svg>
+        <div>
+            <p class="mano">Think of it like the head chef handing out the orders.</p>
+            <p>They give each dish to the cook who prepares it best, without exceeding what each can handle during the shift, and make sure the entire order goes out. The model does the exact same thing with the plan's items and the sales team.</p>
+        </div>
+    </section>
+
+    <section class="boceto" aria-label="Scheduling sketch">
+        <div class="etapa entradas">
+            <header><span class="eyebrow">1 · What comes in</span><h3>The plan and history</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>The approved plan: units by product, zone, and month</li>
+                    <li>What each salesperson has sold: which products, in which zones, and how much per month</li>
+                    <li>Each person's strong and weak months (seasonality)</li>
+                    <li>Promotions and which salespeople they apply to</li>
+                </ul>
+            </div>
+            <p class="nota">comes from the published plan and actual sales</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa objetivo">
+            <header><span class="eyebrow">2 · Who is good at what</span><h3>Effectiveness</h3></header>
+            <div class="caja" style="text-align: left; justify-content: flex-start">
+                <ul>
+                    <li><b>100%</b> if they have already sold that product in that zone</li>
+                    <li><b>85%</b> if they sell it, but in another of their zones</li>
+                    <li><b>70%</b> if the zone is theirs, but they have never sold it</li>
+                    <li>Adjusted up to ±10% depending on whether their sales are going up or down</li>
+                </ul>
+            </div>
+            <p class="nota">an item in the hands of someone who knows it "is worth more"</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa reglas">
+            <header><span class="eyebrow">3 · What is not allowed</span><h3>The rules</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Leaving plan items without an owner (if they don't fit, they are reported)</li>
+                    <li>Giving someone more than their capacity: their normal monthly sales + an effort %</li>
+                    <li>Leaving someone below their monthly minimum</li>
+                    <li>Loading an entire product in a zone onto a single person</li>
+                </ul>
+            </div>
+            <p class="nota">so that targets are achievable</p>
+        </div>
+        <div class="flecha" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M4 17 H28 M20 9 L28 17 L20 25" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+        <div class="etapa plan">
+            <header><span class="eyebrow">4 · What they receive</span><h3>Their target</h3></header>
+            <div class="caja">
+                <ul>
+                    <li>Monthly target in pesos and units</li>
+                    <li>Products to promote and priority clients</li>
+                    <li>A notification and their My target screen to confirm receipt</li>
+                    <li>Their actual progress against the target, all month long</li>
+                </ul>
+            </div>
+            <p class="nota">the sum of all = the plan</p>
+        </div>
+    </section>
+
+    <section class="motor">
+        <div class="texto">
+            <span class="eyebrow">How does it choose?</span>
+            <h2>Each item goes where the highest margin is expected</h2>
+            <p>The model calculates, for each salesperson, how much margin is expected from each item assigned to them: the product's margin multiplied by their effectiveness. Then it distributes the entire plan seeking to maximize the total sum, always within the rules.</p>
+            <p>If someone reaches their limit in a month, the system marks them as <b>saturated</b> (for example "Saturated 2 m" = two months at the limit) and shows how much margin would be gained if they had a little more capacity. This shows where support or an additional salesperson is needed.</p>
+        </div>
+        <svg viewBox="0 0 420 230" role="img" aria-label="The plan items pass through the engine and are distributed among salespeople according to their effectiveness and capacity">
+            <g font-family="Figtree, sans-serif" font-size="12" fill="var(--tenue)">
+                <rect x="8" y="70" width="86" height="90" rx="12" fill="var(--azul-suave)" stroke="var(--azul)" stroke-width="2" />
+                <text x="51" y="106" text-anchor="middle" fill="var(--tinta)" font-weight="600">Plan</text>
+                <text x="51" y="128" text-anchor="middle" font-size="11">by product,</text><text x="51" y="142" text-anchor="middle" font-size="11">zone and month</text>
+                <path d="M100 115 H140" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <path d="M134 108 L142 115 L134 122" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <rect x="148" y="62" width="120" height="106" rx="16" fill="var(--marino)" />
+                <path class="rayo" d="M212 78 L194 116 H210 L200 152 L226 106 H210 L222 78 Z" fill="var(--sobre-marino)" />
+                <text x="208" y="190" text-anchor="middle" fill="var(--tinta)" font-weight="600">optimal distribution</text>
+                <path d="M272 100 L318 52 M272 115 H318 M272 130 L318 178" stroke="var(--tenue)" stroke-width="2" fill="none" />
+                <g>
+                    <circle cx="340" cy="46" r="15" fill="var(--tinta)" /><text x="362" y="50" fill="var(--tinta)" font-weight="600">Ana</text>
+                    <circle cx="340" cy="115" r="15" fill="var(--azul)" /><text x="362" y="119" fill="var(--tinta)" font-weight="600">Beto</text>
+                    <circle cx="340" cy="184" r="15" fill="var(--meta)" /><text x="362" y="188" fill="var(--tinta)" font-weight="600">Carla</text>
+                </g>
+                <text x="300" y="222" fill="var(--tenue)">each with their target</text>
+            </g>
+        </svg>
+    </section>
+
+    <section class="ejemplo">
+        <div class="cabeza">
+            <span class="eyebrow">Napkin example</span>
+            <h2>100 units of Cream A in the North Zone, in March</h2>
+            <p>Each unit yields an $80 margin. There are two salespeople in the zone:</p>
+        </div>
+        <div class="vendedores">
+            <div class="vendedor">
+                <span class="nombre">Ana</span>
+                <div class="fila"><span>Already sells Cream A in North</span><span>100% effectiveness</span></div>
+                <div class="fila"><span>Expected margin per unit</span><span><b>$80</b></span></div>
+                <div class="fila"><span>Capacity in March</span><span>60 units</span></div>
+            </div>
+            <div class="vendedor">
+                <span class="nombre">Beto</span>
+                <div class="fila"><span>North is their zone, has never sold it</span><span>70% effectiveness</span></div>
+                <div class="fila"><span>Expected margin per unit</span><span><b>$56</b></span></div>
+                <div class="fila"><span>Capacity in March</span><span>80 units</span></div>
+            </div>
+        </div>
+        <div class="comparacion">
+            <table>
+                <thead><tr><th>How to distribute the 100 units</th><th>Ana</th><th>Beto</th><th>Expected margin</th></tr></thead>
+                <tbody>
+                    <tr><td>Half and half</td><td>50</td><td>50</td><td>$6,800</td></tr>
+                    <tr><td>More to the one with more capacity</td><td>40</td><td>60</td><td>$6,560</td></tr>
+                    <tr class="mejor"><td>Ana up to her limit, the rest to Beto</td><td>60</td><td>40</td><td>$7,040</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="barra" role="img" aria-label="Final distribution: Ana 60 units, Beto 40 units">
+            <div class="ana" style="width:60%">Ana · 60 units</div>
+            <div class="beto" style="width:40%">Beto · 40 units</div>
+        </div>
+        <div class="sombra">
+            <span class="mano">+$24</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+                <span class="saturado">Ana · saturated in March</span>
+                <p>Ana reached her limit. If she could sell one more unit, it would be taken from Beto and the margin would increase by $24 ($80 − $56). This number tells management how much it is worth to support Ana (more visits, an assistant) or to train Beto on Cream A.</p>
+            </div>
+        </div>
+        <p class="nota">In real life, it's all products, zones, salespeople, and months at the same time. The idea is exactly the same.</p>
+    </section>
+
+    <section class="cierre" aria-label="What the business gains">
+        <div><b>Fair targets</b><p>Everyone receives what their history says they can sell, not an equal figure for everyone.</p></div>
+        <div><b>The plan is met</b><p>Every item in the plan has an owner; what doesn't fit is identified before publishing.</p></div>
+        <div><b>Where to support</b><p>Saturated salespeople and their value show where to reinforce the team.</p></div>
+    </section>
+</main>
+        </div>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI combines <em>Künstliche Intelligenz</em> (artificial intelligence) and <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Services</h4><a href="../index.html#servicios">Strategic planning</a><a href="../index.html#servicios">Operational scheduling</a><a href="../index.html#servicios">Implementation</a><a href="../index.html#servicios">Evaluation and follow-up</a></div>
+                <div><h4>Company</h4><a href="../index.html#metodologia">Methodology</a><a href="../index.html#industrias">Industries</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Insights</a></div>
+                <div><h4>Contact</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Mexico City · Spain · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. All rights reserved.</span><span><a href="../contacto.html#privacidad" style="display: inline">Privacy notice</a></span></div>
+        </div>
+    </footer>
+    <script src="../../sitio.js"></script>
+</body>
+</html>

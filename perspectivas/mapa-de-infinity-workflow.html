@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        (function () {
+            try {
+                var actual = document.documentElement.lang;
+                var elegido = localStorage.getItem('ki_idioma');
+                var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
+                var quiere = elegido || (espanol ? 'es' : 'en');
+                if (quiere === actual) return;
+                var ruta = location.pathname;
+                var destino = quiere === 'en' ? '/en' + (ruta === '/' ? '/' : ruta) : ruta.replace(/^\/en(?=\/|$)/, '') || '/';
+                location.replace(destino + location.search + location.hash);
+            } catch (e) {}
+        })();
+    </script>
+    <title>Mapa de Infinity Workflow · KI Advisory &amp; Strategy Group</title>
+    <meta name="description" content="" />
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet" />
+    <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/perspectivas/mapa-de-infinity-workflow.html" />
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+.boceto-sitio {
+    --papel: #f5f8fa;
+    --tarjeta: #ffffff;
+    --tinta: #0b2233;
+    --tenue: #5b6e7c;
+    --linea: #d5dee5;
+    --azul: #0090d0;
+    --marino: #051c2c;
+    --sobre-marino: #ffffff;
+    --a-dia: #0090d0;
+    --a-gente: #7c3aed;
+    --a-negocio: #0d9488;
+    --a-inteligencia: #c2410c;
+    --a-control: #475569;
+    --f-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+    --f-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+    --f-mano: 'Caveat', 'Comic Sans MS', cursive;
+    color-scheme: light;
+}
+.boceto-sitio * { box-sizing: border-box; }
+.boceto-sitio, .boceto-sitio { margin: 0; }
+.boceto-sitio {
+    background: var(--papel);
+    color: var(--tinta);
+    font: 400 16px/1.55 var(--f-texto);
+    background-image: radial-gradient(var(--linea) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.boceto-sitio .hoja {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+.boceto-sitio h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.boceto-sitio h2 { font-size: 1.5rem; line-height: 1.15; }
+.boceto-sitio h3 { font-size: 1.05rem; }
+.boceto-sitio p { margin: 0; }
+.boceto-sitio b { font-weight: 600; }
+.boceto-sitio .eyebrow { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); }
+.boceto-sitio .mano { font-family: var(--f-mano); font-weight: 600; font-size: 1.35rem; line-height: 1.15; color: var(--azul); }
+.boceto-sitio .tenue { color: var(--tenue); }
+.boceto-sitio .marca { display: inline-flex; align-items: center; gap: 12px; width: fit-content; color: var(--tinta); }
+.boceto-sitio .marca svg { width: 30px; height: 45px; flex-shrink: 0; }
+.boceto-sitio .marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.boceto-sitio .marca .sup { font: 600 0.66rem/1 var(--f-texto); letter-spacing: 0.42em; text-transform: uppercase; color: #00a9f4; margin-bottom: 4px; }
+.boceto-sitio .marca .principal { font: 600 1.45rem/1 var(--f-texto); letter-spacing: -0.01em; }
+.boceto-sitio .arriba { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.boceto-sitio .navs { display: flex; flex-wrap: wrap; gap: 8px; }
+.boceto-sitio .nav-boceto { font: 500 0.85rem/1 var(--f-texto); color: var(--tenue); text-decoration: none; border: 1px solid var(--linea); border-radius: 999px; padding: 8px 12px; background: var(--tarjeta); }
+.boceto-sitio .nav-boceto:hover { color: var(--tinta); border-color: var(--tenue); }
+.boceto-sitio .cabeza { display: grid; gap: 14px; max-width: 820px; }
+.boceto-sitio .cabeza .lead { font-size: 1.12rem; color: var(--tenue); }
+.boceto-sitio .mapa-y-ficha { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 940px) {
+.boceto-sitio .mapa-y-ficha { grid-template-columns: 1fr; }
+}
+.boceto-sitio .mapa { display: flex; flex-direction: column; gap: 14px; }
+.boceto-sitio .capa { display: grid; grid-template-columns: 118px minmax(0, 1fr); gap: 12px; align-items: stretch; }
+@media (max-width: 560px) {
+.boceto-sitio .capa { grid-template-columns: minmax(0, 1fr); }
+.boceto-sitio .areas { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.boceto-sitio .area { padding: 10px 11px; }
+.boceto-sitio .area h3 { font-size: 0.9rem; }
+}
+.boceto-sitio .capa-nombre { display: flex; flex-direction: column; justify-content: center; gap: 2px; border-left: 4px solid var(--c); padding-left: 10px; }
+.boceto-sitio .capa-nombre b { font-family: var(--f-display); font-size: 1rem; color: var(--c); }
+.boceto-sitio .capa-nombre span { font-size: 0.78rem; color: var(--tenue); line-height: 1.3; }
+.boceto-sitio .areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(176px, 100%), 1fr)); gap: 10px; }
+.boceto-sitio .area {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 14px 12px;
+    border-radius: 14px;
+    background: var(--tarjeta);
+    border: 1px solid var(--linea);
+    border-top: 4px solid var(--c);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    min-height: 104px;
+}
+.boceto-sitio .area:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(5, 28, 44, 0.08); }
+.boceto-sitio .area:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.boceto-sitio .area[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 11%, var(--tarjeta)); border-color: var(--c); box-shadow: 0 0 0 1px var(--c); }
+.boceto-sitio .area .fila { display: flex; align-items: center; gap: 8px; }
+.boceto-sitio .icono { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 15%, transparent); color: var(--c); flex-shrink: 0; }
+.boceto-sitio .icono svg { width: 18px; height: 18px; }
+.boceto-sitio .area h3 { font-size: 0.98rem; line-height: 1.15; }
+.boceto-sitio .area p { font-size: 0.82rem; color: var(--tenue); line-height: 1.35; }
+.boceto-sitio .area .cuenta { margin-top: auto; font: 600 0.7rem/1 var(--f-texto); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c); }
+.boceto-sitio .ficha {
+    position: sticky;
+    top: 16px;
+    background: var(--tarjeta);
+    border: 1px solid var(--linea);
+    border-top: 6px solid var(--c);
+    border-radius: 18px;
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+}
+@media (max-width: 940px) {
+.boceto-sitio .ficha { position: static; max-height: none; }
+}
+.boceto-sitio .ficha .titulo { display: flex; gap: 12px; align-items: center; }
+.boceto-sitio .ficha .titulo .icono { width: 44px; height: 44px; border-radius: 12px; }
+.boceto-sitio .ficha .titulo .icono svg { width: 24px; height: 24px; }
+.boceto-sitio .ficha .eyebrow { color: var(--c); }
+.boceto-sitio .ficha .para { font-size: 1.02rem; }
+.boceto-sitio .bloque { display: flex; flex-direction: column; gap: 8px; }
+.boceto-sitio .bloque > b { font: 600 0.72rem/1 var(--f-texto); letter-spacing: 0.12em; text-transform: uppercase; color: var(--tenue); }
+.boceto-sitio .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.boceto-sitio .chip { font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 12%, transparent); color: var(--tinta); }
+.boceto-sitio .chip.ir { all: unset; cursor: pointer; font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--c2, var(--linea)); color: var(--tinta); background: var(--tarjeta); }
+.boceto-sitio .chip.ir:hover, .boceto-sitio .chip.ir:focus-visible { background: color-mix(in srgb, var(--c2) 14%, var(--tarjeta)); outline: none; }
+.boceto-sitio .chip.ir::after { content: ' →'; color: var(--c2); }
+.boceto-sitio .pantallas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.boceto-sitio .pantallas li { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--linea); }
+.boceto-sitio .pantallas li:last-child { border-bottom: 0; }
+.boceto-sitio .pantallas li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--c); margin-top: 7px; }
+.boceto-sitio .pantallas li b { display: block; font-size: 0.93rem; }
+.boceto-sitio .pantallas li span { font-size: 0.85rem; color: var(--tenue); }
+.boceto-sitio .ejemplo { border: 1.5px dashed var(--c); border-radius: 14px; padding: 12px 14px; background: color-mix(in srgb, var(--c) 6%, var(--tarjeta)); }
+.boceto-sitio .ejemplo .mano { color: var(--c); display: block; margin-bottom: 4px; }
+.boceto-sitio .ejemplo p { font-size: 0.92rem; }
+.boceto-sitio .donde { font-size: 0.82rem; color: var(--tenue); }
+.boceto-sitio .donde code { font: 500 0.8rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: color-mix(in srgb, var(--c) 10%, transparent); padding: 2px 6px; border-radius: 6px; color: var(--tinta); }
+.boceto-sitio .seccion { display: flex; flex-direction: column; gap: 14px; }
+.boceto-sitio .recorrido { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; counter-reset: paso; }
+@media (max-width: 1000px) {
+.boceto-sitio .recorrido { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.boceto-sitio .paso {
+    all: unset; box-sizing: border-box; cursor: pointer; position: relative;
+    background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px;
+}
+.boceto-sitio .paso:hover, .boceto-sitio .paso:focus-visible { border-color: var(--c); outline: none; box-shadow: 0 0 0 1px var(--c); }
+.boceto-sitio .paso::before { counter-increment: paso; content: counter(paso); font: 800 1.4rem/1 var(--f-display); color: var(--c); }
+.boceto-sitio .paso b { font-size: 0.9rem; }
+.boceto-sitio .paso span { font-size: 0.8rem; color: var(--tenue); line-height: 1.35; }
+.boceto-sitio .transversal { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.boceto-sitio .trans { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.boceto-sitio .trans h3 { font-size: 0.98rem; }
+.boceto-sitio .trans p { font-size: 0.86rem; color: var(--tenue); }
+.boceto-sitio .pie { font-size: 0.82rem; color: var(--tenue); border-top: 1px solid var(--linea); padding-top: 16px; }
+@media (prefers-reduced-motion: reduce) {
+.boceto-sitio .area { transition: none; }
+.boceto-sitio .area:hover { transform: none; }
+}
+
+.boceto-sitio { --papel: #f5f7fa; --tarjeta: #ffffff; --tinta: #1b2533; --tenue: #5b6675; --linea: #e6eaf0;
+    --azul: #0284c7; --azul-suave: #e0f2fe; --marino: #0a1f3c; --sobre-marino: #ffffff;
+    --f-display: 'Source Serif 4', Georgia, serif; --f-texto: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --f-mano: 'Source Serif 4', Georgia, serif; color-scheme: light; background: var(--papel); background-image: none; }
+.boceto-sitio h1, .boceto-sitio h2, .boceto-sitio h3 { font-weight: 500; letter-spacing: -0.01em; }
+.boceto-sitio .mano { font-style: italic; font-weight: 500; font-size: 1.12rem; }
+/* La cabecera de la página ya muestra la marca, el antetítulo y el título */
+.boceto-sitio .hoja > .marca, .boceto-sitio .hoja > .cabeza:first-of-type > .eyebrow, .boceto-sitio .hoja > .cabeza:first-of-type > h1 { display: none; }
+.volver-perspectivas { display: inline-flex; margin-top: 26px; color: #c5d3e6; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.volver-perspectivas:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+    <header class="cabecera">
+        <div class="contenedor">
+            <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+            <button class="boton-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="menu">
+                <a href="../index.html#servicios">Servicios</a>
+                <a href="../infinity-workflow.html">Infinity Workflow</a>
+                <a href="../index.html#industrias">Industrias</a>
+                <a href="../index.html#metodologia">Metodología</a>
+                <a href="../perspectivas/index.html" class="activo">Perspectivas</a>
+                <a class="idioma" href="../en/perspectivas/mapa-de-infinity-workflow.html" hreflang="en" lang="en">EN</a>
+                <a class="boton boton-oscuro" href="../contacto.html">Agendar consulta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cabecera-pagina sobre-oscuro">
+            <div class="contenedor">
+                <div class="antetitulo">Boceto · mapa de la aplicación</div>
+                <h1>Infinity Workflow, área por área</h1>
+                <a class="volver-perspectivas" href="index.html">← Todas las perspectivas</a>
+            </div>
+        </section>
+        <div class="boceto-sitio">
+<main class="hoja">
+    <div class="arriba">
+        <div class="marca" role="img" aria-label="Infinity Workflow">
+            <svg viewBox="0 0 100 150" aria-hidden="true">
+                <path d="M50 6 L89 45 L50 84 L11 45 Z" fill="none" stroke="currentColor" stroke-width="11" />
+                <path d="M50 66 L89 105 L50 144 L11 105 Z" fill="none" stroke="#00a9f4" stroke-width="11" />
+            </svg>
+            <span class="nombre"><span class="sup">Infinity</span><span class="principal">Workflow</span></span>
+        </div>
+        <nav class="navs" aria-label="Otros bocetos">
+            <a class="nav-boceto" href="ciclo-del-plan.html">Ciclo del plan →</a>
+            <a class="nav-boceto" href="como-decide-el-plan-de-ventas.html">Cómo decide el plan de ventas →</a>
+        </nav>
+    </div>
+
+    <section class="cabeza">
+        <span class="eyebrow">Boceto · mapa de la aplicación</span>
+        <h1>Infinity Workflow, área por área</h1>
+        <p class="lead">Una sola aplicación para la gente, la operación, la venta, el campo, el inventario, el dinero, la planeación y el control. Las áreas comparten los mismos datos: lo que se captura en una alimenta a las demás.</p>
+        <p class="mano">Da clic en un área para ver qué hace, quién la usa y sus pantallas ↓</p>
+    </section>
+
+    <section class="mapa-y-ficha">
+        <div class="mapa" id="mapa" aria-label="Áreas de la aplicación"></div>
+        <article class="ficha" id="ficha" aria-live="polite"></article>
+    </section>
+
+    <section class="seccion">
+        <div>
+            <span class="eyebrow">Cómo se conectan</span>
+            <h2>El recorrido de un dato por toda la aplicación</h2>
+            <p class="tenue">De dar de alta a una persona hasta medir si el plan se cumplió. Da clic en cada paso para abrir su área.</p>
+        </div>
+        <div class="recorrido" id="recorrido"></div>
+    </section>
+
+    <section class="seccion">
+        <div>
+            <span class="eyebrow">En todas las pantallas</span>
+            <h2>Lo que atraviesa todas las áreas</h2>
+        </div>
+        <div class="transversal" id="transversal"></div>
+    </section>
+
+    <p class="pie">Boceto ilustrativo de Infinity Workflow (noviembre 2026). Cada pantalla tiene su ayuda con la tecla <b>F1</b>; lo que ve cada persona depende de su rol y de sus accesos por sección.</p>
+</main>
+        </div>
+<script>
+// Íconos de trazo simple (24×24)
+const ICONOS = {
+    inicio: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+    operaciones: '<rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="13" rx="1.5"/>',
+    rrhh: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M16 14.2c2.9.2 5 2.6 5 5.8"/>',
+    activos: '<path d="M4 15l1.8-5.2A2 2 0 0 1 7.7 8.5h8.6a2 2 0 0 1 1.9 1.3L20 15"/><rect x="3" y="15" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="19.5" r="1.4"/><circle cx="16.5" cy="19.5" r="1.4"/>',
+    ventas: '<path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M3 19h18"/><path d="M14 7l3-3 3 3"/>',
+    campo: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+    inventario: '<path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/>',
+    cobranza: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/>',
+    planeacion: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/><path d="M12 3.5V1.5M20.5 12h2"/>',
+    analitica: '<path d="M3 20h18"/><circle cx="7" cy="14" r="1.6"/><circle cx="11" cy="9" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="19" cy="5" r="1.6"/><path d="M5 17l14-12" stroke-dasharray="2 2.5"/>',
+    usuarios: '<rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.4"/>',
+    datos: '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5"/><path d="M4.5 12v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/>'
+};
+const icono = (k) => `<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS[k]}</svg></span>`;
+
+const CAPAS = [
+    { id: 'dia', nombre: 'El día a día', nota: 'lo que ves al entrar y el trabajo en curso', color: 'var(--a-dia)' },
+    { id: 'gente', nombre: 'Gente y recursos', nota: 'recursos humanos y lo que la empresa presta', color: 'var(--a-gente)' },
+    { id: 'negocio', nombre: 'El negocio', nota: 'vender, visitar, surtir y cobrar', color: 'var(--a-negocio)' },
+    { id: 'inteligencia', nombre: 'Inteligencia', nota: 'decidir con modelos y datos', color: 'var(--a-inteligencia)' },
+    { id: 'control', nombre: 'Control', nota: 'quién entra, qué hace y la salud de los datos', color: 'var(--a-control)' }
+];
+
+const AREAS = [
+    {
+        id: 'inicio', capa: 'dia', titulo: 'Inicio y pendientes', corto: 'Tu panel, tableros KPI y todo lo que requiere tu atención.',
+        para: 'Es la puerta de entrada: cada persona arma su propio panel, consulta el estado general de la operación y ve en un solo lugar lo que vence o espera su aprobación.',
+        quien: ['Todos los usuarios', 'Directores y supervisores (tableros KPI)'],
+        pantallas: [
+            ['Mi panel', 'Tablero de widgets que cada quien acomoda; se guarda en su cuenta y lo sigue en cualquier equipo.'],
+            ['Tablero general', 'Indicadores y gráficas de la operación por estado y prioridad, con lo más reciente o próximo a vencer.'],
+            ['Tableros KPI', 'Indicadores en pestañas, cada una con su rango de fechas que recalcula los KPIs.'],
+            ['Pendientes y tareas', 'Vencimientos (pólizas, mantenimientos, verificaciones), solicitudes por aprobar, acciones de incidencias y tareas asignadas.']
+        ],
+        conecta: ['operaciones', 'rrhh', 'activos', 'ventas'],
+        ejemplo: 'El lunes, la gerente abre Pendientes: dos vacaciones por aprobar, la póliza de una camioneta que vence el viernes y una incidencia con plan de acción atrasado.',
+        menu: 'Inicio'
+    },
+    {
+        id: 'operaciones', capa: 'dia', titulo: 'Operaciones', corto: 'Trabajos y solicitudes internas con flujo de aprobación.',
+        para: 'Registra cada trabajo, orden o solicitud interna y la lleva por su flujo — Borrador → Pendiente → En proceso → En revisión → Aprobada → Cerrada — con tareas, responsables y bitácora.',
+        quien: ['Operadores', 'Supervisores que aprueban', 'Responsables de tareas'],
+        pantallas: [
+            ['Listado', 'Todas las operaciones con su estado, prioridad, fechas y responsables.'],
+            ['Tablero Kanban', 'Las operaciones como tarjetas por estado; arrastrar una tarjeta ejecuta la acción del flujo.'],
+            ['Matriz RACI', 'Operaciones y tareas contra personas, con su rol (responsable, aprueba, consultado, informado), alertas y carga de trabajo.'],
+            ['Detalle de operación', 'Datos, tareas, avance, historial y las acciones permitidas según el estado y tu rol.']
+        ],
+        conecta: ['inicio', 'rrhh'],
+        ejemplo: 'Compras pide cotizar un empaque nuevo: la operación nace en Borrador, el supervisor la aprueba, se asignan tareas y al cerrarse queda su historial completo.',
+        menu: 'Operaciones'
+    },
+    {
+        id: 'rrhh', capa: 'gente', titulo: 'Recursos humanos y organización', corto: 'Empresas, organigrama por puesto, empleados, vacaciones y ausencias.',
+        para: 'La estructura de la empresa y su gente: el organigrama se arma por puesto (cada puesto depende de otro y tiene plazas) y las personas ocupan plazas. De aquí sale quién es jefe de quién para aprobaciones, avisos y acuerdos de metas.',
+        quien: ['Recursos humanos', 'Jefes (su equipo)', 'Cada empleado (sus vacaciones)'],
+        pantallas: [
+            ['Empresas y departamentos', 'Datos generales y fiscales de cada empresa del grupo; áreas con clave, centro de costo y titular.'],
+            ['Puestos y organigrama', 'Estructura por puesto con plazas; si alguien sale, la estructura no cambia.'],
+            ['Empleados', 'Expediente: contacto, puesto, jornada, días de descanso, antigüedad y política de vacaciones.'],
+            ['Mis vacaciones y ausencias', 'Solicitar vacaciones, días económicos, home office, permisos e incapacidades, con el saldo de días.'],
+            ['Mi equipo (Gantt)', 'Para jefes: ausencias del equipo en un Gantt; aprobar o rechazar solicitudes y cambios.'],
+            ['Días festivos, cumpleaños y pólizas', 'Calendario oficial y de la empresa, cumpleaños del equipo y pólizas de seguro de los empleados.']
+        ],
+        conecta: ['inicio', 'activos', 'usuarios', 'ventas'],
+        ejemplo: 'Ana pide 5 días de vacaciones; su jefe lo ve en el Gantt del equipo, lo aprueba y el saldo de Ana se descuenta solo, sin contar el día festivo.',
+        menu: 'Organización · Vacaciones y ausencias'
+    },
+    {
+        id: 'activos', capa: 'gente', titulo: 'Activos', corto: 'Vehículos y equipos asignados, con mantenimiento y pólizas.',
+        para: 'Lo que la empresa presta a su gente: la flotilla y los equipos (celulares, laptops, tablets…), a quién están asignados y qué vence.',
+        quien: ['Administración de activos', 'Quien tiene un vehículo o equipo asignado'],
+        pantallas: [
+            ['Vehículos', 'Asignación permanente o temporal, placas y permisos, póliza, kilometraje, mantenimiento, siniestros y estado estético.'],
+            ['Equipos', 'Descriptor, número de serie, IMEI, SIM y línea, compra, garantía, condición y a quién está asignado.']
+        ],
+        conecta: ['rrhh', 'inicio'],
+        ejemplo: 'La verificación de una camioneta vence en 10 días: aparece en Pendientes del responsable y del administrador hasta que se registra.',
+        menu: 'Activos'
+    },
+    {
+        id: 'ventas', capa: 'negocio', titulo: 'Ventas y clientes', corto: 'Clientes, zonas, productos, precios, programa de ventas y análisis.',
+        para: 'El corazón comercial: quiénes son los clientes y dónde están, qué se vende y a qué precio, cuál es la meta de cada vendedor y cómo va la venta real contra lo programado.',
+        quien: ['Vendedores', 'Gerentes comerciales', 'Administración de precios'],
+        pantallas: [
+            ['Clientes y puntos de venta', 'Datos fiscales, crédito, ejecutivo de cuenta, sucursales y contactos; la zona sale del estado donde está cada punto.'],
+            ['Zonas y vendedores', 'Regiones formadas por estados; vendedores con sus zonas y clientes.'],
+            ['Productos y proveedores', 'Catálogo con SKU, precios de compra y venta, margen, stock mínimo y registro sanitario; proveedores con condiciones.'],
+            ['Precios y promociones', 'Listas de precios, promociones (descuentos, NxM, regalos) con alcance y vigencia, su efecto en ventas y un cotizador.'],
+            ['Programa de ventas y Mi meta', 'Metas mensuales por vendedor, cliente y producto; cada vendedor ve su meta, su avance y revisa su programación con su supervisor.'],
+            ['Análisis de ventas', 'Programa contra real por vendedor, cliente y producto, y el histórico de 5 años.'],
+            ['Incidencias y fechas importantes', 'Reclamaciones de producto con plan de acción; cumpleaños y aniversarios de clientes y médicos.']
+        ],
+        conecta: ['campo', 'inventario', 'cobranza', 'planeacion'],
+        ejemplo: 'La programación publica la meta de Ana; ella la revisa en Mi meta, ajusta dos productos dentro de su rango y la acepta; desde ese momento su avance se mide contra lo acordado.',
+        menu: 'Comercial'
+    },
+    {
+        id: 'campo', capa: 'negocio', titulo: 'Visita médica y campo', corto: 'Mercado médico, ruta del día, pedidos y seguimiento de vendedores.',
+        para: 'El trabajo fuera de la oficina: encontrar médicos y clínicas, visitarlos con una ruta, levantar el pedido en la visita y contar el producto que tienen (sell-out). También funciona como app en Android y iOS.',
+        quien: ['Vendedores y visitadores', 'Supervisores de campo', 'Almacén y envíos (pedidos)'],
+        pantallas: [
+            ['Mercado médico', 'Médicos y clínicas por código postal (Google Places) contra tus clientes; prospectos y rutas publicadas.'],
+            ['Mi ruta del día', 'Bitácora de cada visita (llegada, resultado, notas, pedido), impacto en la meta y check-out que reporta al supervisor.'],
+            ['Pedidos de médicos', 'El pedido se levanta viendo stock y promociones; almacén lo surte, envíos lo manda y queda la venta con su lote.'],
+            ['Inventario sombra (sell-out)', 'Lo que cada cliente tiene de nuestro producto: venta real = conteo anterior + entregado − contado hoy.'],
+            ['Seguimiento de vendedores', 'Dónde se registró por última vez cada vendedor y el desempeño de sus rutas.']
+        ],
+        conecta: ['ventas', 'inventario', 'planeacion'],
+        ejemplo: 'A Ana le faltan 114 piezas: el Plan de visitas le propone médicos sin vendedor cerca; en la visita levanta un pedido y al hacer check-out su supervisor recibe el reporte.',
+        menu: 'Comercial · Mercado médico, Mi ruta del día, Pedidos de médicos'
+    },
+    {
+        id: 'inventario', capa: 'negocio', titulo: 'Inventario, compras y trazabilidad', corto: 'Existencias, órdenes de compra, backorders y la historia de cada lote.',
+        para: 'Que haya producto y se sepa de dónde vino: existencias por almacén, compras a proveedores con lote y caducidad, y la trazabilidad de cada pieza hasta quién la compró.',
+        quien: ['Almacén', 'Compras', 'Calidad (trazabilidad e incidencias)'],
+        pantallas: [
+            ['Inventarios', 'Existencias por producto y almacén, perspectiva anual con el plan, balance Sankey, backorders y kardex.'],
+            ['Órdenes de compra', 'Compras a proveedores y su recepción con lote, caducidad y factura: el primer eslabón de la trazabilidad.'],
+            ['Trazabilidad', 'Historia de cada lote: proveedor, recepción, traspasos, pedidos, a quién se vendió, incidencias y devoluciones.']
+        ],
+        conecta: ['ventas', 'campo', 'planeacion'],
+        ejemplo: 'Un médico reporta un tubo defectuoso: con el lote se ve la orden de compra, el proveedor y a qué otros clientes llegó ese mismo lote.',
+        menu: 'Comercial · Inventarios, Órdenes de compra, Trazabilidad'
+    },
+    {
+        id: 'cobranza', capa: 'negocio', titulo: 'Cuentas por cobrar', corto: 'Cartera por cliente y punto de venta, antigüedad y abonos.',
+        para: 'El dinero que falta cobrar: cada venta a un cliente genera su cargo solo; aquí se ve la cartera, la antigüedad del saldo y se registran abonos y cargos manuales.',
+        quien: ['Administración y crédito (solo administradores)'],
+        pantallas: [
+            ['Cartera por cliente', 'Saldo de cada cliente con su antigüedad.'],
+            ['Por punto de venta', 'La cartera abierta por sucursal o instalación del cliente.'],
+            ['Documentos y abonos', 'Cargos, abonos y ajustes manuales con su historial.']
+        ],
+        conecta: ['ventas', 'inicio'],
+        ejemplo: 'Una farmacia trae saldo de más de 60 días: crédito lo ve en la cartera y el vendedor lo sabe antes de su próxima visita.',
+        menu: 'Cuentas por cobrar'
+    },
+    {
+        id: 'planeacion', capa: 'inteligencia', titulo: 'Planeación estratégica', corto: 'Modelo de optimización, programación de vendedores, plan de visitas y evaluación.',
+        para: 'Decide qué vender, dónde y cuándo para maximizar el margen respetando inventario, tiempos de entrega, demanda y la meta de la empresa; reparte el plan entre vendedores, lo negocia con ellos y lo evalúa contra lo real.',
+        quien: ['Planeadores', 'Dirección comercial', 'Supervisores (acuerdos con su equipo)'],
+        pantallas: [
+            ['Optimización de ventas (LP)', 'Modelo, casos y escenarios con Gantt editable, elasticidad, sensibilidad, backcasting, reporte de actividad y resultados.'],
+            ['Programación de zonas y vendedores', 'Reparte el plan por historia, afinidad y capacidad; publica metas, acuerdos vendedor-supervisor y metas acordadas con sus brechas.'],
+            ['Plan de visitas médicas', 'De la meta del vendedor a sus rutas: a qué médicos visitar y cómo ampliar su red.'],
+            ['Evaluación del plan', 'Plan contra real por mes, vendedor, producto y zona, con precisión del pronóstico, hallazgos e interpretación de la IA.']
+        ],
+        conecta: ['ventas', 'campo', 'inventario', 'analitica'],
+        ejemplo: 'El modelo dice que la crema conviene en el Norte en marzo; la programación se la asigna a Ana, ella acuerda su meta y en abril la evaluación mide cuánto se capturó.',
+        menu: 'Planeación estratégica'
+    },
+    {
+        id: 'analitica', capa: 'inteligencia', titulo: 'Analítica de datos', corto: 'Diseño de casos y análisis multivariable sobre las series del negocio.',
+        para: 'Para entender por qué pasan las cosas: se eligen variables del negocio en un árbol de procesos y se estudia cómo se relacionan y cómo se pronostican.',
+        quien: ['Analistas', 'Planeadores', 'Dirección'],
+        pantallas: [
+            ['Diseño de casos', 'Arrastra variables a un caso, míralas en gráfica y grid con tendencia y estadísticas, y crea variables calculadas.'],
+            ['Análisis multivariable', 'Correlación, dispersión, PCA, regresión múltiple, PLS, pronóstico ARIMA/ARMAX y red neuronal.']
+        ],
+        conecta: ['planeacion', 'ventas'],
+        ejemplo: '¿Las promociones de verano mueven la venta de gel o solo la adelantan? Se arma un caso con promociones, venta y precio, y la regresión lo responde.',
+        menu: 'Analítica de datos'
+    },
+    {
+        id: 'usuarios', capa: 'control', titulo: 'Usuarios, accesos y seguridad', corto: 'Alta de usuarios, roles, accesos por sección, monitoreo y 2FA.',
+        para: 'Quién entra y qué puede hacer: cada usuario tiene un rol y, si hace falta, excepciones por sección; se vigila la actividad y cada quien protege su cuenta con doble validación o llaves de acceso.',
+        quien: ['Administradores', 'Cada usuario (su seguridad)'],
+        pantallas: [
+            ['Usuarios', 'Alta, roles (admin, supervisor, operador, vendedor, planeador), permisos especiales, vínculo con el empleado y solicitudes de acceso.'],
+            ['Accesos por sección', 'Quién entra a cada sección y subsección y qué puede hacer dentro; las excepciones de cada usuario.'],
+            ['Monitoreo de usuarios', 'Quién está en línea, inicios e intentos fallidos, en qué trabaja cada uno, alertas de seguridad y cierre de sesiones.'],
+            ['Seguridad de mi cuenta', 'Cambiar contraseña, doble validación (2FA) y llaves de acceso (passkeys).']
+        ],
+        conecta: ['rrhh', 'datos'],
+        ejemplo: 'Llega un planeador nuevo: se da de alta, se liga a su expediente de empleado y se le abre Planeación; el monitoreo muestra su primer inicio de sesión.',
+        menu: 'Administración · Usuarios, Accesos, Monitoreo'
+    },
+    {
+        id: 'datos', capa: 'control', titulo: 'Base de datos e integridad', corto: 'Auditoría de Atlas, bitácora de cambios y volumen por colección.',
+        para: 'La salud de los datos: que cada registro apunte a otros que existen, que el inventario cuadre, que los folios no se repitan y que quede registro de cada operación de administración sobre la base.',
+        quien: ['Administradores (solo lectura en la bitácora)'],
+        pantallas: [
+            ['Integridad de datos', 'Referencias rotas, balance de inventario, coherencia de negocio y folios repetidos, con corrección manual o automática y el volumen de cada colección.'],
+            ['Bitácora de base de datos', 'Qué cambió en qué colecciones, cuántos documentos, cuándo y quién.']
+        ],
+        conecta: ['usuarios', 'inventario'],
+        ejemplo: 'La revisión nocturna encuentra 3 ventas que apuntan a un cliente eliminado; el administrador las corrige y la bitácora guarda quién lo hizo.',
+        menu: 'Administración · Integridad de datos, Bitácora de base de datos'
+    }
+];
+
+const RECORRIDO = [
+    ['rrhh', 'Gente y estructura', 'Empleados, puestos y quién es jefe de quién.'],
+    ['ventas', 'Catálogo comercial', 'Clientes, zonas, productos y precios.'],
+    ['planeacion', 'Plan y metas', 'El modelo decide; la programación reparte y se acuerda.'],
+    ['campo', 'Ejecución en campo', 'Rutas, visitas y pedidos de médicos.'],
+    ['inventario', 'Surtir y rastrear', 'Almacén, compras y el lote de cada pieza.'],
+    ['cobranza', 'Cobrar', 'Cada venta genera su cargo en la cartera.'],
+    ['analitica', 'Medir y aprender', 'Evaluación del plan y análisis de datos.']
+];
+
+const TRANSVERSAL = [
+    ['Asistente de IA', 'Pregunta en lenguaje natural («¿qué pólizas vencen este mes?») y consulta tus datos en modo solo lectura; también arma modelos de planeación.'],
+    ['Notificaciones y pendientes', 'La campana avisa solicitudes, aprobaciones, metas y acuerdos; el contador de pendientes junta lo que vence.'],
+    ['Ayuda y manuales', 'Cada pantalla tiene su guía (F1), con manuales en PDF y bocetos como este.'],
+    ['Roles y accesos', 'Lo que ves depende de tu rol y de los accesos por sección que te asignen.'],
+    ['Bitácora de cambios', 'La mayoría de los registros guardan quién cambió qué y cuándo.'],
+    ['App móvil y SOS', 'La misma aplicación en Android y iOS para el campo, y el botón SOS con contactos y procedimientos de emergencia.']
+];
+
+const capa = (id) => CAPAS.find((c) => c.id === id);
+const area = (id) => AREAS.find((a) => a.id === id);
+const color = (a) => capa(a.capa).color;
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+// Mapa por capas
+const mapa = document.getElementById('mapa');
+mapa.innerHTML = CAPAS.map((c) => `
+    <div class="capa" style="--c:${c.color}">
+        <div class="capa-nombre"><b>${c.nombre}</b><span>${c.nota}</span></div>
+        <div class="areas">${AREAS.filter((a) => a.capa === c.id).map((a) => `
+            <button class="area" type="button" data-area="${a.id}" aria-pressed="false" aria-controls="ficha" style="--c:${c.color}">
+                <span class="fila">${icono(a.id)}<h3>${a.titulo}</h3></span>
+                <p>${a.corto}</p>
+                <span class="cuenta">${a.pantallas.length} pantallas</span>
+            </button>`).join('')}
+        </div>
+    </div>`).join('');
+
+const ficha = document.getElementById('ficha');
+function mostrar(id, { desplazar = false } = {}) {
+    const a = area(id) ?? AREAS[0];
+    const c = capa(a.capa);
+    ficha.style.setProperty('--c', c.color);
+    ficha.innerHTML = `
+        <div class="titulo">${icono(a.id)}<div><span class="eyebrow">${c.nombre}</span><h2>${a.titulo}</h2></div></div>
+        <p class="para">${a.para}</p>
+        <div class="bloque"><b>Quién lo usa</b><div class="chips">${a.quien.map((q) => `<span class="chip">${q}</span>`).join('')}</div></div>
+        <div class="bloque"><b>Sus pantallas</b><ul class="pantallas">${a.pantallas.map(([n, d]) => `<li><div><b>${n}</b><span>${d}</span></div></li>`).join('')}</ul></div>
+        <div class="bloque"><b>Se conecta con</b><div class="chips">${a.conecta.map((k) => `<button class="chip ir" type="button" data-area="${k}" style="--c2:${color(area(k))}">${area(k).titulo}</button>`).join('')}</div></div>
+        <div class="ejemplo"><span class="mano">Por ejemplo…</span><p>${a.ejemplo}</p></div>
+        <p class="donde">En el menú: <code>${esc(a.menu)}</code></p>`;
+    document.querySelectorAll('.area').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.area === a.id)));
+    if (location.hash.slice(1) !== a.id) history.replaceState(null, '', `#${a.id}`);
+    if (desplazar && window.matchMedia('(max-width: 940px)').matches) ficha.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-area]');
+    if (!b) return;
+    mostrar(b.dataset.area, { desplazar: true });
+    if (b.classList.contains('paso')) document.querySelector('.mapa-y-ficha').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+window.addEventListener('hashchange', () => mostrar(location.hash.slice(1)));
+
+document.getElementById('recorrido').innerHTML = RECORRIDO.map(([k, t, d]) => `<button class="paso" type="button" data-area="${k}" style="--c:${color(area(k))}"><b>${t}</b><span>${d}</span></button>`).join('');
+document.getElementById('transversal').innerHTML = TRANSVERSAL.map(([t, d]) => `<div class="trans"><h3>${t}</h3><p>${d}</p></div>`).join('');
+
+mostrar(location.hash.slice(1) || 'ventas');
+</script>
+
+    </main>
+
+
+
+    <footer class="pie-sitio">
+        <div class="contenedor">
+            <div class="columnas">
+                <div>
+                    <a class="logo" href="../index.html"><b>KI</b><span>Advisory &amp; Strategy</span></a>
+                    <p>Intelligence that transforms. KI une <em>Künstliche Intelligenz</em> (inteligencia artificial) y <em>Key Intelligence</em>.</p>
+                </div>
+                <div><h4>Servicios</h4><a href="../index.html#servicios">Planeación estratégica</a><a href="../index.html#servicios">Programación operativa</a><a href="../index.html#servicios">Implementación</a><a href="../index.html#servicios">Evaluación y seguimiento</a></div>
+                <div><h4>Compañía</h4><a href="../index.html#metodologia">Metodología</a><a href="../index.html#industrias">Industrias</a><a href="../infinity-workflow.html">Infinity Workflow</a><a href="../perspectivas/index.html">Perspectivas</a></div>
+                <div><h4>Contacto</h4><a href="mailto:contact@kiadvisorygroup.com">contact@kiadvisorygroup.com</a><a href="../contacto.html">Ciudad de México · España · LATAM</a></div>
+            </div>
+            <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="../contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
+        </div>
+    </footer>
+    <script src="../sitio.js"></script>
+</body>
+</html>
