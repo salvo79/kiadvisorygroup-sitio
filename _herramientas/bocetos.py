@@ -2,6 +2,7 @@
 
 Cada boceto se encierra en <div class="boceto-sitio">: sus estilos se limitan a ese contenedor (no chocan con los del
 sitio), toma la paleta y las tipografías del sitio y va con la cabecera, el pie y el selector de idioma de la web.
+Las imágenes de las tarjetas (img/perspectivas/es|en/<boceto>.jpg) son capturas del inicio de cada boceto ya montado.
 Uso:  python3 _herramientas/bocetos.py  [carpeta de los bocetos]   (por omisión ~/Desktop/WorkflowHD/FE/public/manuales)
 """
 import html
@@ -167,7 +168,8 @@ def generar():
             pagina(idioma, f'{slug}.html', b['titulo'], b['resumen'][:300], cuerpo, otra, f'    <style>\n{b["estilos"]}\n{TEMA}\n    </style>\n')
             tarjetas[idioma].append((slug, b))
         # Índice de perspectivas
-        cartas = '\n'.join(f'''                    <a class="perspectiva" href="{slug}.html"><small>{html.escape(b['antetitulo'])}</small><h3>{html.escape(b['titulo'])}</h3><p>{html.escape(b['resumen'][:220] + ('…' if len(b['resumen']) > 220 else ''))}</p></a>''' for slug, b in tarjetas[idioma])
+        img = '../img' if idioma == 'es' else '../../img'
+        cartas = '\n'.join(f'''                    <a class="perspectiva" href="{slug}.html"><img src="{img}/perspectivas/{idioma}/{slug}.jpg" alt="" loading="lazy" /><small>{html.escape(b['antetitulo'])}</small><h3>{html.escape(b['titulo'])}</h3><p>{html.escape(b['resumen'][:220] + ('…' if len(b['resumen']) > 220 else ''))}</p></a>''' for slug, b in tarjetas[idioma])
         cuerpo = f'''        <section class="cabecera-pagina sobre-oscuro">
             <div class="contenedor">
                 <div class="antetitulo">{t['seccion']}</div>
@@ -188,7 +190,8 @@ def generar():
         portada = os.path.join(SITIO, 'index.html' if idioma == 'es' else 'en/index.html')
         s = open(portada, encoding='utf-8').read()
         s = re.sub(r'\s*<!-- Perspectivas -->.*?<!-- /Perspectivas -->', '', s, flags=re.S)
-        destacadas = '\n'.join(f'''                    <a class="perspectiva" href="perspectivas/{slug}.html"><small>{html.escape(b['antetitulo'])}</small><h3>{html.escape(b['titulo'])}</h3><p>{html.escape(b['resumen'][:180] + ('…' if len(b['resumen']) > 180 else ''))}</p></a>''' for slug, b in tarjetas[idioma][:3])
+        img = 'img' if idioma == 'es' else '../img'
+        destacadas = '\n'.join(f'''                    <a class="perspectiva" href="perspectivas/{slug}.html"><img src="{img}/perspectivas/{idioma}/{slug}.jpg" alt="" loading="lazy" /><small>{html.escape(b['antetitulo'])}</small><h3>{html.escape(b['titulo'])}</h3><p>{html.escape(b['resumen'][:180] + ('…' if len(b['resumen']) > 180 else ''))}</p></a>''' for slug, b in tarjetas[idioma][:3])
         bloque = f'''
         <!-- Perspectivas -->
         <section id="perspectivas">
