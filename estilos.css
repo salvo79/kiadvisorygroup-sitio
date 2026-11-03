@@ -116,7 +116,8 @@ main > section { padding: 110px 0; }
 .resultado small { display: block; margin-top: 12px; font-size: 0.78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cian-osc); font-weight: 600; }
 
 /* Industrias */
-.industrias { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.industrias { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 56px; }
+@media (max-width: 1180px) { .industrias { grid-template-columns: repeat(3, 1fr); } }
 .industria { border-top: 2px solid var(--marino); padding: 26px 0 0; }
 .industria h3 { font-size: 1.3rem; margin-bottom: 10px; }
 .industria p { color: var(--gris); font-size: 0.95rem; margin: 0; }
