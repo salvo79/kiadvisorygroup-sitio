@@ -214,3 +214,7 @@ a[href^="mailto:"] { overflow-wrap: anywhere; }
 .perspectiva img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: left top; border: 1px solid var(--gris-claro); margin-bottom: 20px; transition: transform .3s, box-shadow .3s; }
 .perspectiva:hover img { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(10, 31, 60, .12); }
 .perspectiva { border-top: 0; padding-top: 0; }
+
+/* Formulario: campo trampa para robots, fuera de la vista */
+.formulario .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formulario button[disabled] { opacity: .6; cursor: wait; }

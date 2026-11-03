@@ -82,9 +82,10 @@
                         <label>Horizonte
                             <select name="horizonte"><option value="">Elija una opción</option><option>Inmediato</option><option>1 a 3 meses</option><option>3 a 6 meses</option><option>Explorando</option></select>
                         </label>
+                        <label class="trampa" aria-hidden="true">Sitio web<input name="sitio_web" tabindex="-1" autocomplete="off" /></label>
                         <label class="ancho">Cuéntenos su desafío *<textarea name="desafio" rows="6" required></textarea></label>
                         <div class="ancho"><button class="boton boton-oscuro" type="submit"><span class="con-flecha">Enviar solicitud</span></button></div>
-                        <p id="mensaje-enviado" class="ancho" hidden style="color: var(--cian-osc); font-weight: 600">Se abrió su correo con la solicitud lista para enviar. Si no se abrió, escríbanos a contact@kiadvisorygroup.com.</p>
+                        <p id="mensaje-enviado" class="ancho" hidden role="status" aria-live="polite" style="font-weight: 600">Se abrió su correo con la solicitud lista para enviar. Si no se abrió, escríbanos a contact@kiadvisorygroup.com.</p>
                     </form>
                 </div>
                 <div>

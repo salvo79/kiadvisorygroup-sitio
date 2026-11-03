@@ -9,7 +9,7 @@ Sitio de KI Advisory & Strategy Group: HTML estático (sin compilación), listo 
 - `en/`: versión en inglés de `index.html`, `infinity-workflow.html` y `contacto.html` (comparten `estilos.css`, `sitio.js` e `img/`); el selector ES | EN del menú lleva a la página equivalente y cada página declara su alterna con `hreflang`
 - `estilos.css`, `sitio.js`, `img/`
 
-El formulario de contacto abre el correo del visitante dirigido a contact@kiadvisorygroup.com.
+El formulario «Cuéntenos su desafío» se envía con `contacto.php` (PHP `mail()` de Hostinger) a contact@kiadvisorygroup.com, con el correo del visitante como «Responder a». Requiere que exista el buzón contact@kiadvisorygroup.com. Si el servidor no responde, el formulario abre el correo del visitante con la solicitud escrita.
 
 ## Perspectivas (bocetos de Infinity Workflow)
 
