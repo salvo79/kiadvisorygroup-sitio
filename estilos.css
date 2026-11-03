@@ -218,3 +218,12 @@ a[href^="mailto:"] { overflow-wrap: anywhere; }
 /* Formulario: campo trampa para robots, fuera de la vista */
 .formulario .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .formulario button[disabled] { opacity: .6; cursor: wait; }
+
+/* Ventana «Agendar consulta» (se abre desde cualquier botón de consulta y envía por el sitio) */
+.ventana-consulta { border: 0; padding: 44px 40px 36px; width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; box-shadow: 0 40px 90px rgba(6, 21, 42, .35); color: var(--tinta); }
+.ventana-consulta::backdrop { background: rgba(6, 21, 42, .62); backdrop-filter: blur(2px); }
+.ventana-consulta h2 { font-size: 2rem; }
+.ventana-consulta .lead-ventana { color: var(--gris); margin: 10px 0 26px; }
+.cerrar-ventana { position: absolute; top: 14px; right: 16px; background: none; border: 0; font-size: 1.8rem; line-height: 1; color: var(--gris); cursor: pointer; }
+.cerrar-ventana:hover { color: var(--marino); }
+@media (max-width: 620px) { .ventana-consulta { padding: 40px 18px 24px; } .ventana-consulta h2 { font-size: 1.6rem; } }

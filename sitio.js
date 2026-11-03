@@ -40,46 +40,81 @@
         el.textContent = new Date().getFullYear();
     });
 
-    // Formulario «Cuéntenos su desafío»: lo envía contacto.php a contact@kiadvisorygroup.com; si el servidor no
-    // responde, abre el correo del visitante con la solicitud ya escrita
-    var form = document.getElementById('formulario-contacto');
-    if (form) {
+    // Solicitudes de consulta: se envían desde el sitio con contacto.php a contact@kiadvisorygroup.com (nunca desde el
+    // correo del visitante). Lo usan el formulario de la página de contacto y la ventana «Agendar consulta».
+    var en = document.documentElement.lang === 'en';
+    function enviarSolicitud(form) {
         form.addEventListener('submit', function (ev) {
             ev.preventDefault();
             var d = new FormData(form);
-            var en = document.documentElement.lang === 'en';
             d.append('idioma', en ? 'en' : 'es');
-            var aviso = document.getElementById('mensaje-enviado');
+            var aviso = form.querySelector('.aviso-envio');
             var boton = form.querySelector('button[type="submit"]');
             var mostrar = function (texto, ok) {
                 aviso.textContent = texto;
                 aviso.style.color = ok ? 'var(--cian-osc)' : '#b91c1c';
                 aviso.hidden = false;
             };
-            var porCorreo = function () {
-                var e = en ? ['Name', 'Company', 'Job title', 'Email', 'Phone', 'Area of interest', 'Industry', 'Timeframe', 'Initial consultation'] : ['Nombre', 'Empresa', 'Cargo', 'Correo', 'Teléfono', 'Área de interés', 'Industria', 'Horizonte', 'Consulta inicial'];
-                var lineas = [e[0] + ': ' + d.get('nombre'), e[1] + ': ' + (d.get('empresa') || '—'), e[2] + ': ' + (d.get('cargo') || '—'), e[3] + ': ' + d.get('email'), e[4] + ': ' + (d.get('telefono') || '—'), e[5] + ': ' + d.get('area'), e[6] + ': ' + (d.get('industria') || '—'), e[7] + ': ' + (d.get('horizonte') || '—'), '', d.get('desafio')];
-                window.location.href = 'mailto:contact@kiadvisorygroup.com?subject=' + encodeURIComponent(e[8] + ' · ' + (d.get('empresa') || d.get('nombre'))) + '&body=' + encodeURIComponent(lineas.join('\n'));
-                mostrar(en ? 'Your email app opened with the request ready to send. If it didn’t open, write to us at contact@kiadvisorygroup.com.' : 'Se abrió su correo con la solicitud lista para enviar. Si no se abrió, escríbanos a contact@kiadvisorygroup.com.', true);
-            };
             boton.disabled = true;
             mostrar(en ? 'Sending…' : 'Enviando…', true);
             fetch('/contacto.php', { method: 'POST', body: d, headers: { Accept: 'application/json' } })
                 .then(function (r) {
-                    return r.json().then(function (j) {
-                        return { r: r, j: j };
-                    });
+                    return r.json();
                 })
-                .then(function (x) {
-                    mostrar(x.j.mensaje, x.j.ok);
-                    if (x.j.ok) form.reset();
+                .then(function (j) {
+                    mostrar(j.mensaje, j.ok);
+                    if (j.ok) form.reset();
                 })
-                .catch(porCorreo) // sin PHP o sin red: por el correo del visitante
+                .catch(function () {
+                    mostrar(en ? 'We could not send your request right now. Please try again in a few minutes.' : 'No pudimos enviar su solicitud en este momento. Intente de nuevo en unos minutos.', false);
+                })
                 .finally(function () {
                     boton.disabled = false;
                 });
         });
     }
+    var pagina = document.getElementById('formulario-contacto');
+    if (pagina) enviarSolicitud(pagina);
+
+    // Ventana «Agendar consulta»: los botones y enlaces a la página de contacto la abren aquí mismo
+    var T = en
+        ? { titulo: 'Book an initial consultation', lead: 'Free and with no commitment. A partner will reply within one business day.', nombre: 'Name *', empresa: 'Company', email: 'Email *', tel: 'Phone', area: 'Area of interest *', elija: 'Select an option', areas: ['Strategic planning', 'Operational scheduling', 'Operations implementation', 'Evaluation and follow-up', 'Infinity Workflow', 'Other'], desafio: 'Tell us about your challenge *', enviar: 'Send request', cerrar: 'Close' }
+        : { titulo: 'Agendar consulta inicial', lead: 'Sin costo y sin compromiso. Un socio le responde en menos de 24 horas hábiles.', nombre: 'Nombre *', empresa: 'Empresa', email: 'Correo *', tel: 'Teléfono', area: 'Área de interés *', elija: 'Elija una opción', areas: ['Planeación estratégica', 'Programación operativa', 'Implementación de operaciones', 'Evaluación y seguimiento', 'Infinity Workflow', 'Otro'], desafio: 'Cuéntenos su desafío *', enviar: 'Enviar solicitud', cerrar: 'Cerrar' };
+    var ventana = null;
+    function abrirVentana(interes) {
+        if (!ventana) {
+            ventana = document.createElement('dialog');
+            ventana.className = 'ventana-consulta';
+            ventana.setAttribute('aria-labelledby', 'titulo-consulta');
+            ventana.innerHTML =
+                '<button type="button" class="cerrar-ventana" aria-label="' + T.cerrar + '">×</button>' +
+                '<div class="antetitulo">KI Advisory &amp; Strategy</div><h2 id="titulo-consulta">' + T.titulo + '</h2><p class="lead-ventana">' + T.lead + '</p>' +
+                '<form class="formulario"><label>' + T.nombre + '<input name="nombre" required autocomplete="name" /></label><label>' + T.empresa + '<input name="empresa" autocomplete="organization" /></label>' +
+                '<label>' + T.email + '<input name="email" type="email" required autocomplete="email" /></label><label>' + T.tel + '<input name="telefono" type="tel" autocomplete="tel" /></label>' +
+                '<label class="ancho">' + T.area + '<select name="area" required><option value="">' + T.elija + '</option>' + T.areas.map(function (a) { return '<option>' + a + '</option>'; }).join('') + '</select></label>' +
+                '<label class="trampa" aria-hidden="true">Web<input name="sitio_web" tabindex="-1" autocomplete="off" /></label>' +
+                '<label class="ancho">' + T.desafio + '<textarea name="desafio" rows="4" required></textarea></label>' +
+                '<div class="ancho"><button class="boton boton-oscuro" type="submit"><span class="con-flecha">' + T.enviar + '</span></button></div>' +
+                '<p class="ancho aviso-envio" hidden role="status" aria-live="polite" style="font-weight: 600"></p></form>';
+            document.body.appendChild(ventana);
+            ventana.querySelector('.cerrar-ventana').addEventListener('click', function () { ventana.close(); });
+            ventana.addEventListener('click', function (e) { if (e.target === ventana) ventana.close(); }); // clic fuera
+            enviarSolicitud(ventana.querySelector('form'));
+        }
+        ventana.querySelector('.aviso-envio').hidden = true;
+        if (interes) ventana.querySelector('select[name="area"]').value = interes;
+        ventana.showModal();
+        ventana.querySelector('input[name="nombre"]').focus();
+    }
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="contacto.html"]');
+        if (!a || a.classList.contains('idioma') || a.hash || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        var url = new URL(a.href, location.href);
+        if (!/\/contacto\.html$/.test(url.pathname) || (document.getElementById('formulario-contacto') && url.pathname === location.pathname)) return;
+        if (typeof HTMLDialogElement !== 'function') return; // navegador muy antiguo: va a la página de contacto
+        e.preventDefault();
+        abrirVentana(url.searchParams.get('interes'));
+    });
 })();
 
 // Contacto: «Solicitar una demostración» llega con ?interes=… y preselecciona el área
