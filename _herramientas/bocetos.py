@@ -134,7 +134,7 @@ def pagina(idioma, archivo, titulo, descripcion, cuerpo, otra, extra_head=''):
     cab = re.sub(r'<meta name="description" content="[^"]*" />', f'<meta name="description" content="{html.escape(descripcion)}" />', cab)
     cab = re.sub(r'hreflang="es" href="[^"]*"', f'hreflang="es" href="{BASE}perspectivas/{archivo}"', cab)
     cab = re.sub(r'hreflang="(en|x-default)" href="[^"]*"', lambda m: f'hreflang="{m.group(1)}" href="{BASE}en/perspectivas/{archivo}"', cab)
-    cab = re.sub(r'<a class="idioma" href="[^"]*"', f'<a class="idioma" href="{otra}"', cab)
+    cab = re.sub(r'<a class="idioma" href="[^"]*" hreflang="(es|en)"', lambda m: f'<a class="idioma" href="{otra}?idioma={m.group(1)}" hreflang="{m.group(1)}"', cab)
     cab = cab.replace('</head>', extra_head + '</head>')
     t = TEXTOS[idioma]
     cab = cab.replace(f'>{t["seccion"]}</a>', f' class="activo">{t["seccion"]}</a>', 1)

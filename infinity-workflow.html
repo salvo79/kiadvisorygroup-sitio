@@ -6,6 +6,14 @@
     <script>
         (function () {
             try {
+                // ?idioma=es|en viene del selector ES | EN: se guarda aquí mismo (no depende de sitio.js) y se quita de la dirección
+                var params = new URLSearchParams(location.search);
+                var pedido = params.get('idioma');
+                if (pedido === 'es' || pedido === 'en') {
+                    localStorage.setItem('ki_idioma', pedido);
+                    params.delete('idioma');
+                    history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : '') + location.hash);
+                }
                 var actual = document.documentElement.lang;
                 var elegido = localStorage.getItem('ki_idioma');
                 var espanol = (navigator.languages || [navigator.language || '']).some(function (l) { return /^es/i.test(l); });
@@ -26,7 +34,7 @@
     <link rel="alternate" hreflang="es" href="https://kiadvisorygroup.com/infinity-workflow.html" />
     <link rel="alternate" hreflang="en" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
     <link rel="alternate" hreflang="x-default" href="https://kiadvisorygroup.com/en/infinity-workflow.html" />
-    <link rel="stylesheet" href="estilos.css" />
+    <link rel="stylesheet" href="estilos.css?v=20261103" />
 </head>
 <body>
     <header class="cabecera">
@@ -39,7 +47,7 @@
                 <a href="index.html#industrias">Industrias</a>
                 <a href="index.html#metodologia">Metodología</a>
                 <a href="perspectivas/index.html">Perspectivas</a>
-                <a class="idioma" href="en/infinity-workflow.html" hreflang="en" lang="en">EN</a>
+                <a class="idioma" href="en/infinity-workflow.html?idioma=en" hreflang="en" lang="en">EN</a>
                 <a class="boton boton-oscuro" href="contacto.html">Agendar consulta</a>
             </nav>
         </div>
@@ -124,6 +132,6 @@
             <div class="legal"><span>© <span class="anio">2026</span> KI-Advisory &amp; Strategy Group. Todos los derechos reservados.</span><span><a href="contacto.html#privacidad" style="display: inline">Aviso de privacidad</a></span></div>
         </div>
     </footer>
-    <script src="sitio.js"></script>
+    <script src="sitio.js?v=20261103"></script>
 </body>
 </html>

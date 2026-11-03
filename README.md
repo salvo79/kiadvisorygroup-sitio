@@ -9,7 +9,7 @@ Sitio de KI Advisory & Strategy Group: HTML estático (sin compilación), listo 
 - `en/`: versión en inglés de `index.html`, `infinity-workflow.html` y `contacto.html` (comparten `estilos.css`, `sitio.js` e `img/`); el selector ES | EN del menú lleva a la página equivalente y cada página declara su alterna con `hreflang`
 - `estilos.css`, `sitio.js`, `img/`
 
-El formulario «Cuéntenos su desafío» se envía con `contacto.php` (PHP `mail()` de Hostinger) a contact@kiadvisorygroup.com, con el correo del visitante como «Responder a». Requiere que exista el buzón contact@kiadvisorygroup.com. Los botones «Agendar consulta» abren una ventana con el mismo envío; el sitio no usa enlaces mailto (nada se manda desde el correo del visitante).
+El formulario «Cuéntenos su desafío» se envía con `contacto.php` por SMTP autenticado de Hostinger (smtp.hostinger.com:465) con las credenciales de `config-correo.php`, un archivo que vive en el servidor **fuera** de `public_html` y no está en GitHub (`<?php return ['usuario' => 'contact@kiadvisorygroup.com', 'clave' => '…'];`); sin ese archivo usa `mail()` de PHP, a contact@kiadvisorygroup.com, con el correo del visitante como «Responder a». Requiere que exista el buzón contact@kiadvisorygroup.com. Los botones «Agendar consulta» abren una ventana con el mismo envío; el sitio no usa enlaces mailto (nada se manda desde el correo del visitante).
 
 ## Perspectivas (bocetos de Infinity Workflow)
 
@@ -20,5 +20,6 @@ las tipografías, la cabecera y el pie del sitio. Al cambiar un boceto en la apl
 ## Idioma
 
 Inglés por omisión. El script de `<head>` de cada página manda a la versión en español si el navegador del visitante
-está en español; si el visitante usa el selector ES | EN, su elección (guardada en el navegador) manda sobre lo automático.
+está en español; si el visitante usa el selector ES | EN (que lleva `?idioma=es|en`), el script de `<head>` guarda su elección y esta manda sobre lo automático.
+`estilos.css` y `sitio.js` se cargan con `?v=` (versión): al cambiarlos, sube el número en las páginas para que los navegadores no usen una copia vieja.
 `x-default` de `hreflang` apunta a la versión en inglés.
