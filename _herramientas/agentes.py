@@ -108,7 +108,7 @@ def producto(lang):
         'featureList': (['Optimización del plan de ventas, compras e inventario', 'Comparador de escenarios, sensibilidad y backcasting', 'Programación comercial por vendedor', 'CRM: cartera, rutas con check-in, pedidos y cobranza', 'Agente de IA y ampliación de cartera (nivel Pro)', 'Evaluación del plan contra lo real', 'Analítica de datos (módulo adicional)', 'Integraciones: Teams, Slack, WhatsApp Business, Outlook, API para CRM/ERP']
                         if es else ['Sales, purchasing, and inventory plan optimization', 'Scenario comparator, sensitivity, and backcasting', 'Sales scheduling by salesperson', 'CRM: portfolio, routes with check-in, orders, and collections', 'AI agent and portfolio expansion (Pro tier)', 'Plan-versus-actual evaluation', 'Data analytics (add-on module)', 'Integrations: Teams, Slack, WhatsApp Business, Outlook, API for CRM/ERP']),
         'screenshot': [img + f for f in ('lp-resultados.jpg', 'lp-comparador.jpg', 'seguimiento-mapa.jpg', 'evaluacion.jpg', 'pro-asistente.jpg')],
-        'offers': [{'@type': 'Offer', 'name': 'CRM Base' if es else 'Base CRM', 'price': '0', 'priceCurrency': 'MXN', 'description': 'Sin costo, usuarios limitados' if es else 'Free, limited users', 'seller': {'@id': ORG_ID}}],
+        'offers': [{'@type': 'Offer', 'name': 'Prueba del CRM Base' if es else 'Base CRM trial', 'price': '0', 'priceCurrency': 'MXN', 'description': 'Prueba sin costo con alta asistida y usuarios limitados' if es else 'No-cost trial with assisted setup and limited users', 'seller': {'@id': ORG_ID}}],
     }
 
 
@@ -158,14 +158,20 @@ class AMarkdown(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.base, self.out, self.omitir, self.enlace, self.dentro_main = base, [], 0, [], 0
 
+    VACIAS = {'img', 'br', 'hr', 'input', 'meta', 'link', 'source', 'wbr', 'col', 'area', 'base', 'track', 'embed', 'param'}
+
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if tag == 'main':
             self.dentro_main += 1
-        if tag in self.OMITIR or 'trampa' in (a.get('class') or '') or a.get('aria-hidden') == 'true':
-            self.omitir += 1
-            return
+        # Dentro de un elemento omitido se lleva la profundidad de todas sus etiquetas (no solo las de OMITIR)
         if self.omitir:
+            if tag not in self.VACIAS:
+                self.omitir += 1
+            return
+        if tag in self.OMITIR or 'trampa' in (a.get('class') or '') or a.get('aria-hidden') == 'true':
+            if tag not in self.VACIAS:
+                self.omitir = 1
             return
         if tag in self.BLOQUES:
             self.out.append('\n\n')
@@ -190,10 +196,9 @@ class AMarkdown(HTMLParser):
     def handle_endtag(self, tag):
         if tag == 'main':
             self.dentro_main -= 1
-        if tag in self.OMITIR:
-            self.omitir = max(0, self.omitir - 1)
-            return
         if self.omitir:
+            if tag not in self.VACIAS:
+                self.omitir -= 1
             return
         if tag in ('b', 'strong'):
             self.out.append('**')

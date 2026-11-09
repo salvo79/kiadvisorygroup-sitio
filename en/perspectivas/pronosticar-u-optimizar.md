@@ -76,6 +76,12 @@ The best is to use both
 
 **1 · Forecast**Time series estimate how much the market demands each month.
 
+**2 · Optimize**LP uses that forecast as a ceiling and builds the highest-margin plan.
+
+**3 · Execute**The plan is distributed into targets per salesperson and sold.
+
+**4 · Measure**What was actually sold becomes history and improves the next forecast.   [← Back to How the sales program is decided](https://kiadvisorygroup.com/en/perspectivas/como-decide-el-plan-de-ventas.html)
+
 ---
 
 Source: https://kiadvisorygroup.com/en/perspectivas/pronosticar-u-optimizar.html · KI Advisory & Strategy Group · contact@kiadvisorygroup.com

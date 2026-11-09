@@ -88,6 +88,84 @@ Desarrollamos Infinity Workflow para que la estrategia no se quede en una presen
 
 - KPI, analítica y asistente de IA en español e inglés  [Conocer Infinity Workflow](https://kiadvisorygroup.com/infinity-workflow.html)
 
+Industrias
+
+## Conocemos los problemas *de su industria.*
+
+### Oil, Gas & Refinación
+
+Modelos LP de refinerías y petroquímica, balance de crudos y productos, y programación de plantas. Experiencia directa en la operación y planeación de refinerías.Nuestra industria más profunda
+
+### Energía y distribución de petrolíferos
+
+Grupos gasolineros y distribuidores de combustibles: planeación de compras y abasto por estación, inventarios, logística de autotanques, precios y venta por estación contra el plan.Con Infinity Workflow
+
+### Manufactura industrial
+
+Planeación de producción, control avanzado de procesos y eficiencia operativa en plantas de proceso.APC · DCS · Lean
+
+### Industria química
+
+Fabricantes de químicos, resinas, pinturas, adhesivos y especialidades: planeación de producción y mezclas, materias primas, inventarios y programa de ventas por cliente.Optimización · Programación
+
+### Farmacéutica y salud
+
+Plan de ventas óptimo, programación de representantes, visita médica, inventario y evaluación contra metas.Con Infinity Workflow
+
+### Distribución y ventas en campo
+
+Empresas con fuerza de ventas o técnicos en campo: dispositivos médicos, materiales de construcción y consumo.Con Infinity Workflow
+
+### Agropecuario y ganadero
+
+Planeación por temporada y ciclo productivo, programación de técnicos y vendedores en campo, abasto de insumos y evaluación por región y productor.Con Infinity Workflow
+
+Metodología
+
+## Un método probado, *de principio a fin.*
+
+Cada proyecto empieza con un diagnóstico sin costo y termina cuando los indicadores acordados confirman la mejora. [Solicitar diagnóstico inicial](https://kiadvisorygroup.com/contacto.html)
+
+Diagnóstico
+
+Entendemos la operación, los datos y las restricciones reales; acordamos los indicadores que definirán el éxito.
+
+Diseño del plan y del programa
+
+Construimos el modelo, evaluamos escenarios y convertimos el plan óptimo en metas y programas por responsable.
+
+Puesta en marcha
+
+El plan y el programa operan con los equipos, con procesos, gobierno y la plataforma que los sostiene.
+
+Evaluación y ajuste
+
+Medimos lo real contra lo planeado, explicamos las brechas y replaneamos hasta que la mejora se sostiene.
+
+Perspectivas
+
+## Ideas que *se pueden operar.*
+
+[Boceto · mapa de la aplicación
+
+### Mapa de Infinity Workflow
+
+](https://kiadvisorygroup.com/perspectivas/mapa-de-infinity-workflow.html) [Planeación de ventas
+
+### Cómo decide el plan de ventas
+
+El modelo es una calculadora que revisa todas las combinaciones posibles de qué vender, dónde, cuándo y cuánto comprar, y se queda con la que deja más margen sin romper ninguna reg…](https://kiadvisorygroup.com/perspectivas/como-decide-el-plan-de-ventas.html) [Dos formas de planear
+
+### Pronosticar u optimizar
+
+Las series temporales miran el pasado para decir cuánto se va a vender. El modelo LP toma eso y decide cuánto conviene vender y comprar para ganar más sin romper las reglas del neg…](https://kiadvisorygroup.com/perspectivas/pronosticar-u-optimizar.html)  [Ver todas las perspectivas](https://kiadvisorygroup.com/perspectivas/index.html)
+
+Primer paso
+
+## ¿Dónde está la brecha entre *su plan y su operación?*
+
+La primera consulta es sin costo y sin compromiso. Respondemos en menos de 24 horas hábiles. [Agendar consulta inicial](https://kiadvisorygroup.com/contacto.html)
+
 ---
 
 Fuente: https://kiadvisorygroup.com/index.html · KI Advisory & Strategy Group · contact@kiadvisorygroup.com

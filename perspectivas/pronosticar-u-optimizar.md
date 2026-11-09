@@ -76,6 +76,12 @@ Lo mejor es usar los dos
 
 **1 · Pronosticar**Las series temporales estiman cuánto pide el mercado cada mes.
 
+**2 · Optimizar**El LP usa ese pronóstico como techo y arma el plan de mayor margen.
+
+**3 · Ejecutar**El plan se reparte en metas por vendedor y se vende.
+
+**4 · Medir**Lo que se vendió de verdad se vuelve historia y mejora el siguiente pronóstico.   [← Regresar a Cómo decide el plan de ventas](https://kiadvisorygroup.com/perspectivas/como-decide-el-plan-de-ventas.html)
+
 ---
 
 Fuente: https://kiadvisorygroup.com/perspectivas/pronosticar-u-optimizar.html · KI Advisory & Strategy Group · contact@kiadvisorygroup.com
