@@ -248,7 +248,7 @@ Clientes, visitas, pedidos y cobranza en un solo lugar, conectados con la meta d
 
 - **Cuentas por cobrar** con antigüedad de saldos
 
-Alta asistida por nuestro equipo · prueba sin costo con usuarios limitados. [Solicite su prueba](https://kiadvisorygroup.com/contacto.html?interes=Infinity%20Workflow)
+Alta asistida por nuestro equipo · prueba sin costo con usuarios limitados; no incluye las funciones de inteligencia artificial. [Solicite su prueba](https://kiadvisorygroup.com/contacto.html?interes=Infinity%20Workflow)
 
 [Infinity Workflow · Mercado potencial![Cartera de clientes con agenda de contacto](https://kiadvisorygroup.com/img/app/es/clientes.jpg)](https://kiadvisorygroup.com/img/app/es/clientes.jpg)[Infinity Workflow![Pedido de cliente con productos y promociones](https://kiadvisorygroup.com/img/app/es/crm-pedido.jpg)](https://kiadvisorygroup.com/img/app/es/crm-pedido.jpg)
 
@@ -268,7 +268,7 @@ Todo lo del Base, más un agente que analiza por usted y una herramienta para en
 
 - **Resúmenes de conversaciones** de WhatsApp con acuerdos y pendientes
 
-IA con cupo mensual · el administrador decide quién la usa
+IA con cupo mensual · el administrador decide quién la usa. Se activa al contratar; no forma parte de la prueba sin costo.
 
 [Infinity Workflow · Asistente![Agente de IA respondiendo con datos de ventas](https://kiadvisorygroup.com/img/app/es/pro-asistente.jpg)](https://kiadvisorygroup.com/img/app/es/pro-asistente.jpg)[Infinity Workflow![Prospectos del mercado potencial para ampliar la cartera](https://kiadvisorygroup.com/img/app/es/crm-prospectos.jpg)](https://kiadvisorygroup.com/img/app/es/crm-prospectos.jpg)
 
