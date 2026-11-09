@@ -33,3 +33,13 @@ personas y clientes sustituidos por ficticios) que usa la sección «La platafor
 y `en/infinity-workflow.html`: resultados y hallazgos del modelo LP, comparador de escenarios, programa de ventas,
 seguimiento de vendedores (mapa y avance), evaluación del plan y análisis multivariable (módulo adicional de analítica).
 La sección «CRM» usa además clientes, crm-pedido, pro-asistente y crm-prospectos (escritorio) y m-clientes, m-pedido, m-asistente y m-cobranza (formato de teléfono 393 × 852, en marcos de iPhone y Android hechos con CSS). Para cambiarlas basta con reemplazar el archivo con el mismo nombre en ambos idiomas.
+
+## Agentes de IA
+
+`python3 _herramientas/agentes.py` (correr después de `bocetos.py` y cada vez que cambie el contenido) agrega a cada página
+`canonical`, la alterna en Markdown y JSON-LD (Organization, WebSite, WebPage/ContactPage/CollectionPage, SoftwareApplication
+con la oferta del CRM Base y BreadcrumbList), y genera `sitemap.xml`, `robots.txt` (con Content-Signal
+`search=yes, ai-input=yes, ai-train=no`), `llms.txt` y un `.md` por página. `.htaccess` sirve el `.md` cuando el cliente pide
+`Accept: text/markdown` y agrega encabezados `Link` hacia `llms.txt`, la versión Markdown y el sitemap. `sitio.js` registra
+herramientas WebMCP (`ki_informacion`, `ki_preparar_consulta`) y el formulario de contacto lleva `toolname`/`tooldescription`.
+Los perfiles externos de la empresa (LinkedIn, etc.) van en `PERFILES` de `agentes.py` para el `sameAs`.

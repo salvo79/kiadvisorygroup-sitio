@@ -132,3 +132,46 @@ document.querySelectorAll('a.idioma').forEach(function (a) {
         } catch (e) {}
     });
 });
+
+// WebMCP: herramientas para agentes de IA que corren en el navegador (navigator.modelContext). Solo lectura, salvo
+// «preparar consulta», que llena el formulario de contacto para que la persona lo revise y lo envíe.
+(function () {
+    var mc = navigator.modelContext;
+    if (!mc || typeof mc.registerTool !== 'function') return;
+    var en = document.documentElement.lang === 'en';
+    var raiz = location.origin + (en ? '/en/' : '/');
+    var PAGINAS = { empresa: 'index.md', 'infinity-workflow': 'infinity-workflow.md', contacto: 'contacto.md', perspectivas: 'perspectivas/index.md' };
+    var texto = function (t) { return { content: [{ type: 'text', text: t }] }; };
+    try {
+        mc.registerTool({
+            name: 'ki_informacion',
+            description: en
+                ? 'Returns, as Markdown, information from KI Advisory & Strategy Group: the firm and its services, the Infinity Workflow platform (modules, CRM Base and Pro, integrations), insights, or contact details.'
+                : 'Devuelve en Markdown información de KI Advisory & Strategy Group: la empresa y sus servicios, la plataforma Infinity Workflow (módulos, CRM Base y Pro, integraciones), perspectivas o datos de contacto.',
+            inputSchema: { type: 'object', properties: { tema: { type: 'string', enum: Object.keys(PAGINAS), description: en ? 'Topic to read' : 'Tema a consultar' } }, required: ['tema'] },
+            annotations: { readOnlyHint: true },
+            execute: function (args) {
+                var url = raiz + (PAGINAS[args && args.tema] || PAGINAS.empresa);
+                return fetch(url, { headers: { Accept: 'text/markdown' } }).then(function (r) { return r.text(); }).then(function (t) { return texto(t + '\n\n' + url); });
+            }
+        });
+        mc.registerTool({
+            name: 'ki_preparar_consulta',
+            description: en
+                ? 'Opens the KI contact form pre-filled (name, email, company, area of interest, challenge) so the person can review and send it. It does not send anything by itself.'
+                : 'Abre el formulario de contacto de KI ya llenado (nombre, correo, empresa, área de interés, desafío) para que la persona lo revise y lo envíe. No envía nada por sí sola.',
+            inputSchema: { type: 'object', properties: { nombre: { type: 'string' }, email: { type: 'string', format: 'email' }, empresa: { type: 'string' }, area: { type: 'string' }, desafio: { type: 'string' } } },
+            execute: function (args) {
+                args = args || {};
+                var form = document.getElementById('formulario-contacto');
+                if (!form) {
+                    location.href = raiz + 'contacto.html' + (args.area ? '?interes=' + encodeURIComponent(args.area) : '');
+                    return texto(en ? 'Opening the contact page; call the tool again there to pre-fill the form.' : 'Abriendo la página de contacto; vuelve a llamar la herramienta ahí para llenar el formulario.');
+                }
+                ['nombre', 'email', 'empresa', 'area', 'desafio'].forEach(function (k) { if (args[k] && form.elements[k]) form.elements[k].value = args[k]; });
+                form.scrollIntoView({ behavior: 'smooth' });
+                return texto(en ? 'The form is filled in. Ask the person to review it and press Send.' : 'El formulario está llenado. Pide a la persona que lo revise y pulse Enviar.');
+            }
+        });
+    } catch (e) {}
+})();

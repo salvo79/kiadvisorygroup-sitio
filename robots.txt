@@ -1,0 +1,10 @@
+# kiadvisorygroup.com · política para rastreadores y agentes
+# Content-Signal (https://contentsignals.org): search = aparecer en buscadores; ai-input = usarse como fuente en
+# respuestas de IA con referencia; ai-train = entrenar modelos de IA.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+Disallow: /contacto.php
+Disallow: /_herramientas/
+
+Sitemap: https://kiadvisorygroup.com/sitemap.xml
