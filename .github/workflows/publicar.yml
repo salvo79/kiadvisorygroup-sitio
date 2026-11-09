@@ -1,0 +1,43 @@
+# Publica el sitio en Hostinger (public_html) por FTP cada vez que se hace push a main, o a mano desde la pestaña
+# Actions («Run workflow»). Solo sube lo que cambió (guarda su estado en .ftp-deploy-sync-state.json en el servidor) y
+# nunca borra archivos del servidor que no estén en el repositorio.
+#
+# Secretos del repositorio (Settings › Secrets and variables › Actions):
+#   FTP_SERVIDOR    servidor FTP de Hostinger (hPanel › Archivos › Cuentas FTP), p. ej. ftp.kiadvisorygroup.com
+#   FTP_USUARIO     usuario FTP
+#   FTP_CLAVE       contraseña FTP
+#   FTP_DIRECTORIO  (opcional) carpeta destino; por omisión public_html/
+#   FTP_PROTOCOLO   (opcional) ftps (por omisión) o ftp si el servidor no acepta TLS
+name: Publicar en Hostinger
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+concurrency:
+    group: publicar
+    cancel-in-progress: false
+
+jobs:
+    publicar:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Descargar el sitio
+              uses: actions/checkout@v4
+
+            - name: Subir por FTP a Hostinger
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+              with:
+                  server: ${{ secrets.FTP_SERVIDOR }}
+                  username: ${{ secrets.FTP_USUARIO }}
+                  password: ${{ secrets.FTP_CLAVE }}
+                  protocol: ${{ secrets.FTP_PROTOCOLO || 'ftps' }}
+                  server-dir: ${{ secrets.FTP_DIRECTORIO || 'public_html/' }}
+                  exclude: |
+                      **/.git*
+                      **/.git*/**
+                      .github/**
+                      _herramientas/**
+                      README.md
+                      **/.DS_Store

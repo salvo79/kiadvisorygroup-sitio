@@ -2,6 +2,8 @@
 
 Sitio de KI Advisory & Strategy Group: HTML estático (sin compilación), listo para servirse desde `public_html` en Hostinger.
 
+**Publicación**: cada push a `main` lo sube solo a Hostinger con `.github/workflows/publicar.yml` (FTP cifrado, solo lo que cambió, nunca borra en el servidor; excluye `.git`, `.github`, `_herramientas` y este README). Necesita los secretos `FTP_SERVIDOR`, `FTP_USUARIO` y `FTP_CLAVE` (y opcionales `FTP_DIRECTORIO`, por omisión `public_html/`, y `FTP_PROTOCOLO`, por omisión `ftps`). También se lanza a mano en Actions › Publicar en Hostinger › Run workflow.
+
 - `index.html`: portada, servicios, enfoque, Infinity Workflow, industrias y metodología
 - `infinity-workflow.html`, `contacto.html`
 - `socios.html`: sección inactiva, redirige a la portada (el contenido está en el historial de git)
