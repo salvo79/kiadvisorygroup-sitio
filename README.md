@@ -32,4 +32,4 @@ está en español; si el visitante usa el selector ES | EN (que lleva `?idioma=e
 personas y clientes sustituidos por ficticios) que usa la sección «La plataforma en acción» de `infinity-workflow.html`
 y `en/infinity-workflow.html`: resultados y hallazgos del modelo LP, comparador de escenarios, programa de ventas,
 seguimiento de vendedores (mapa y avance), evaluación del plan y análisis multivariable (módulo adicional de analítica).
-Para cambiarlas basta con reemplazar el archivo con el mismo nombre en ambos idiomas.
+La sección «CRM» usa además clientes, crm-pedido, pro-asistente y crm-prospectos (escritorio) y m-clientes, m-pedido, m-asistente y m-cobranza (formato de teléfono 393 × 852, en marcos de iPhone y Android hechos con CSS). Para cambiarlas basta con reemplazar el archivo con el mismo nombre en ambos idiomas.
