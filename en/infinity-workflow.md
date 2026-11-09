@@ -248,7 +248,7 @@ Customers, visits, orders, and collections in one place, connected to each sales
 
 - **Accounts receivable** with balance aging
 
-Assisted setup by our team · no-cost trial with limited users; it does not include the artificial intelligence features. [Request your trial](https://kiadvisorygroup.com/en/contacto.html?interes=Infinity%20Workflow)
+Assisted setup by our team · no-cost trial with limited users. [Request your trial](https://kiadvisorygroup.com/en/contacto.html?interes=Infinity%20Workflow)
 
 [Infinity Workflow · Potential market![Customer portfolio with contact schedule](https://kiadvisorygroup.com/img/app/en/clientes.jpg)](https://kiadvisorygroup.com/img/app/en/clientes.jpg)[Infinity Workflow![Customer order with products and promotions](https://kiadvisorygroup.com/img/app/en/crm-pedido.jpg)](https://kiadvisorygroup.com/img/app/en/crm-pedido.jpg)
 
@@ -268,7 +268,7 @@ Everything in Base, plus an agent that analyzes for you and a tool to find your 
 
 - **WhatsApp conversation summaries** with agreements and follow-ups
 
-AI with a monthly quota · the administrator decides who uses it. Activated upon subscription; not part of the no-cost trial.
+AI with a monthly quota · the administrator decides who uses it.
 
 [Infinity Workflow · Assistant![AI agent answering with sales data](https://kiadvisorygroup.com/img/app/en/pro-asistente.jpg)](https://kiadvisorygroup.com/img/app/en/pro-asistente.jpg)[Infinity Workflow![Potential-market prospects to grow the portfolio](https://kiadvisorygroup.com/img/app/en/crm-prospectos.jpg)](https://kiadvisorygroup.com/img/app/en/crm-prospectos.jpg)
 

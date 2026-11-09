@@ -108,7 +108,7 @@ def producto(lang):
         'featureList': (['Optimización del plan de ventas, compras e inventario', 'Comparador de escenarios, sensibilidad y backcasting', 'Programación comercial por vendedor', 'CRM: cartera, rutas con check-in, pedidos y cobranza', 'Agente de IA y ampliación de cartera (nivel Pro)', 'Evaluación del plan contra lo real', 'Analítica de datos (módulo adicional)', 'Integraciones: Teams, Slack, WhatsApp Business, Outlook, API para CRM/ERP']
                         if es else ['Sales, purchasing, and inventory plan optimization', 'Scenario comparator, sensitivity, and backcasting', 'Sales scheduling by salesperson', 'CRM: portfolio, routes with check-in, orders, and collections', 'AI agent and portfolio expansion (Pro tier)', 'Plan-versus-actual evaluation', 'Data analytics (add-on module)', 'Integrations: Teams, Slack, WhatsApp Business, Outlook, API for CRM/ERP']),
         'screenshot': [img + f for f in ('lp-resultados.jpg', 'lp-comparador.jpg', 'seguimiento-mapa.jpg', 'evaluacion.jpg', 'pro-asistente.jpg')],
-        'offers': [{'@type': 'Offer', 'name': 'Prueba del CRM Base' if es else 'Base CRM trial', 'price': '0', 'priceCurrency': 'MXN', 'description': 'Prueba sin costo con alta asistida y usuarios limitados; no incluye inteligencia artificial (nivel Pro)' if es else 'No-cost trial with assisted setup and limited users; does not include artificial intelligence (Pro tier)', 'seller': {'@id': ORG_ID}}],
+        'offers': [{'@type': 'Offer', 'name': 'Prueba del CRM Base' if es else 'Base CRM trial', 'price': '0', 'priceCurrency': 'MXN', 'description': 'Prueba sin costo con alta asistida y usuarios limitados' if es else 'No-cost trial with assisted setup and limited users', 'seller': {'@id': ORG_ID}}],
     }
 
 
