@@ -227,3 +227,46 @@ a[href^="mailto:"] { overflow-wrap: anywhere; }
 .cerrar-ventana { position: absolute; top: 14px; right: 16px; background: none; border: 0; font-size: 1.8rem; line-height: 1; color: var(--gris); cursor: pointer; }
 .cerrar-ventana:hover { color: var(--marino); }
 @media (max-width: 620px) { .ventana-consulta { padding: 40px 18px 24px; } .ventana-consulta h2 { font-size: 1.6rem; } }
+
+/* Infinity Workflow · «La plataforma en acción»: escenas que alternan texto y captura real de la aplicación en un
+   marco de navegador, con una segunda captura superpuesta; módulo adicional de analítica en la cuadrícula de módulos. */
+.ciclo.con-adicional { grid-template-columns: repeat(5, 1fr); }
+.fase.adicional { background: var(--fondo-2); padding-right: 22px; }
+.fase .insignia { display: inline-block; margin-left: 8px; font-family: var(--sans); font-size: .66rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--cian-osc); padding: 3px 7px; vertical-align: middle; }
+.en-accion .entrada { margin-top: 22px; }
+.escena { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 70px; align-items: center; padding: 90px 0; border-top: 1px solid var(--gris-claro); }
+.escena:first-of-type { border-top: 0; padding-top: 70px; }
+.escena.invertida .escena-texto { order: 2; }
+.escena .etapa { font-family: var(--serif); font-size: 1rem; color: var(--cian-osc); font-weight: 600; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.escena .etapa::before { content: ''; width: 28px; height: 2px; background: currentColor; }
+.escena h3 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.15; }
+.escena h3 em { font-style: italic; color: var(--cian-osc); }
+.escena-texto > p { color: var(--gris); margin: 18px 0 22px; }
+.beneficios { list-style: none; margin: 0; padding: 0; }
+.beneficios li { padding: 14px 0 14px 30px; border-top: 1px solid var(--gris-claro); position: relative; font-size: .97rem; }
+.beneficios li::before { content: ''; position: absolute; left: 2px; top: 22px; width: 11px; height: 6px; border-left: 2px solid var(--cian-osc); border-bottom: 2px solid var(--cian-osc); transform: rotate(-45deg); }
+.beneficios b { color: var(--marino); }
+.escena-visual { position: relative; padding-bottom: 46px; }
+.marco { display: block; background: #fff; border: 1px solid var(--gris-claro); box-shadow: 0 34px 70px rgba(10, 31, 60, .16); text-decoration: none; transition: transform .35s, box-shadow .35s; }
+.marco:hover { transform: translateY(-4px); box-shadow: 0 44px 90px rgba(10, 31, 60, .22); }
+.marco .barra { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--fondo-2); border-bottom: 1px solid var(--gris-claro); }
+.marco .barra i { width: 9px; height: 9px; border-radius: 50%; background: #d4dae3; }
+.marco .barra span { margin-left: 10px; font-size: .72rem; color: var(--gris); letter-spacing: .02em; }
+.marco img { width: 100%; height: auto; }
+.marco.secundario { position: absolute; width: 52%; right: -28px; bottom: 0; z-index: 2; }
+.escena.invertida .marco.secundario { right: auto; left: -28px; }
+.pie-captura { margin-top: 14px; font-size: .78rem; color: var(--gris); }
+.escena.invertida .pie-captura { text-align: right; }
+@media (max-width: 1180px) { .ciclo.con-adicional { grid-template-columns: repeat(3, 1fr); } .ciclo.con-adicional .fase:nth-child(4) { padding-left: 0; border-left: 0; } }
+@media (max-width: 980px) {
+    .escena { grid-template-columns: 1fr; gap: 40px; padding: 64px 0; }
+    .escena.invertida .escena-texto { order: 0; }
+    .marco.secundario { right: -8px; width: 56%; }
+    .escena.invertida .marco.secundario { left: -8px; }
+    .ciclo.con-adicional { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+    .ciclo.con-adicional { grid-template-columns: 1fr; }
+    .marco.secundario { position: static; width: 100%; margin-top: 16px; }
+    .escena-visual { padding-bottom: 0; }
+}

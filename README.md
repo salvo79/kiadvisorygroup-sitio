@@ -23,3 +23,11 @@ Inglés por omisión. El script de `<head>` de cada página manda a la versión 
 está en español; si el visitante usa el selector ES | EN (que lleva `?idioma=es|en`), el script de `<head>` guarda su elección y esta manda sobre lo automático.
 `estilos.css` y `sitio.js` se cargan con `?v=` (versión): al cambiarlos, sube el número en las páginas para que los navegadores no usen una copia vieja.
 `x-default` de `hreflang` apunta a la versión en inglés.
+
+## Capturas de Infinity Workflow
+
+`img/app/es/` y `img/app/en/` tienen las capturas reales de la aplicación (JPEG de 1800 px, modo claro, nombres de
+personas y clientes sustituidos por ficticios) que usa la sección «La plataforma en acción» de `infinity-workflow.html`
+y `en/infinity-workflow.html`: resultados y hallazgos del modelo LP, comparador de escenarios, programa de ventas,
+seguimiento de vendedores (mapa y avance), evaluación del plan y análisis multivariable (módulo adicional de analítica).
+Para cambiarlas basta con reemplazar el archivo con el mismo nombre en ambos idiomas.
